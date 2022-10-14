@@ -5,6 +5,8 @@ import { mainWizard } from './scenes/wizard-scene.js';
 import { sampleBase } from './scenes/scene.js';
 import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
+import { mainMenu } from './controllers/main.js';
+import { callbackQuery } from './controllers/callback-query.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -20,9 +22,10 @@ bot.use(stage.middleware());
 
 bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
+bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
-bot.on('message', async ctx => await ctx.reply('Эхо-' + ctx.message.text));
+bot.on('callback_query', async ctx => await callbackQuery(ctx));
 // bot.on('message', async ctx => await controlMessage(ctx));
 
 bot.launch();
