@@ -1,0 +1,21 @@
+{
+	"name": "bot_template",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"type": "module",
+	"scripts": {
+		"dev": "nodemon app.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^16.0.3",
+		"mongoose": "^6.6.5",
+		"telegraf": "^4.10.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.20"
+	}
+}

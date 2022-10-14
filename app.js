@@ -1,0 +1,31 @@
+import 'dotenv/config';
+import { Scenes, session, Telegraf } from 'telegraf';
+import mongoose from 'mongoose';
+import { mainWizard } from './scenes/wizard-scene.js';
+import { sampleBase } from './scenes/scene.js';
+import { start } from './controllers/start.js';
+import { help } from './controllers/help.js';
+
+await mongoose
+	.connect(process.env.MONGODB)
+	.then(() => console.log('Connected to Mongo..'))
+	.catch(error => console.log(error));
+
+const bot = new Telegraf(process.env.BOT_TOKEN);
+
+const stage = new Scenes.Stage([mainWizard(), sampleBase()]);
+
+bot.use(session());
+bot.use(stage.middleware());
+
+bot.command('start', async ctx => await start(ctx));
+bot.command('help', async ctx => await help(ctx));
+bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
+bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
+bot.on('message', async ctx => await ctx.reply('Эхо-' + ctx.message.text));
+// bot.on('message', async ctx => await controlMessage(ctx));
+
+bot.launch();
+
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
