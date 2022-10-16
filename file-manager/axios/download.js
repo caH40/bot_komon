@@ -5,7 +5,7 @@ import fs from 'fs';
 export async function downloadXlsx(path, name) {
 	try {
 		const url = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/${path}`;
-		const writer = fs.createWriteStream(`./src/${name}.xlsx`);
+		const writer = fs.createWriteStream(`../../src/${name}.xlsx`);
 
 		const response = await axios({
 			url,

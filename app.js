@@ -8,6 +8,7 @@ import { help } from './controllers/help.js';
 import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
 import { getExcel } from './file-manager/xlsx/excel.js';
+import { downloadXlsx } from './file-manager/axios/download.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -27,10 +28,7 @@ bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
 bot.command('excel', async ctx => await getExcel());
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
-bot.hears('dl', async ctx => await ctx.download('documents/file_2.xlsx'));
-bot.hears('file', async ctx => {
-	await downloadImage();
-});
+bot.hears('file', async ctx => await downloadXlsx(path, name));
 bot.on('document', async ctx => {
 	const fileId = ctx.message.document.file_id;
 	const response = await ctx.telegram.getFile(fileId);
