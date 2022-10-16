@@ -8,7 +8,7 @@ import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
 import { getExcel } from './file-manager/xlsx/excel.js';
 import { downloadXlsx } from './file-manager/axios/download.js';
-import { getProtocolBase } from './scenes/scene.js';
+import { getProtocolBase, uploadProtocolBase } from './scenes/scene.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -17,7 +17,7 @@ await mongoose
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const stage = new Scenes.Stage([getProtocolBase()]);
+const stage = new Scenes.Stage([getProtocolBase(), uploadProtocolBase()]);
 
 bot.use(session());
 bot.use(stage.middleware());
@@ -26,7 +26,7 @@ bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
 bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
-bot.command('excel', async ctx => await getExcel());
+bot.command('excel', async ctx => ctx.scene.enter('uploadProtocol'));
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
 bot.command('/file', async ctx => {
 	const path = 'documents/file_9.js';

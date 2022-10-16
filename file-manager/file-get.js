@@ -4,6 +4,8 @@ export async function getFileTelegram(ctx) {
 	try {
 		const fileId = ctx.message.document.file_id;
 		const fileName = ctx.message.document.file_name;
+		ctx.session.data.fileName = fileName;
+
 		const mimeType = ctx.message.document.mime_type;
 		const mimeTypeSample = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 		if (mimeType === mimeTypeSample) {
