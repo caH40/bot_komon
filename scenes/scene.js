@@ -2,7 +2,7 @@ import { Scenes } from 'telegraf';
 import { getFileTelegram } from '../file-manager/file-get.js';
 import { getExcel } from '../file-manager/xlsx/excel.js';
 import { text } from '../modules/text.js';
-import { viewDesktop } from '../utility/viewer.js';
+import { divisionChart, viewDesktop } from '../utility/viewer.js';
 
 const { leave } = Scenes.Stage;
 
@@ -32,21 +32,27 @@ export const getProtocolBase = () => {
 
 // проверка данных из файла xlsx и загрузка в базу данных
 export const uploadProtocolBase = () => {
-	const protocol = new Scenes.BaseScene('uploadProtocol');
-	protocol.enter(async ctx => {
-		await ctx.reply('Данные обрабатываются...');
-		const dataXlsx = await getExcel('Autumn-2022_Stage-4.xlsx');
-		// const dataXlsx = await getExcel(ctx.session.data.fileName);
-		if (!dataXlsx) {
-			await ctx.reply('Произошла ошибка при загрузке данных из excel файла...');
-			ctx.scene.enter('getProtocol');
-		}
+	try {
+		const protocol = new Scenes.BaseScene('uploadProtocol');
+		protocol.enter(async ctx => {
+			await ctx.reply('Данные обрабатываются...');
+			// const dataXlsx = await getExcel('Autumn-2022_Stage-3.xlsx');
+			const dataXlsx = await getExcel(ctx.session.data.fileName);
+			if (!dataXlsx) {
+				await ctx.reply('Произошла ошибка при загрузке данных из excel файла...');
+				ctx.scene.enter('getProtocol');
+			}
 
-		ctx.replyWithHTML(viewDesktop(dataXlsx));
-		// console.log(dataXlsx);
-		// console.log(viewDesktop(dataXlsx));
-	});
-	protocol.command('quit', leave('uploadProtocol'));
+			const charts = divisionChart(dataXlsx);
 
-	return protocol;
+			for (let i = 0; i < charts.length; i++) {
+				await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
+			}
+		});
+		protocol.command('quit', leave('uploadProtocol'));
+
+		return protocol;
+	} catch (error) {
+		console.log(error);
+	}
 };

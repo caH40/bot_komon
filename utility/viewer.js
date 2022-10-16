@@ -20,7 +20,7 @@ export function viewDesktop(data) {
 				format(row.wattPerKg, 'wattPerKg') +
 				`\n`;
 		});
-		return `<pre>${tableHeader}${body}${viewer.rowDLine}</pre>`;
+		return `${tableHeader}${body}${viewer.rowDLine}`;
 	} catch (error) {
 		console.log(error);
 	}
@@ -63,6 +63,24 @@ function format(value, column) {
 			return value + spaces + '|';
 		}
 		return value + '|';
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export function divisionChart(data) {
+	try {
+		const newData = [];
+		const quantityPath = Math.trunc(data.length / 36);
+		let j = 0;
+		let k = 36;
+		for (let i = 0; i < quantityPath + 1; i++) {
+			newData.push(data.slice(j, k));
+			j += 36;
+			k += 36;
+		}
+
+		return newData;
 	} catch (error) {
 		console.log(error);
 	}
