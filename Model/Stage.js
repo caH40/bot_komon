@@ -11,6 +11,7 @@ const stageSchema = new Schema({
 	world: String,
 	route: String,
 	registeredRider: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rider' }],
+	protocol: { type: String, unique: true },
 });
 
 export const Stage = model('Stage', stageSchema);

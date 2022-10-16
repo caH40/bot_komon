@@ -7,6 +7,7 @@ const seriesSchema = new Schema({
 	description: String,
 	type: String,
 	organizer: String,
+	schedule: { type: String, unique: true },
 });
 
 export const Series = model('Series', seriesSchema);

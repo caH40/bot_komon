@@ -21,9 +21,11 @@ export const schedule = Markup.inlineKeyboard([
 export const account = Markup.inlineKeyboard([
 	[Markup.button.callback('Мои результаты', 'account_myResults')],
 	[Markup.button.callback('Регистрация', 'account_registration')],
+	[Markup.button.callback('Команда', 'team')],
+	[Markup.button.callback('Админ кабинет', 'account_adminAcc')],
 	[Markup.button.callback('Главное меню', 'main')],
 ]);
-// меню выбора личного кабинета
+// меню выбора зачетов серии
 export function resultSeries(series) {
 	return Markup.inlineKeyboard([
 		[Markup.button.callback('Генеральный зачет', `result_General_${series}`)],
@@ -32,6 +34,15 @@ export function resultSeries(series) {
 		[Markup.button.callback('Главное меню', 'main')],
 	]);
 }
+// меню выбора админ кабинета
+export function adminAccount(series) {
+	return Markup.inlineKeyboard([
+		[Markup.button.callback('Загрузить протокол', 'admin_getProtocol')],
+		[Markup.button.callback('Загрузить расписание', 'admin_getSchedule')],
+		[Markup.button.callback('Главное меню', 'main')],
+	]);
+}
+// меню выбора результатов этапов серии
 export function resultStages(series) {
 	const dataDB = ['1', '2', '3', '4'];
 	const buttons = dataDB.map(stage => [Markup.button.callback(stage, `stage_${series}_${stage}`)]);

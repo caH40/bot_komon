@@ -1,12 +1,15 @@
 import 'dotenv/config';
 import { Scenes, session, Telegraf } from 'telegraf';
 import mongoose from 'mongoose';
+import axios from 'axios';
+import fs from 'fs';
+
 import { mainWizard } from './scenes/wizard-scene.js';
-import { sampleBase } from './scenes/scene.js';
 import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
+import { getExcel } from './file-manager/xlsx/excel.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -15,7 +18,7 @@ await mongoose
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const stage = new Scenes.Stage([mainWizard(), sampleBase()]);
+const stage = new Scenes.Stage([mainWizard()]);
 
 bot.use(session());
 bot.use(stage.middleware());
@@ -24,9 +27,36 @@ bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
 bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
+bot.command('excel', async ctx => await getExcel());
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
+bot.hears('dl', async ctx => await ctx.download('documents/file_2.xlsx'));
+bot.hears('file', async ctx => {
+	await downloadImage();
+});
+bot.on('document', async ctx => {
+	const fileId = ctx.message.document.file_id;
+	const response = await ctx.telegram.getFile(fileId);
+	const filePath = response.file_path;
+});
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
-// bot.on('message', async ctx => await controlMessage(ctx));
+
+async function downloadImage() {
+	const url = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/documents/file_4.xlsx`;
+	const writer = fs.createWriteStream('./src/1.xlsx');
+
+	const response = await axios({
+		url,
+		method: 'GET',
+		responseType: 'stream',
+	});
+
+	response.data.pipe(writer);
+
+	return new Promise((resolve, reject) => {
+		writer.on('finish', resolve);
+		writer.on('error', reject);
+	});
+}
 
 bot.launch();
 
