@@ -1,8 +1,6 @@
 import 'dotenv/config';
 import { Scenes, session, Telegraf } from 'telegraf';
 import mongoose from 'mongoose';
-import axios from 'axios';
-import fs from 'fs';
 
 import { mainWizard } from './scenes/wizard-scene.js';
 import { start } from './controllers/start.js';
@@ -39,24 +37,6 @@ bot.on('document', async ctx => {
 	const filePath = response.file_path;
 });
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
-
-async function downloadImage() {
-	const url = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/documents/file_4.xlsx`;
-	const writer = fs.createWriteStream('./src/1.xlsx');
-
-	const response = await axios({
-		url,
-		method: 'GET',
-		responseType: 'stream',
-	});
-
-	response.data.pipe(writer);
-
-	return new Promise((resolve, reject) => {
-		writer.on('finish', resolve);
-		writer.on('error', reject);
-	});
-}
 
 bot.launch();
 

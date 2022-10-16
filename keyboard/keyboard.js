@@ -35,7 +35,7 @@ export function resultSeries(series) {
 	]);
 }
 // меню выбора админ кабинета
-export function adminAccount(series) {
+export function accountAdmin(series) {
 	return Markup.inlineKeyboard([
 		[Markup.button.callback('Загрузить протокол', 'admin_getProtocol')],
 		[Markup.button.callback('Загрузить расписание', 'admin_getSchedule')],
