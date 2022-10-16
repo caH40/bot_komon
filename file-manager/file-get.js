@@ -9,10 +9,19 @@ export async function getFileTelegram(ctx) {
 		if (mimeType === mimeTypeSample) {
 		} else {
 			ctx.reply('Файл должен быть файлом Excel и иметь расширение - xlsx\nПопробуйте еще раз.');
+			return false;
 		}
 		const resGetFile = await ctx.telegram.getFile(fileId);
 		const filePath = resGetFile.file_path;
-		const resDownloadXlsx = await downloadXlsx(fileName, filePath);
+
+		const isExistsFile = await downloadXlsx(fileName, filePath);
+
+		if (isExistsFile) {
+			ctx.reply('Файл с таким именем уже существует\nПопробуйте еще раз.');
+			return false;
+		}
+		await ctx.reply('Файл загружен');
+		return true;
 	} catch (error) {
 		console.log(error);
 	}

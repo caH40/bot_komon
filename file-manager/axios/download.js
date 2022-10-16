@@ -10,6 +10,8 @@ export async function downloadXlsx(name, pathTelegram) {
 		const url = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/${pathTelegram}`;
 
 		const pathSrc = path.resolve(__dirname, 'src/', name);
+		const isExistsFile = fs.existsSync(pathSrc);
+		if (isExistsFile) return true;
 
 		const writeStream = fs.createWriteStream(pathSrc);
 
@@ -21,8 +23,8 @@ export async function downloadXlsx(name, pathTelegram) {
 
 		resAxios.data.pipe(writeStream);
 
-		writeStream.on('finish', finish => console.log(finish));
-		writeStream.on('error', error => console.log(error));
+		writeStream.on('finish', () => console.log(`${name} was downloaded`));
+		writeStream.on('error', error => console.log('module-download.js', error));
 	} catch (error) {
 		console.log(error);
 	}
