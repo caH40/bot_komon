@@ -30,7 +30,9 @@ export async function handler(ctx, cbqData) {
 				'Результаты этапов' + 'autumn2022',
 				resultStagesKeyboard('autumn2022')
 			);
-		// вывод результатов уровень меню
+		// обработка запросов из админ кабинета
+		if (cbqData === 'admin_getProtocol') await ctx.scene.enter('getProtocol');
+		if (cbqData === 'admin_getSchedule') await ctx.scene.enter('getSchedule');
 	} catch (error) {
 		console.log(error);
 	}
