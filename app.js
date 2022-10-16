@@ -28,7 +28,11 @@ bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
 bot.command('excel', async ctx => await getExcel());
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
-bot.hears('file', async ctx => await downloadXlsx(path, name));
+bot.command('/file', async ctx => {
+	const path = 'documents/file_9.js';
+	const name = 'KOM.xlsx';
+	await downloadXlsx(name, path);
+});
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 
 bot.launch();

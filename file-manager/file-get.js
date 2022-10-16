@@ -1,3 +1,5 @@
+import { downloadXlsx } from './axios/download.js';
+
 export async function getFileTelegram(ctx) {
 	try {
 		const fileId = ctx.message.document.file_id;
@@ -10,9 +12,7 @@ export async function getFileTelegram(ctx) {
 		}
 		const resGetFile = await ctx.telegram.getFile(fileId);
 		const filePath = resGetFile.file_path;
-		console.log('resGetFile', resGetFile);
-
-		// const resDownloadXlsx = await downloadXlsx(response.file_path, name);
+		const resDownloadXlsx = await downloadXlsx(fileName, filePath);
 	} catch (error) {
 		console.log(error);
 	}

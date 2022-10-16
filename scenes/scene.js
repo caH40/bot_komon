@@ -1,4 +1,5 @@
 import { Scenes } from 'telegraf';
+import { downloadXlsx } from '../file-manager/axios/download.js';
 import { getFileTelegram } from '../file-manager/file-get.js';
 
 const { leave } = Scenes.Stage;
@@ -31,7 +32,9 @@ export const getProtocolBase = () => {
 		);
 		protocol.leave(async ctx => await ctx.reply('До свидания!'));
 
-		protocol.on('document', async ctx => await getFileTelegram(ctx));
+		protocol.on('document', async ctx => {
+			const filePath = await getFileTelegram(ctx);
+		});
 		protocol.command('quit', leave());
 		protocol.on(
 			'text',
