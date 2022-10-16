@@ -2,6 +2,7 @@ import { Scenes } from 'telegraf';
 import { getFileTelegram } from '../file-manager/file-get.js';
 import { getExcel } from '../file-manager/xlsx/excel.js';
 import { text } from '../modules/text.js';
+import { viewDesktop } from '../utility/viewer.js';
 
 const { leave } = Scenes.Stage;
 
@@ -41,8 +42,9 @@ export const uploadProtocolBase = () => {
 			ctx.scene.enter('getProtocol');
 		}
 
-		ctx.replyWithHTML();
-		console.log(view.desktop(dataXlsx));
+		ctx.replyWithHTML(viewDesktop(dataXlsx));
+		// console.log(dataXlsx);
+		// console.log(viewDesktop(dataXlsx));
 	});
 	protocol.command('quit', leave('uploadProtocol'));
 

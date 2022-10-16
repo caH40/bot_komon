@@ -6,7 +6,6 @@ import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
-import { getExcel } from './file-manager/xlsx/excel.js';
 import { downloadXlsx } from './file-manager/axios/download.js';
 import { getProtocolBase, uploadProtocolBase } from './scenes/scene.js';
 
