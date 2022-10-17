@@ -12,11 +12,13 @@ export const seriesKeyboard = Markup.inlineKeyboard([
 	[Markup.button.callback('Главное меню', 'main')],
 ]);
 // меню выбора расписания серий
-export const scheduleKeyboard = Markup.inlineKeyboard([
-	[Markup.button.callback('Зимняя серия', 'schedule_autumn2022')],
-	[Markup.button.callback('Осенняя серия', 'schedule_winter2022')],
-	[Markup.button.callback('Главное меню', 'main')],
-]);
+export function scheduleKeyboard(series) {
+	Markup.inlineKeyboard([
+		...series.map(elm => Markup.button.callback(elm.name, 'schedule_' + elm.name)),
+		[Markup.button.callback('Главное меню', 'main')],
+	]);
+	return;
+}
 // меню выбора личного кабинета
 export const accountKeyboard = Markup.inlineKeyboard([
 	[Markup.button.callback('Мои результаты', 'account_myResults')],
