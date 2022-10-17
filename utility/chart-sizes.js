@@ -21,3 +21,9 @@ export const protocolDesktop = {
 	watt: 5,
 	wattPerKg: 5,
 };
+export const seriesDesktop = {
+	name: 23,
+	dateStart: 14,
+	type: 11,
+	organizer: 14,
+};

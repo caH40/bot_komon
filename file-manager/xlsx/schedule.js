@@ -7,18 +7,21 @@ export async function getExcel(ctx, fileName) {
 
 		var book = XLSX.readFile(path.resolve(__dirname, 'src/schedule/', `./${fileName}`));
 
-		const sheetName = 'series';
-		const sheet = book.Sheets[sheetName];
-		if (!sheet) {
-			await ctx.reply(`В книге нет страницы ${sheetName}!`);
+		const sheetStages = book.Sheets['stages'];
+		if (!sheetStages) {
+			await ctx.reply(`В книге нет страницы "stages"!`);
 			return;
 		}
 
-		const keys = Object.keys(sheet);
-		const rowTitle = getCellTitle(keys, sheet, 'Ссылка на заезд в Звифте').slice(1) - 1;
-		const total = XLSX.utils.sheet_to_json(sheet, { range: rowTitle, raw: false });
+		const keysStages = Object.keys(sheetStages);
+		const rowTitleStages =
+			getCellTitle(keysStages, sheetStages, 'Ссылка на заезд в Звифте').slice(1) - 1;
+		const totalStages = XLSX.utils.sheet_to_json(sheetStages, {
+			range: rowTitleStages,
+			raw: false,
+		});
 
-		const totalClear = total.map(elm => {
+		const totalClearStages = totalStages.map(elm => {
 			return {
 				number: elm['Этап'],
 				dateStart: elm['Дата'],
@@ -33,7 +36,31 @@ export async function getExcel(ctx, fileName) {
 			};
 		});
 
-		return totalClear;
+		//получение данных со странице Серии
+		const sheetSeries = book.Sheets['series'];
+		if (!sheetSeries) {
+			await ctx.reply(`В книге нет страницы "series"!`);
+			return;
+		}
+
+		const keysSeries = Object.keys(sheetSeries);
+		const rowTitleSeries = getCellTitle(keysSeries, sheetSeries, 'Наименование серии').slice(1) - 1;
+		const totalSeries = XLSX.utils.sheet_to_json(sheetSeries, {
+			range: rowTitleSeries,
+			raw: false,
+		});
+
+		const totalClearSeries = totalSeries.map(elm => {
+			return {
+				name: elm['Наименование серии'],
+				dateStart: elm['Дата старта'],
+				description: elm['Описание'],
+				type: elm['Тип'],
+				organizer: elm['Организатор'],
+			};
+		});
+
+		return { totalClearStages, totalClearSeries };
 	} catch (error) {
 		console.log(error);
 	}

@@ -4,6 +4,7 @@ import { getExcel } from '../../file-manager/xlsx/schedule.js';
 import { text } from '../../modules/text.js';
 import { divisionChart } from '../../utility/chart-division.js';
 import { viewDesktop } from '../../view/schedule.js';
+import { viewDesktopSeries } from '../../view/series.js';
 
 const { leave } = Scenes.Stage;
 
@@ -25,18 +26,21 @@ async function enter(ctx) {
 	const fileName = ctx.session.data.fileName;
 	await ctx.reply(text.upload.enter);
 	const dataXlsx = await getExcel(ctx, fileName);
-	if (!dataXlsx) {
+	if (!dataXlsx.totalClearStages) {
 		await ctx.reply(text.upload.wrong);
 		deleteFile(fileName, ctx.session.data.dlPath);
 		await ctx.reply(`Файл ${fileName} удален!`);
 		return await ctx.scene.enter('downloadSchedule');
 	}
 
-	ctx.session.data.schedule = dataXlsx;
-	const charts = divisionChart(dataXlsx);
+	ctx.session.data.schedule = dataXlsx.totalClearStages;
+	ctx.session.data.series = dataXlsx.totalClearSeries;
+
+	const charts = divisionChart(dataXlsx.totalClearStages);
 
 	for (let i = 0; i < charts.length; i++) {
 		await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
 	}
+	await ctx.replyWithHTML('<pre>' + viewDesktopSeries(dataXlsx.totalClearSeries) + '</pre>');
 	ctx.scene.enter('confirmUploadSchedule');
 }
