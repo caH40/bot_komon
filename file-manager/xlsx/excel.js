@@ -1,15 +1,18 @@
 import path from 'path';
 import XLSX from 'xlsx';
 
-export async function getExcel(fileName) {
+export async function getExcel(ctx, fileName) {
 	try {
 		const __dirname = path.resolve();
 
 		var book = XLSX.readFile(path.resolve(__dirname, 'src/', `./${fileName}`));
 
-		const sheetName = 'Stage 1';
+		const sheetName = 'Stage';
 		const sheet = book.Sheets[sheetName];
-		if (!sheet) return console.log(`В книге нет страницы ${sheetName}`);
+		if (!sheet) {
+			await ctx.reply(`В книге нет страницы ${sheetName}!`);
+			return;
+		}
 
 		const keys = Object.keys(sheet);
 		const rowTitle = getCellTitle(keys, sheet, 'Имя участника').slice(1) - 1;
