@@ -7,7 +7,7 @@ const stageSchema = new Schema({
 	seriesId: { type: mongoose.Schema.Types.ObjectId, ref: 'Series', required: true },
 	number: Number,
 	type: String,
-	timeStart: Number,
+	dateStart: Number,
 	world: String,
 	route: String,
 	distance: String,

@@ -20,7 +20,7 @@ export async function scheduleToDB(dataSeries, dataStages) {
 			let stage = new Stage({
 				seriesId: response._id,
 				number: dataStages[index].number,
-				timeStart: convertDate(dataStages[index].dateStart, dataStages[index].timeStart),
+				dateStart: convertDate(dataStages[index].dateStart, dataStages[index].timeStart),
 				world: dataStages[index].world,
 				route: dataStages[index].route,
 				laps: dataStages[index].laps,

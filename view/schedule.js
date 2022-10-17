@@ -12,7 +12,7 @@ export function viewDesktop(data, title = '') {
 				body +
 				'|' +
 				format(String(row.number), scheduleDesktop.number) +
-				format(ternary(row.timeStart), scheduleDesktop.dateStart) +
+				format(ternary(row.dateStart), scheduleDesktop.dateStart) +
 				format(row.world, scheduleDesktop.world) +
 				format(row.route, scheduleDesktop.route) +
 				format(row.laps, scheduleDesktop.laps) +
