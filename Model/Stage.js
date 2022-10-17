@@ -10,6 +10,10 @@ const stageSchema = new Schema({
 	dateStart: Number,
 	world: String,
 	route: String,
+	distance: String,
+	ascent: String,
+	laps: String,
+	link: String,
 	registeredRider: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rider' }],
 	protocol: { type: String, unique: true },
 });
