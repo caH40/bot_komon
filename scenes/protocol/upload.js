@@ -1,8 +1,8 @@
 import { Scenes } from 'telegraf';
 import { deleteFile } from '../../file-manager/file-delete.js';
-import { getExcel } from '../../file-manager/xlsx/excel.js';
+import { getExcel } from '../../file-manager/xlsx/protocol.js';
 import { text } from '../../modules/text.js';
-import { divisionChart, viewDesktop } from '../../utility/viewer.js';
+import { divisionChart, viewDesktop } from '../../view/protocol.js';
 
 const { leave } = Scenes.Stage;
 

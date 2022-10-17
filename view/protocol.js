@@ -1,8 +1,8 @@
-import { regexp, viewer } from '../modules/text.js';
+import { regexp, protocol } from '../modules/text.js';
 
 export function viewDesktop(data) {
 	try {
-		const tableHeader = viewer.rowDLine + viewer.titles + viewer.rowDLine;
+		const tableHeader = protocol.rowDLine + protocol.titles + protocol.rowDLine;
 		let body = '';
 
 		data.forEach(row => {
@@ -20,7 +20,7 @@ export function viewDesktop(data) {
 				format(row.wattPerKg, 'wattPerKg') +
 				`\n`;
 		});
-		return `${tableHeader}${body}${viewer.rowDLine}`;
+		return `${tableHeader}${body}${protocol.rowDLine}`;
 	} catch (error) {
 		console.log(error);
 	}

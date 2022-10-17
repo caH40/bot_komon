@@ -10,6 +10,7 @@ import { downloadProtocolBase } from './scenes/protocol/download.js';
 import { uploadProtocolBase } from './scenes/protocol/upload.js';
 import { confirmUploadScene } from './scenes/protocol/confirm.js';
 import { downloadScheduleBase } from './scenes/schedule/download.js';
+import { uploadScheduleBase } from './scenes/schedule/upload.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -23,6 +24,7 @@ const stage = new Scenes.Stage([
 	uploadProtocolBase(),
 	confirmUploadScene(),
 	downloadScheduleBase(),
+	uploadScheduleBase(),
 ]);
 
 bot.use(session());

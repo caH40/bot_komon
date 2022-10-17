@@ -1,20 +1,20 @@
 import { Scenes } from 'telegraf';
 import { deleteFile } from '../../file-manager/file-delete.js';
-import { getExcel } from '../../file-manager/xlsx/schedule.js';
+import { getExcel } from '../../file-manager/xlsx/protocol.js';
 import { text } from '../../modules/text.js';
-import { divisionChart, viewDesktop } from '../../view/schedule.js';
+import { divisionChart, viewDesktop } from '../../utility/viewer.js';
 
 const { leave } = Scenes.Stage;
 
 // проверка данных из файла xlsx и загрузка в базу данных
-export const uploadScheduleBase = () => {
+export const uploadProtocolBase = () => {
 	try {
-		const upload = new Scenes.BaseScene('uploadSchedule');
-		upload.enter(async ctx => await enter(ctx));
-		upload.command('quit', leave('uploadSchedule'));
-		upload.on('text', async ctx => await ctx.reply(text.wrong));
+		const protocol = new Scenes.BaseScene('uploadProtocol');
+		protocol.enter(async ctx => await enter(ctx));
+		protocol.command('quit', leave('uploadProtocol'));
+		protocol.on('text', async ctx => await ctx.reply(text.wrong));
 
-		return upload;
+		return protocol;
 	} catch (error) {
 		console.log(error);
 	}
@@ -22,14 +22,13 @@ export const uploadScheduleBase = () => {
 
 async function enter(ctx) {
 	const fileName = ctx.session.data.fileName;
-	console.log('fileName', ctx.session.data.fileName);
 	await ctx.reply(text.upload.enter);
 	const dataXlsx = await getExcel(ctx, fileName);
 	if (!dataXlsx) {
 		await ctx.reply(text.upload.wrong);
 		deleteFile(fileName);
 		await ctx.reply(`Файл ${fileName} удален!`);
-		return await ctx.scene.enter('downloadSchedule');
+		return await ctx.scene.enter('getProtocol');
 	}
 
 	const charts = divisionChart(dataXlsx);
