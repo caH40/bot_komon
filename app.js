@@ -9,6 +9,7 @@ import { callbackQuery } from './controllers/callback-query.js';
 import { downloadProtocolBase } from './scenes/protocol/download.js';
 import { uploadProtocolBase } from './scenes/protocol/upload.js';
 import { confirmUploadScene } from './scenes/protocol/confirm.js';
+import { downloadScheduleBase } from './scenes/schedule/download.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -21,6 +22,7 @@ const stage = new Scenes.Stage([
 	downloadProtocolBase(),
 	uploadProtocolBase(),
 	confirmUploadScene(),
+	downloadScheduleBase(),
 ]);
 
 bot.use(session());

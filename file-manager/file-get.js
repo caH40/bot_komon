@@ -1,6 +1,6 @@
 import { downloadXlsx } from './axios/download.js';
 
-export async function getFileTelegram(ctx) {
+export async function getFileTelegram(ctx, dlPath) {
 	try {
 		const fileId = ctx.message.document.file_id;
 		const fileName = ctx.message.document.file_name;
@@ -16,7 +16,7 @@ export async function getFileTelegram(ctx) {
 		const resGetFile = await ctx.telegram.getFile(fileId);
 		const filePath = resGetFile.file_path;
 
-		const isExistsFile = await downloadXlsx(fileName, filePath);
+		const isExistsFile = await downloadXlsx(fileName, filePath, dlPath);
 
 		if (isExistsFile) {
 			ctx.reply('Файл с таким именем уже существует\nПопробуйте еще раз.');

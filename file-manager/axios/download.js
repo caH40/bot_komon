@@ -5,11 +5,11 @@ import path from 'path';
 
 const __dirname = path.resolve();
 
-export async function downloadXlsx(name, pathTelegram) {
+export async function downloadXlsx(name, pathTelegram, dlPath) {
 	try {
 		const url = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/${pathTelegram}`;
 
-		const pathSrc = path.resolve(__dirname, 'src/', name);
+		const pathSrc = path.resolve(__dirname, dlPath, name);
 		const isExistsFile = fs.existsSync(pathSrc);
 		if (isExistsFile) return true;
 

@@ -35,7 +35,7 @@ export async function handler(ctx, cbqData) {
 			);
 		// обработка запросов из админ кабинета
 		if (cbqData === 'admin_getProtocol') return await ctx.scene.enter('getProtocol');
-		if (cbqData === 'admin_getSchedule') return await ctx.scene.enter('getSchedule');
+		if (cbqData === 'admin_getSchedule') return await ctx.scene.enter('downloadSchedule');
 		await beingDeveloped(ctx);
 	} catch (error) {
 		console.log(error);
