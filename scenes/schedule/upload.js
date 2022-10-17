@@ -2,7 +2,8 @@ import { Scenes } from 'telegraf';
 import { deleteFile } from '../../file-manager/file-delete.js';
 import { getExcel } from '../../file-manager/xlsx/schedule.js';
 import { text } from '../../modules/text.js';
-import { divisionChart, viewDesktop } from '../../view/schedule.js';
+import { divisionChart } from '../../utility/chart-division.js';
+import { viewDesktop } from '../../view/schedule.js';
 
 const { leave } = Scenes.Stage;
 
