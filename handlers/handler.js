@@ -1,4 +1,4 @@
-import { mainMenu } from '../controllers/main.js';
+import { scheduleBtn } from '../keyboard/button/schedule-btn.js';
 import {
 	accountKeyboard,
 	mainMenuKeyboard,
@@ -19,7 +19,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData === 'main_series')
 			return await ctx.editMessageText('Результаты заездов', seriesKeyboard);
 		if (cbqData === 'main_schedule')
-			return await ctx.editMessageText('Расписание заездов', scheduleKeyboard);
+			return await ctx.editMessageText('Расписание заездов', await scheduleBtn());
 		if (cbqData === 'main_account')
 			return await ctx.editMessageText('Личный кабинет', accountKeyboard);
 		if (cbqData === 'account_adminAcc')

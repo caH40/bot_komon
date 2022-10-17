@@ -13,11 +13,11 @@ export const seriesKeyboard = Markup.inlineKeyboard([
 ]);
 // меню выбора расписания серий
 export function scheduleKeyboard(series) {
-	Markup.inlineKeyboard([
-		...series.map(elm => Markup.button.callback(elm.name, 'schedule_' + elm.name)),
+	const keyboard = Markup.inlineKeyboard([
+		series.map(elm => Markup.button.callback(elm.name, 'schedule_' + elm.name)),
 		[Markup.button.callback('Главное меню', 'main')],
 	]);
-	return;
+	return keyboard;
 }
 // меню выбора личного кабинета
 export const accountKeyboard = Markup.inlineKeyboard([
