@@ -1,6 +1,6 @@
-import { seriesChart } from '../modules/text.js';
-import { format } from '../utility/chart-format.js';
-import { seriesDesktop } from '../utility/chart-sizes.js';
+import { seriesChart } from '../../modules/text.js';
+import { format } from '../../utility/chart-format.js';
+import { seriesDesktop } from '../../utility/chart-sizes.js';
 
 export function viewDesktopSeries(data) {
 	try {

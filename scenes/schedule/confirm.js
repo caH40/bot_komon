@@ -1,7 +1,7 @@
 import { Scenes } from 'telegraf';
 
 import { deleteFile } from '../../file-manager/file-delete.js';
-import { scheduleToDB } from '../../modules/schedule-save.js';
+import { scheduleToDB } from '../../controllersDB/schedule-save.js';
 import { textSchedule } from '../../modules/text.js';
 
 export const confirmUploadScheduleScene = () => {

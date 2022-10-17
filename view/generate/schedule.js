@@ -1,6 +1,6 @@
-import { scheduleChart } from '../modules/text.js';
-import { format } from '../utility/chart-format.js';
-import { scheduleDesktop } from '../utility/chart-sizes.js';
+import { scheduleChart } from '../../modules/text.js';
+import { format } from '../../utility/chart-format.js';
+import { scheduleDesktop } from '../../utility/chart-sizes.js';
 
 export function viewDesktop(data, title = '') {
 	try {

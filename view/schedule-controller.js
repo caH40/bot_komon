@@ -1,6 +1,6 @@
 import { Series } from '../Model/Series.js';
 import { Stage } from '../Model/Stage.js';
-import { viewDesktop } from './schedule.js';
+import { viewDesktopSeries } from './generate/series.js';
 
 export async function schedule(ctx, cbqData) {
 	try {
@@ -10,7 +10,7 @@ export async function schedule(ctx, cbqData) {
 		const seriesDB = await Series.findOne({ _id: seriesId });
 		const title = `${seriesDB.name}, ${seriesDB.type}`;
 
-		await ctx.replyWithHTML('<pre>' + viewDesktop(stagesDB, title) + '</pre>');
+		await ctx.replyWithHTML('<pre>' + viewDesktopSeries(stagesDB, title) + '</pre>');
 
 		return;
 	} catch (error) {
