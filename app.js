@@ -6,8 +6,9 @@ import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
-import { downloadXlsx } from './file-manager/axios/download.js';
-import { downloadProtocolBase, uploadProtocolBase } from './scenes/scene.js';
+import { downloadProtocolBase } from './scenes/protocol/download.js';
+import { uploadProtocolBase } from './scenes/protocol/upload.js';
+import { confirmUploadScene } from './scenes/protocol/confirm.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -16,7 +17,11 @@ await mongoose
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const stage = new Scenes.Stage([downloadProtocolBase(), uploadProtocolBase()]);
+const stage = new Scenes.Stage([
+	downloadProtocolBase(),
+	uploadProtocolBase(),
+	confirmUploadScene(),
+]);
 
 bot.use(session());
 bot.use(stage.middleware());
