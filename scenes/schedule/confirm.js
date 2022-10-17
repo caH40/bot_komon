@@ -1,6 +1,7 @@
 import { Scenes } from 'telegraf';
 
 import { deleteFile } from '../../file-manager/file-delete.js';
+import { scheduleToDB } from '../../modules/schedule-save.js';
 import { textSchedule } from '../../modules/text.js';
 
 export const confirmUploadScheduleScene = () => {
@@ -8,6 +9,9 @@ export const confirmUploadScheduleScene = () => {
 	confirmScene.enter(async ctx => await ctx.reply(textSchedule.confirm.enter));
 	confirmScene.command('confirm', async ctx => {
 		await ctx.reply(textSchedule.confirm.successfully);
+		//сохранение данных в БД
+		await scheduleToDB(ctx.session.data.schedule);
+
 		await ctx.scene.leave('confirmUploadSchedule');
 	});
 	confirmScene.command('quit', async ctx => {

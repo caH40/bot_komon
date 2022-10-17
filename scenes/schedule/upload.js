@@ -32,6 +32,7 @@ async function enter(ctx) {
 		return await ctx.scene.enter('downloadSchedule');
 	}
 
+	ctx.session.data.schedule = dataXlsx;
 	const charts = divisionChart(dataXlsx);
 
 	for (let i = 0; i < charts.length; i++) {

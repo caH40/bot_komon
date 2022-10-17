@@ -8,6 +8,7 @@ const stageSchema = new Schema({
 	number: Number,
 	type: String,
 	dateStart: Number,
+	timeStart: Number,
 	world: String,
 	route: String,
 	distance: String,
@@ -15,7 +16,7 @@ const stageSchema = new Schema({
 	laps: String,
 	link: String,
 	registeredRider: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rider' }],
-	protocol: { type: String, unique: true },
+	protocol: { type: String },
 });
 
 export const Stage = model('Stage', stageSchema);
