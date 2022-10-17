@@ -51,7 +51,7 @@ function format(value, column) {
 		}
 		// убрать символы, которые не помещаются в столбец
 		if (value.length > columns[column]) {
-			return value.slice(0, columns[column]) + '.' + '|';
+			return value.slice(0, columns[column] - 1) + '.' + '|';
 		}
 		// добавить символы до нужной ширины столбца
 		if (value.length < columns[column]) {

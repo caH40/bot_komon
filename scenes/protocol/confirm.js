@@ -12,7 +12,7 @@ export const confirmUploadProtocolScene = () => {
 	});
 	confirmScene.command('quit', async ctx => {
 		await ctx.reply(text.confirm.quit);
-		deleteFile(ctx.session.data.fileName);
+		deleteFile(ctx.session.data.fileName, ctx.session.data.dlPath);
 		await ctx.scene.leave('confirmUploadProtocol');
 	});
 	confirmScene.on('text', async ctx => await ctx.reply(text.confirm.wrong));

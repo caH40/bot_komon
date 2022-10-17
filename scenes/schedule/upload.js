@@ -22,7 +22,6 @@ export const uploadScheduleBase = () => {
 
 async function enter(ctx) {
 	const fileName = ctx.session.data.fileName;
-	console.log('fileName', ctx.session.data.fileName);
 	await ctx.reply(text.upload.enter);
 	const dataXlsx = await getExcel(ctx, fileName);
 	if (!dataXlsx) {

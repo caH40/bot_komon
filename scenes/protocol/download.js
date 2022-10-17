@@ -11,7 +11,10 @@ export const downloadProtocolBase = () => {
 		});
 
 		protocol.on('document', async ctx => {
-			const isRight = await getFileTelegram(ctx);
+			//путь на сервере для хранения полученного файла
+			const dlPath = 'src/';
+			ctx.session.data.dlPath = dlPath;
+			const isRight = await getFileTelegram(ctx, dlPath);
 			if (isRight) await ctx.scene.enter('uploadProtocol');
 		});
 

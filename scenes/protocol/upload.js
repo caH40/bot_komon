@@ -26,7 +26,7 @@ async function enter(ctx) {
 	const dataXlsx = await getExcel(ctx, fileName);
 	if (!dataXlsx) {
 		await ctx.reply(text.upload.wrong);
-		deleteFile(fileName);
+		deleteFile(fileName, ctx.session.data.dlPath);
 		await ctx.reply(`Файл ${fileName} удален!`);
 		return await ctx.scene.enter('getProtocol');
 	}
