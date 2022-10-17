@@ -2,7 +2,7 @@ import { scheduleChart } from '../modules/text.js';
 import { format } from '../utility/chart-format.js';
 import { scheduleDesktop } from '../utility/chart-sizes.js';
 
-export function viewDesktop(data) {
+export function viewDesktop(data, title = '') {
 	try {
 		const tableHeader = scheduleChart.rowDLine + scheduleChart.titles + scheduleChart.rowDLine;
 		let body = '';
@@ -11,8 +11,8 @@ export function viewDesktop(data) {
 			body =
 				body +
 				'|' +
-				format(row.number, scheduleDesktop.number) +
-				format(row.dateStart, scheduleDesktop.dateStart) +
+				format(String(row.number), scheduleDesktop.number) +
+				format(ternary(row.timeStart), scheduleDesktop.dateStart) +
 				format(row.world, scheduleDesktop.world) +
 				format(row.route, scheduleDesktop.route) +
 				format(row.laps, scheduleDesktop.laps) +
@@ -22,8 +22,12 @@ export function viewDesktop(data) {
 				format(row.link, scheduleDesktop.link) +
 				`\n`;
 		});
-		return `${tableHeader}${body}${scheduleChart.rowDLine}`;
+		return `${title}\n${tableHeader}${body}${scheduleChart.rowDLine}`;
 	} catch (error) {
 		console.log(error);
 	}
+}
+
+function ternary(date) {
+	return typeof date == 'number' ? new Date(date).toLocaleDateString() : date;
 }

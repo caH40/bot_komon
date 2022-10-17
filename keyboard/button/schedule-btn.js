@@ -3,8 +3,8 @@ import { scheduleKeyboard } from '../keyboard.js';
 
 export async function scheduleBtn() {
 	try {
-		const series = await Series.find();
-		return scheduleKeyboard(series);
+		const seriesDB = await Series.find();
+		return scheduleKeyboard(seriesDB);
 	} catch (error) {
 		console.log(error);
 	}

@@ -14,7 +14,7 @@ export const seriesKeyboard = Markup.inlineKeyboard([
 // меню выбора расписания серий
 export function scheduleKeyboard(series) {
 	const keyboard = Markup.inlineKeyboard([
-		series.map(elm => Markup.button.callback(elm.name, 'schedule_' + elm.name)),
+		series.map(elm => Markup.button.callback(elm.name, 'schedule_' + elm._id)),
 		[Markup.button.callback('Главное меню', 'main')],
 	]);
 	return keyboard;
