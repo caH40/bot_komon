@@ -36,5 +36,5 @@ async function enter(ctx) {
 	for (let i = 0; i < charts.length; i++) {
 		await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
 	}
-	ctx.scene.enter('confirmUpload');
+	ctx.scene.enter('confirmUploadProtocol');
 }

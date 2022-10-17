@@ -1,20 +1,20 @@
 import { Scenes } from 'telegraf';
 
 import { deleteFile } from '../../file-manager/file-delete.js';
-import { text } from '../../modules/text.js';
+import { textSchedule } from '../../modules/text.js';
 
-export const confirmUploadScene = () => {
-	const confirmScene = new Scenes.BaseScene('confirmUpload');
-	confirmScene.enter(async ctx => await ctx.reply(text.confirm.enter));
+export const confirmUploadScheduleScene = () => {
+	const confirmScene = new Scenes.BaseScene('confirmUploadSchedule');
+	confirmScene.enter(async ctx => await ctx.reply(textSchedule.confirm.enter));
 	confirmScene.command('confirm', async ctx => {
-		await ctx.reply(text.confirm.successfully);
-		await ctx.scene.leave('confirmUpload');
+		await ctx.reply(textSchedule.confirm.successfully);
+		await ctx.scene.leave('confirmUploadSchedule');
 	});
 	confirmScene.command('quit', async ctx => {
-		await ctx.reply(text.confirm.quit);
-		deleteFile(ctx.session.data.fileName);
-		await ctx.scene.leave('confirmUpload');
+		await ctx.reply(textSchedule.confirm.quit);
+		deleteFile(ctx.session.data.fileName, ctx.session.data.dlPath);
+		await ctx.scene.leave('confirmUploadSchedule');
 	});
-	confirmScene.on('text', async ctx => await ctx.reply(text.confirm.wrong));
+	confirmScene.on('text', async ctx => await ctx.reply(textSchedule.confirm.wrong));
 	return confirmScene;
 };

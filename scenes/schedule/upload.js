@@ -27,7 +27,7 @@ async function enter(ctx) {
 	const dataXlsx = await getExcel(ctx, fileName);
 	if (!dataXlsx) {
 		await ctx.reply(text.upload.wrong);
-		deleteFile(fileName);
+		deleteFile(fileName, ctx.session.data.dlPath);
 		await ctx.reply(`Файл ${fileName} удален!`);
 		return await ctx.scene.enter('downloadSchedule');
 	}
@@ -37,5 +37,5 @@ async function enter(ctx) {
 	for (let i = 0; i < charts.length; i++) {
 		await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
 	}
-	ctx.scene.enter('confirmUpload');
+	ctx.scene.enter('confirmUploadSchedule');
 }

@@ -8,9 +8,10 @@ import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
 import { downloadProtocolBase } from './scenes/protocol/download.js';
 import { uploadProtocolBase } from './scenes/protocol/upload.js';
-import { confirmUploadScene } from './scenes/protocol/confirm.js';
+import { confirmUploadProtocolScene } from './scenes/protocol/confirm.js';
 import { downloadScheduleBase } from './scenes/schedule/download.js';
 import { uploadScheduleBase } from './scenes/schedule/upload.js';
+import { confirmUploadScheduleScene } from './scenes/schedule/confirm.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -22,9 +23,10 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const stage = new Scenes.Stage([
 	downloadProtocolBase(),
 	uploadProtocolBase(),
-	confirmUploadScene(),
+	confirmUploadProtocolScene(),
 	downloadScheduleBase(),
 	uploadScheduleBase(),
+	confirmUploadScheduleScene(),
 ]);
 
 bot.use(session());

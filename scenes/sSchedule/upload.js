@@ -21,6 +21,7 @@ export const uploadProtocolBase = () => {
 };
 
 async function enter(ctx) {
+	console.log('ctx.session.data', ctx.session.data);
 	const fileName = ctx.session.data.fileName;
 	await ctx.reply(text.upload.enter);
 	const dataXlsx = await getExcel(ctx, fileName);
@@ -36,5 +37,5 @@ async function enter(ctx) {
 	for (let i = 0; i < charts.length; i++) {
 		await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
 	}
-	ctx.scene.enter('confirmUpload');
+	ctx.scene.enter('confirmUploadProtocol');
 }

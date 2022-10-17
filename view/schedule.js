@@ -2,7 +2,6 @@ import { regexp, scheduleChart } from '../modules/text.js';
 
 export function viewDesktop(data) {
 	try {
-		console.log(data);
 		const tableHeader = scheduleChart.rowDLine + scheduleChart.titles + scheduleChart.rowDLine;
 		let body = '';
 
@@ -31,17 +30,19 @@ function format(value, column) {
 	try {
 		//удаление всех emoji
 		if (value) value = value.replace(regexp, '');
+		if (value) value = value.replace('https://', '');
 		//ширина столбцов
+
 		const columns = {
 			number: 1,
 			dateStart: 10,
 			world: 14,
-			route: 17,
-			laps: 3,
-			distance: 5,
-			ascent: 4,
+			route: 20,
+			laps: 5,
+			distance: 7,
+			ascent: 6,
 			type: 8,
-			link: 45,
+			link: 37,
 		};
 		if (!value) {
 			let spaces = '';
@@ -52,7 +53,7 @@ function format(value, column) {
 		}
 		// убрать символы, которые не помещаются в столбец
 		if (value.length > columns[column]) {
-			return value.slice(0, 24) + '.' + '|';
+			return value.slice(0, columns[column]) + '.' + '|';
 		}
 		// добавить символы до нужной ширины столбца
 		if (value.length < columns[column]) {
