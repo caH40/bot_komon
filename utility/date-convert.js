@@ -1,7 +1,9 @@
-export function convertDate(date, time) {
+export function convertDate(date, time = '00:00') {
 	try {
+		console.log(date, time);
 		const millisecondsInHour = 3600000;
 		const millisecondsInMinute = 60000;
+
 		const timeArr = time.split(':');
 		const timeMilliseconds = timeArr[0] * millisecondsInHour + timeArr[1] * millisecondsInMinute;
 

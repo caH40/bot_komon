@@ -10,7 +10,7 @@ export const confirmUploadScheduleScene = () => {
 	confirmScene.command('confirm', async ctx => {
 		await ctx.reply(textSchedule.confirm.successfully);
 		//сохранение данных в БД
-		await scheduleToDB(ctx.session.data.schedule);
+		await scheduleToDB(ctx.session.data.series, ctx.session.data.schedule);
 
 		await ctx.scene.leave('confirmUploadSchedule');
 	});
