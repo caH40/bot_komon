@@ -7,7 +7,7 @@ export async function scheduleToDB(data) {
 		for (let index = 0; index < length; index++) {
 			let stage = new Stage({
 				number: data[index].number,
-				dateStart: convertDate(data[index].dateStart),
+				timeStart: convertDate(data[index].dateStart, data[index].timeStart),
 				world: data[index].world,
 				route: data[index].route,
 				laps: data[index].laps,

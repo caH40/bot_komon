@@ -22,6 +22,7 @@ export async function getExcel(ctx, fileName) {
 			return {
 				number: elm['Этап'],
 				dateStart: elm['Дата'],
+				timeStart: elm['Время'],
 				world: elm['Мир'],
 				route: elm['Маршрут'],
 				laps: elm['Количество кругов'],
