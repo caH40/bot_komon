@@ -8,7 +8,7 @@ import {
 	accountAdminKeyboard,
 } from '../keyboard/keyboard.js';
 import { beingDeveloped } from '../modules/beingDeveloped.js';
-import { schedule } from '../view/schedule-controller.js';
+import { scheduleView } from '../view/schedule-view.js';
 
 export async function handler(ctx, cbqData) {
 	try {
@@ -37,7 +37,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData === 'admin_getProtocol') return await ctx.scene.enter('getProtocol');
 		if (cbqData === 'admin_getSchedule') return await ctx.scene.enter('downloadSchedule');
 		// отриcовка таблиц
-		if (cbqData.includes('schedule_')) return await schedule(ctx, cbqData);
+		if (cbqData.includes('schedule_')) return await scheduleView(ctx, cbqData);
 		await beingDeveloped(ctx);
 	} catch (error) {
 		console.log(error);

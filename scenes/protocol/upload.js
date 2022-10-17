@@ -22,20 +22,24 @@ export const uploadProtocolBase = () => {
 };
 
 async function enter(ctx) {
-	const fileName = ctx.session.data.fileName;
-	await ctx.reply(text.upload.enter);
-	const dataXlsx = await getExcel(ctx, fileName);
-	if (!dataXlsx) {
-		await ctx.reply(text.upload.wrong);
-		deleteFile(fileName, ctx.session.data.dlPath);
-		await ctx.reply(`Файл ${fileName} удален!`);
-		return await ctx.scene.enter('getProtocol');
-	}
+	try {
+		const fileName = ctx.session.data.fileName;
+		await ctx.reply(text.upload.enter);
+		const dataXlsx = await getExcel(ctx, fileName);
+		if (!dataXlsx) {
+			await ctx.reply(text.upload.wrong);
+			deleteFile(fileName, ctx.session.data.dlPath);
+			await ctx.reply(`Файл ${fileName} удален!`);
+			return await ctx.scene.enter('getProtocol');
+		}
 
-	const charts = divisionChart(dataXlsx);
+		const charts = divisionChart(dataXlsx);
 
-	for (let i = 0; i < charts.length; i++) {
-		await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
+		for (let i = 0; i < charts.length; i++) {
+			await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
+		}
+		ctx.scene.enter('confirmUploadProtocol');
+	} catch (error) {
+		console.log(error);
 	}
-	ctx.scene.enter('confirmUploadProtocol');
 }

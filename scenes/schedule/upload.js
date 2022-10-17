@@ -23,24 +23,28 @@ export const uploadScheduleBase = () => {
 };
 
 async function enter(ctx) {
-	const fileName = ctx.session.data.fileName;
-	await ctx.reply(text.upload.enter);
-	const dataXlsx = await getExcel(ctx, fileName);
-	if (!dataXlsx.totalClearStages) {
-		await ctx.reply(text.upload.wrong);
-		deleteFile(fileName, ctx.session.data.dlPath);
-		await ctx.reply(`Файл ${fileName} удален!`);
-		return await ctx.scene.enter('downloadSchedule');
+	try {
+		const fileName = ctx.session.data.fileName;
+		await ctx.reply(text.upload.enter);
+		const dataXlsx = await getExcel(ctx, fileName);
+		if (!dataXlsx.totalClearStages) {
+			await ctx.reply(text.upload.wrong);
+			deleteFile(fileName, ctx.session.data.dlPath);
+			await ctx.reply(`Файл ${fileName} удален!`);
+			return await ctx.scene.enter('downloadSchedule');
+		}
+
+		ctx.session.data.schedule = dataXlsx.totalClearStages;
+		ctx.session.data.series = dataXlsx.totalClearSeries;
+
+		const charts = divisionChart(dataXlsx.totalClearStages);
+
+		for (let i = 0; i < charts.length; i++) {
+			await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
+		}
+		await ctx.replyWithHTML('<pre>' + viewDesktopSeries(dataXlsx.totalClearSeries) + '</pre>');
+		ctx.scene.enter('confirmUploadSchedule');
+	} catch (error) {
+		console.log(error);
 	}
-
-	ctx.session.data.schedule = dataXlsx.totalClearStages;
-	ctx.session.data.series = dataXlsx.totalClearSeries;
-
-	const charts = divisionChart(dataXlsx.totalClearStages);
-
-	for (let i = 0; i < charts.length; i++) {
-		await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
-	}
-	await ctx.replyWithHTML('<pre>' + viewDesktopSeries(dataXlsx.totalClearSeries) + '</pre>');
-	ctx.scene.enter('confirmUploadSchedule');
 }
