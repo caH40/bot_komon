@@ -2,6 +2,7 @@ import { regexp } from '../modules/text.js';
 
 export function format(value, lengthColumn) {
 	try {
+		if (value === 'undefined') value = undefined;
 		//удаление всех emoji
 		if (value) value = value.replace(regexp, '');
 		if (value) value = value.replace('https://', '');
