@@ -40,11 +40,11 @@ export function resultSeriesKeyboard(seriesId) {
 }
 export function resultStageCatKeyboard(stageId) {
 	return Markup.inlineKeyboard([
-		[Markup.button.callback('Общий протокол', `result_Stage_${stageId}`)],
+		[Markup.button.callback('Общий протокол', `result_Stage_T_${stageId}`)],
 		[Markup.button.callback('Категория "A"', `result_Stage_A_${stageId}`)],
 		[Markup.button.callback('Категория "B"', `result_Stage_B_${stageId}`)],
 		[Markup.button.callback('Категория "C"', `result_Stage_C_${stageId}`)],
-		[Markup.button.callback('Категория "Ж"', `result_Stage_F_${stageId}`)],
+		[Markup.button.callback('Категория "W"', `result_Stage_W_${stageId}`)],
 		[Markup.button.callback('Главное меню', 'main')],
 	]);
 }

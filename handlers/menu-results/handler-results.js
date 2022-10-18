@@ -1,10 +1,10 @@
 import { resultSeriesBtn, seriesBtn } from '../../keyboard/button/schedule-btn.js';
 import { resultsView } from '../../view/results-view.js';
+import { resultsViewStage } from '../../view/resultsStage-view.js';
 import { resultStage, resultStages } from './helper.js';
 
 export async function handlerResults(ctx, cbqData) {
 	try {
-		console.log('tut');
 		if (
 			!(
 				cbqData === 'main_series' ||
@@ -14,6 +14,7 @@ export async function handlerResults(ctx, cbqData) {
 			)
 		)
 			return;
+
 		if (cbqData === 'main_series')
 			return ctx.editMessageText('Результаты заездов. Выберите Series.', await seriesBtn());
 
@@ -27,8 +28,10 @@ export async function handlerResults(ctx, cbqData) {
 
 		// отриcовка таблиц
 		// результаты
+
+		//необходимо искать сначала более длинный составной ключ
+		if (cbqData.includes('result_Stage_')) return await resultsViewStage(ctx, cbqData);
 		if (cbqData.includes('result_')) return await resultsView(ctx, cbqData);
-		// if (cbqData.includes('stage_')) return await resultsViewStage(ctx, cbqData);
 	} catch (error) {
 		console.log(error);
 	}
