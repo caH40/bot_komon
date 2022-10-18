@@ -1,3 +1,5 @@
+import { Markup } from 'telegraf';
+import { clearCharts } from '../keyboard/keyboard.js';
 import { Result } from '../Model/Result.js';
 import { Series } from '../Model/Series.js';
 import { Stage } from '../Model/Stage.js';
@@ -26,9 +28,10 @@ export async function resultsViewStage(ctx, cbqData) {
 
 		const charts = divisionChart(resultsDB);
 		for (let i = 0; i < charts.length; i++) {
-			await ctx.replyWithHTML(`<pre>${title}\n${viewDesktop(charts[i])}</pre>`);
+			await ctx
+				.replyWithHTML(`<pre>${title}\n${viewDesktop(charts[i])}</pre>`, clearCharts)
+				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		}
-
 		return true;
 	} catch (error) {
 		console.log(error);

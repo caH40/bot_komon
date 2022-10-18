@@ -17,7 +17,7 @@ export async function handler(ctx, cbqData) {
 		const messagesIdForDelete = ctx.session.data.messagesIdForDelete;
 		const length = messagesIdForDelete.length;
 		for (let index = 0; index < length; index++) {
-			await ctx.deleteMessage(messagesIdForDelete[i]);
+			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
 		console.log(cbqData);
@@ -44,6 +44,7 @@ export async function handler(ctx, cbqData) {
 		// отриcовка таблиц
 		// расписание
 		if (cbqData.includes('schedule_')) return await scheduleView(ctx, cbqData);
+		if (cbqData === 'clear') return;
 		await beingDeveloped(ctx);
 	} catch (error) {
 		console.log(error);
