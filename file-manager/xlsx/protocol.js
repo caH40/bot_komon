@@ -21,6 +21,7 @@ export async function getExcel(ctx, fileName) {
 
 		const keys = Object.keys(sheet);
 		const rowTitle = getCellTitle(keys, sheet, 'Имя участника').slice(1) - 1;
+
 		const total = XLSX.utils.sheet_to_json(sheet, { range: rowTitle, raw: false });
 
 		const dataStage = changeTitles(total);

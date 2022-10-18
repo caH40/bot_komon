@@ -13,6 +13,7 @@ const resultSchema = new Schema({
 	watt: Number,
 	time: Number,
 	gap: String,
+	category: String,
 	categoryCurrent: String,
 	teamCurrent: String,
 	pointsStage: Number,

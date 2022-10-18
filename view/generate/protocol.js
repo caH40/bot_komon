@@ -5,7 +5,6 @@ import { secondesToTime } from '../../utility/date-convert.js';
 
 export function viewDesktop(data) {
 	try {
-		console.log(data);
 		const tableHeader = protocol.rowDLine + protocol.titles + protocol.rowDLine;
 		let body = '';
 
