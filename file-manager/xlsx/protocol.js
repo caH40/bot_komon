@@ -1,5 +1,6 @@
 import path from 'path';
 import XLSX from 'xlsx';
+import { changeTitles } from '../../utility/excel.js';
 
 export async function getExcel(ctx, fileName) {
 	try {
@@ -7,7 +8,7 @@ export async function getExcel(ctx, fileName) {
 
 		var book = XLSX.readFile(path.resolve(__dirname, 'src/', `./${fileName}`));
 
-		const sheetName = 'Stage';
+		const sheetName = 'stage';
 		const sheet = book.Sheets[sheetName];
 		if (!sheet) {
 			await ctx.reply(`В книге нет страницы ${sheetName}!`);
@@ -17,11 +18,9 @@ export async function getExcel(ctx, fileName) {
 		const keys = Object.keys(sheet);
 		const rowTitle = getCellTitle(keys, sheet, 'Имя участника').slice(1) - 1;
 		const total = XLSX.utils.sheet_to_json(sheet, { range: rowTitle, raw: false });
-		const totalClear = total.map(elm => {
-			return { name: elm['Имя участника'], time: elm['время'] };
-		});
+		const dataStage = changeTitles(total);
 
-		return totalClear;
+		return dataStage;
 	} catch (error) {
 		console.log(error);
 	}

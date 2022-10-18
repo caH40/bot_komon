@@ -12,10 +12,11 @@ export function viewDesktop(data) {
 				body +
 				'|' +
 				format(row.name, protocolDesktop.name) +
-				format(row.team, protocolDesktop.team) +
+				format(row.teamCurrent, protocolDesktop.teamCurrent) +
 				format(row.time, protocolDesktop.time) +
 				format(row.gap, protocolDesktop.gap) +
 				format(row.placeAbsolute, protocolDesktop.placeAbsolute) +
+				format(row.category, protocolDesktop.category) +
 				format(row.placeCategory, protocolDesktop.placeCategory) +
 				format(row.pointsStage, protocolDesktop.pointsStage) +
 				format(row.watt, protocolDesktop.watt) +

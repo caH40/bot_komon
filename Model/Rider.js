@@ -14,7 +14,7 @@ const riderSchema = new Schema({
 	cycleTrainer: String,
 	yearBirth: String,
 	category: String,
-	rights: { type: String, default: user },
+	gender: String,
 });
 
 export const Rider = model('Rider', riderSchema);

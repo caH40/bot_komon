@@ -27,7 +27,7 @@ async function enter(ctx) {
 		const fileName = ctx.session.data.fileName;
 		await ctx.reply(text.upload.enter);
 		const dataXlsx = await getExcel(ctx, fileName);
-		if (!dataXlsx.totalClearStages) {
+		if (!dataXlsx?.totalClearStages) {
 			await ctx.reply(text.upload.wrong);
 			deleteFile(fileName, ctx.session.data.dlPath);
 			await ctx.reply(`Файл ${fileName} удален!`);

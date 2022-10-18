@@ -12,10 +12,11 @@ export const scheduleDesktop = {
 
 export const protocolDesktop = {
 	name: 25,
-	team: 14,
+	teamCurrent: 14,
 	time: 11,
 	gap: 7,
 	placeAbsolute: 9,
+	category: 6,
 	placeCategory: 9,
 	pointsStage: 5,
 	watt: 5,

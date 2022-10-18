@@ -1,13 +1,13 @@
 export function divisionChart(data) {
 	try {
 		const newData = [];
-		const quantityPath = Math.trunc(data.length / 36);
+		const quantityPath = Math.trunc(data.length / 33);
 		let j = 0;
-		let k = 36;
+		let k = 33;
 		for (let i = 0; i < quantityPath + 1; i++) {
 			newData.push(data.slice(j, k));
-			j += 36;
-			k += 36;
+			j += 33;
+			k += 33;
 		}
 
 		return newData;
