@@ -39,6 +39,7 @@ bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
 bot.command('excel', async ctx => ctx.scene.enter('uploadProtocol'));
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
+bot.command('myid', async ctx => await ctx.reply(`Ваш ID Telegram: ${ctx.message.from.id}`));
 bot.command('/test', async ctx => {
 	const time = '1:00:00';
 	console.log(convertTime(time));

@@ -1,4 +1,3 @@
-import { Markup } from 'telegraf';
 import { clearCharts } from '../keyboard/keyboard.js';
 import { Result } from '../Model/Result.js';
 import { Series } from '../Model/Series.js';
