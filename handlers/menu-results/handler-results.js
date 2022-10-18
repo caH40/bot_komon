@@ -16,10 +16,13 @@ export async function handlerResults(ctx, cbqData) {
 			return;
 
 		if (cbqData === 'main_series')
-			return ctx.editMessageText('Результаты заездов. Выберите Series.', await seriesBtn());
+			return ctx.editMessageText('Результаты заездов. Выбор серии заездов.', await seriesBtn());
 
 		if (cbqData.includes('series_')) {
-			return await ctx.editMessageText('Личный кабинет', await resultSeriesBtn(cbqData));
+			return await ctx.editMessageText(
+				'Результаты заездов. Выбор зачетов. Выбор результатов отдельных этапов. ',
+				await resultSeriesBtn(cbqData)
+			);
 		}
 		// четвертый уровень меню
 		if (cbqData.includes('result_Stages_')) return await resultStages(ctx, cbqData);
