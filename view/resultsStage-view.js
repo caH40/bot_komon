@@ -9,15 +9,15 @@ export async function resultsViewStage(ctx, cbqData) {
 		const stageId = cbqData.slice(6);
 
 		const stagesDB = await Stage.find({ _id: stageId });
+		const { name, type } = await Series.findOne({ _id: stagesDB[0].seriesId });
 		const resultsDB = await Result.find({ stageId });
-		// const seriesDB = await Series.findOne({ _id: seriesId });
-		// const title = `${seriesDB.name}, ${seriesDB.type}`;
-		// const title = `${seriesDB.name}, ${seriesDB.type}`;
+
+		const title = `${name}, ${type}`;
+
 		const charts = divisionChart(resultsDB);
 		for (let i = 0; i < charts.length; i++) {
-			await ctx.replyWithHTML('<pre>' + viewDesktop(charts[i]) + '</pre>');
+			await ctx.replyWithHTML(`<pre>'${title}\n${viewDesktop(charts[i])}</pre>`);
 		}
-		// await ctx.replyWithHTML('<pre>' + viewDesktop(resultsDB) + '</pre>');
 
 		return;
 	} catch (error) {
