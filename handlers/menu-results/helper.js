@@ -8,7 +8,7 @@ export async function resultStages(ctx, cbqData) {
 		const { name } = await Series.findOne({ _id: seriesId });
 		const stagesDB = await Stage.find({ seriesId, hasResults: true });
 
-		await ctx.editMessageText(`Результаты этапов ${name}`, resultStagesKeyboard(stagesDB));
+		return await ctx.editMessageText(`Результаты этапов ${name}`, resultStagesKeyboard(stagesDB));
 	} catch (error) {
 		console.log(error);
 	}

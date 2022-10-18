@@ -1,8 +1,7 @@
 import { scheduleBtn } from '../keyboard/button/schedule-btn.js';
 import { accountKeyboard, mainMenuKeyboard, accountAdminKeyboard } from '../keyboard/keyboard.js';
+import { beingDeveloped } from '../modules/beingDeveloped.js';
 
-import { resultsView } from '../view/results-view.js';
-import { resultsViewStage } from '../view/resultsStage-view.js';
 import { scheduleView } from '../view/schedule-view.js';
 
 import { handlerResults } from './menu-results/handler-results.js';
@@ -14,7 +13,8 @@ export async function handler(ctx, cbqData) {
 		if (cbqData === 'main') return await ctx.editMessageText(`Главное меню`, mainMenuKeyboard);
 
 		// Обработчик ветки меню Результаты
-		await handlerResults(ctx, cbqData);
+		const isCompleted = await handlerResults(ctx, cbqData);
+		if (isCompleted) return;
 
 		if (cbqData === 'main_schedule')
 			return await ctx.editMessageText('Расписание заездов', await scheduleBtn());
@@ -32,7 +32,7 @@ export async function handler(ctx, cbqData) {
 		// отриcовка таблиц
 		// расписание
 		if (cbqData.includes('schedule_')) return await scheduleView(ctx, cbqData);
-		// await beingDeveloped(ctx);
+		await beingDeveloped(ctx);
 	} catch (error) {
 		console.log(error);
 	}

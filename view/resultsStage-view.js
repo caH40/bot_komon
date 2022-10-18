@@ -29,7 +29,7 @@ export async function resultsViewStage(ctx, cbqData) {
 			await ctx.replyWithHTML(`<pre>${title}\n${viewDesktop(charts[i])}</pre>`);
 		}
 
-		return;
+		return true;
 	} catch (error) {
 		console.log(error);
 	}

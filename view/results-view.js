@@ -12,7 +12,7 @@ export async function resultsView(ctx, cbqData) {
 
 		// await ctx.replyWithHTML('<pre>' + viewDesktop(stagesDB, title) + '</pre>');
 
-		return;
+		return true;
 	} catch (error) {
 		console.log(error);
 	}

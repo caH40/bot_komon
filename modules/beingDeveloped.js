@@ -1,6 +1,6 @@
 export async function beingDeveloped(ctx) {
 	try {
-		await ctx.reply('Находится в разработке...');
+		await ctx.reply('В разработке...');
 	} catch (error) {
 		console.log(error);
 	}
