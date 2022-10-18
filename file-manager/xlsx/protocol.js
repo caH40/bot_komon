@@ -1,12 +1,16 @@
 import path from 'path';
 import XLSX from 'xlsx';
 import { changeTitles } from '../../utility/excel.js';
+import { checkFileName } from '../name-check.js';
 
 export async function getExcel(ctx, fileName) {
 	try {
+		const isPassed = await checkFileName(ctx, fileName);
+		if (!isPassed) return console.log('Наименование файла протокола не прошло проверку');
+
 		const __dirname = path.resolve();
 
-		var book = XLSX.readFile(path.resolve(__dirname, 'src/', `./${fileName}`));
+		const book = XLSX.readFile(path.resolve(__dirname, 'src/', `./${fileName}`));
 
 		const sheetName = 'stage';
 		const sheet = book.Sheets[sheetName];
@@ -18,6 +22,7 @@ export async function getExcel(ctx, fileName) {
 		const keys = Object.keys(sheet);
 		const rowTitle = getCellTitle(keys, sheet, 'Имя участника').slice(1) - 1;
 		const total = XLSX.utils.sheet_to_json(sheet, { range: rowTitle, raw: false });
+
 		const dataStage = changeTitles(total);
 
 		return dataStage;

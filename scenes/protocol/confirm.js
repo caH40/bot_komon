@@ -1,5 +1,5 @@
 import { Scenes } from 'telegraf';
-import { stageToDB } from '../../controllersDB/stage-save.js';
+import { protocolToDB } from '../../controllersDB/protocol-save.js';
 
 import { deleteFile } from '../../file-manager/file-delete.js';
 import { text } from '../../modules/text.js';
@@ -10,7 +10,11 @@ export const confirmUploadProtocolScene = () => {
 		confirmScene.enter(async ctx => await ctx.reply(text.confirm.enter));
 		confirmScene.command('confirm', async ctx => {
 			//сохранение данных в БД
-			await stageToDB(ctx.session.data.series, ctx.session.data.schedule);
+			await protocolToDB(
+				ctx.session.data.result,
+				ctx.session.data.seriesId,
+				ctx.session.data.stageId
+			);
 			await ctx.reply(text.confirm.successfully);
 			await ctx.scene.leave('confirmUploadProtocol');
 		});

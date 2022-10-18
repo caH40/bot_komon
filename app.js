@@ -12,6 +12,7 @@ import { confirmUploadProtocolScene } from './scenes/protocol/confirm.js';
 import { downloadScheduleBase } from './scenes/schedule/download.js';
 import { uploadScheduleBase } from './scenes/schedule/upload.js';
 import { confirmUploadScheduleScene } from './scenes/schedule/confirm.js';
+import { convertTime } from './utility/date-convert.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -38,9 +39,9 @@ bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
 bot.command('excel', async ctx => ctx.scene.enter('uploadProtocol'));
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
-bot.command('/file', async ctx => {
-	const path = '☢️';
-	console.log(path.length);
+bot.command('/test', async ctx => {
+	const time = '1:00:00';
+	console.log(convertTime(time));
 });
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 

@@ -32,6 +32,7 @@ async function enter(ctx) {
 			await ctx.reply(`Файл ${fileName} удален!`);
 			return await ctx.scene.enter('getProtocol');
 		}
+		ctx.session.data.result = dataXlsx;
 
 		const charts = divisionChart(dataXlsx);
 

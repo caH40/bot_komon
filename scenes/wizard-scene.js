@@ -6,7 +6,7 @@ export const getProtocolWizard = () => {
 			'getProtocol',
 			async ctx => {
 				await ctx.reply(
-					`Загрузите протокол заезда. Название файла должно быть вида "Название серии-год_этап-номер.xlsx"`
+					`Загрузите протокол заезда. Название файла должно быть вида "Название серии годэтап-номер.xlsx"`
 				);
 				ctx.wizard.state.fileProtocol = {};
 				return ctx.wizard.next();
