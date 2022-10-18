@@ -4,7 +4,6 @@ import pkg from 'mongoose';
 const { Schema, model } = pkg;
 
 const resultSchema = new Schema({
-	seriesId: { type: mongoose.Schema.Types.ObjectId, ref: 'Series' },
 	stageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Stage' },
 	riderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Rider' },
 	placeAbsolute: Number,
