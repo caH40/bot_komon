@@ -1,7 +1,6 @@
 import { resultSeriesBtn, seriesBtn } from '../../keyboard/button/schedule-btn.js';
 import { resultsView } from '../../view/results-view.js';
-import { resultsViewStage } from '../../view/resultsStage-view.js';
-import { resultStages } from '../handler-helper.js';
+import { resultStage, resultStages } from './helper.js';
 
 export async function handlerResults(ctx, cbqData) {
 	try {
@@ -10,11 +9,8 @@ export async function handlerResults(ctx, cbqData) {
 			!(
 				cbqData === 'main_series' ||
 				cbqData.includes('series_') ||
-				cbqData.includes('result_Stages_') ||
-				cbqData.includes('stage_') ||
-				cbqData.includes('result_General_') ||
-				cbqData.includes('result_Team_') ||
-				cbqData.includes('result_Stages_')
+				cbqData.includes('result_') ||
+				cbqData.includes('stage_')
 			)
 		)
 			return;
@@ -26,10 +22,13 @@ export async function handlerResults(ctx, cbqData) {
 		}
 		// четвертый уровень меню
 		if (cbqData.includes('result_Stages_')) return await resultStages(ctx, cbqData);
+
+		if (cbqData.includes('stage_')) return await resultStage(ctx, cbqData);
+
 		// отриcовка таблиц
 		// результаты
 		if (cbqData.includes('result_')) return await resultsView(ctx, cbqData);
-		if (cbqData.includes('stage_')) return await resultsViewStage(ctx, cbqData);
+		// if (cbqData.includes('stage_')) return await resultsViewStage(ctx, cbqData);
 	} catch (error) {
 		console.log(error);
 	}
