@@ -6,7 +6,6 @@ export const downloadProtocolBase = () => {
 	try {
 		const protocol = new Scenes.BaseScene('getProtocol');
 		protocol.enter(async ctx => {
-			ctx.session.data = {};
 			await ctx.reply(text.enter);
 		});
 

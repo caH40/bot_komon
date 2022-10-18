@@ -6,7 +6,6 @@ export const downloadScheduleBase = () => {
 	try {
 		const schedule = new Scenes.BaseScene('downloadSchedule');
 		schedule.enter(async ctx => {
-			ctx.session.data = {};
 			await ctx.reply(textSchedule.download.enter);
 		});
 

@@ -8,6 +8,18 @@ import { handlerResults } from './menu-results/handler-results.js';
 
 export async function handler(ctx, cbqData) {
 	try {
+		//исключение багов после перезапуска бота, при нажатии на старое меню
+		if (!ctx.session.data) {
+			ctx.session.data = {};
+			ctx.session.data.messagesIdForDelete = [];
+		}
+
+		const messagesIdForDelete = ctx.session.data.messagesIdForDelete;
+		const length = messagesIdForDelete.length;
+		for (let index = 0; index < length; index++) {
+			await ctx.deleteMessage(messagesIdForDelete[i]);
+		}
+		ctx.session.data.messagesIdForDelete = [];
 		console.log(cbqData);
 		// первый уровень меню
 		if (cbqData === 'main') return await ctx.editMessageText(`Главное меню`, mainMenuKeyboard);
