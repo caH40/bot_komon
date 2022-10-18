@@ -1,4 +1,5 @@
 import { Result } from '../Model/Result.js';
+import { Stage } from '../Model/Stage.js';
 import { convertTime } from '../utility/date-convert.js';
 
 export async function protocolToDB(dataResult, seriesId, stageId) {
@@ -24,7 +25,11 @@ export async function protocolToDB(dataResult, seriesId, stageId) {
 			});
 			console.log('result', result);
 			const response = await result.save().catch(error => console.log(error));
-			if (!response) console.log('Ошибка при сохранении данных результатов этапа!');
+			if (response) {
+				await Stage.findOneAndUpdate({ _id: stageId }, { $set: { hasResults: true } });
+			} else {
+				console.log('Ошибка при сохранении данных результатов этапа!');
+			}
 		}
 	} catch (error) {
 		console.log(error);

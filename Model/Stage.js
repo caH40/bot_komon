@@ -16,6 +16,7 @@ const stageSchema = new Schema({
 	link: String,
 	registeredRider: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rider' }],
 	protocol: { type: String },
+	hasResults: { type: Boolean, hasResults: false },
 });
 
 export const Stage = model('Stage', stageSchema);

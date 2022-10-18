@@ -5,12 +5,14 @@ export const mainMenuKeyboard = Markup.inlineKeyboard([
 	[Markup.button.callback('Расписание заездов', 'main_schedule')],
 	[Markup.button.callback('Личный кабинет', 'main_account')],
 ]);
-// меню выбора результатов серий
-export const seriesKeyboard = Markup.inlineKeyboard([
-	[Markup.button.callback('Зимняя серия', 'series_autumn2022')],
-	[Markup.button.callback('Осенняя серия', 'series_winter2022')],
-	[Markup.button.callback('Главное меню', 'main')],
-]);
+// меню выбора результатов серий main_series
+export function seriesKeyboard(series) {
+	const keyboard = Markup.inlineKeyboard([
+		series.map(elm => Markup.button.callback(elm.name, 'series_' + elm._id)),
+		[Markup.button.callback('Главное меню', 'main')],
+	]);
+	return keyboard;
+}
 // меню выбора расписания серий
 export function scheduleKeyboard(series) {
 	const keyboard = Markup.inlineKeyboard([
@@ -28,11 +30,11 @@ export const accountKeyboard = Markup.inlineKeyboard([
 	[Markup.button.callback('Главное меню', 'main')],
 ]);
 // меню выбора зачетов серии
-export function resultSeriesKeyboard(series) {
+export function resultSeriesKeyboard(seriesId) {
 	return Markup.inlineKeyboard([
-		[Markup.button.callback('Генеральный зачет', `result_General_${series}`)],
-		[Markup.button.callback('Командный зачет', `result_Team_${series}`)],
-		[Markup.button.callback('Результаты этапов', `result_Stages_${series}`)],
+		[Markup.button.callback('Генеральный зачет', `result_General_${seriesId}`)],
+		[Markup.button.callback('Командный зачет', `result_Team_${seriesId}`)],
+		[Markup.button.callback('Результаты этапов', `result_Stages_${seriesId}`)],
 		[Markup.button.callback('Главное меню', 'main')],
 	]);
 }
@@ -45,8 +47,15 @@ export const accountAdminKeyboard = Markup.inlineKeyboard([
 
 // меню выбора результатов этапов серии
 export function resultStagesKeyboard(series) {
-	const dataDB = ['1', '2', '3', '4'];
-	const buttons = dataDB.map(stage => [Markup.button.callback(stage, `stage_${series}_${stage}`)]);
+	const keyboard = Markup.inlineKeyboard([
+		...series.map(stage => [
+			Markup.button.callback(
+				`Этап ${stage.number}, ${new Date(stage.dateStart).toLocaleDateString()}, ${stage.type}`,
+				`stage_${stage._id}`
+			),
+		]),
+		[Markup.button.callback('Главное меню', 'main')],
+	]);
 
-	return Markup.inlineKeyboard([...buttons, [Markup.button.callback('Главное меню', 'main')]]);
+	return keyboard;
 }
