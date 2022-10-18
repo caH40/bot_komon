@@ -1,7 +1,6 @@
 import { scheduleBtn } from '../keyboard/button/schedule-btn.js';
-import { accountKeyboard, mainMenuKeyboard, accountAdminKeyboard } from '../keyboard/keyboard.js';
+import { mainMenuKeyboard, accountAdminKeyboard, accountKeyboard } from '../keyboard/keyboard.js';
 import { beingDeveloped } from '../modules/beingDeveloped.js';
-import { isAdmin, isRoot } from '../modules/verify-user.js';
 
 import { scheduleView } from '../view/schedule-view.js';
 
@@ -32,7 +31,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData === 'main_schedule')
 			return await ctx.editMessageText('Расписание заездов', await scheduleBtn());
 		if (cbqData === 'main_account')
-			return await ctx.editMessageText('Личный кабинет', accountKeyboard);
+			return await ctx.editMessageText('Личный кабинет', await accountKeyboard(ctx));
 		if (cbqData === 'account_adminAcc')
 			return await ctx.editMessageText('Админ кабинет', accountAdminKeyboard);
 		// третий уровень меню

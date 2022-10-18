@@ -1,4 +1,5 @@
 import { Markup } from 'telegraf';
+import { accountBtn } from './button/account.js';
 // главное меню
 export const mainMenuKeyboard = Markup.inlineKeyboard([
 	[Markup.button.callback('Результаты заездов', 'main_series')],
@@ -22,13 +23,9 @@ export function scheduleKeyboard(series) {
 	return keyboard;
 }
 // меню выбора личного кабинета
-export const accountKeyboard = Markup.inlineKeyboard([
-	[Markup.button.callback('Мои результаты', 'account_myResults')],
-	[Markup.button.callback('Регистрация', 'account_registration')],
-	[Markup.button.callback('Команда', 'team')],
-	[Markup.button.callback('Админ кабинет', 'account_adminAcc')],
-	[Markup.button.callback('Главное меню', 'main')],
-]);
+export async function accountKeyboard(ctx) {
+	return Markup.inlineKeyboard(await accountBtn(ctx));
+}
 // меню выбора зачетов серии
 export function resultSeriesKeyboard(seriesId) {
 	return Markup.inlineKeyboard([

@@ -1,6 +1,6 @@
 import { Rights } from '../Model/Rights.js';
 
-export async function isRoot(ctx) {
+export async function verifyRoot(ctx) {
 	try {
 		const userId = ctx.update.callback_query.message.chat.id;
 		const response = await Rights.findOne({ root: { $in: userId } });
@@ -10,7 +10,7 @@ export async function isRoot(ctx) {
 		console.log(error);
 	}
 }
-export async function isAdmin(ctx) {
+export async function verifyAdmin(ctx) {
 	try {
 		const userId = ctx.update.callback_query.message.chat.id;
 		const response = await Rights.findOne({ admin: { $in: userId } });
