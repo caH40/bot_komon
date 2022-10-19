@@ -18,6 +18,7 @@ export async function resultsViewStage(ctx, cbqData) {
 		const { name, type } = await Series.findOne({ _id: seriesId });
 
 		let resultsDB = [];
+		// 'T' общий протокол
 		if (category === 'T') {
 			resultsDB = await Result.find({ stageId });
 		} else {

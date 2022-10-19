@@ -16,9 +16,9 @@ const resultSchema = new Schema({
 	category: String,
 	categoryCurrent: String,
 	teamCurrent: String,
-	pointsStage: Number,
-	pointsSprint: Number,
-	pointsMountain: Number,
+	pointsStage: { type: Number, default: 0 },
+	pointsSprint: { type: Number, default: 0 },
+	pointsMountain: { type: Number, default: 0 },
 	isUnderChecking: { type: String, default: false },
 	comment: String,
 });

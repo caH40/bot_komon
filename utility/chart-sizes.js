@@ -28,3 +28,9 @@ export const seriesDesktop = {
 	type: 11,
 	organizer: 14,
 };
+export const generalDesktop = {
+	place: 5,
+	name: 25,
+	team: 14,
+	pointsGeneral: 5,
+};

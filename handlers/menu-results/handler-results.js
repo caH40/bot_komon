@@ -1,6 +1,7 @@
 import { resultSeriesBtn, seriesBtn } from '../../keyboard/button/schedule-btn.js';
 import { beingDeveloped } from '../../modules/beingDeveloped.js';
 import { resultsView } from '../../view/results-view.js';
+import { resultsSeriesGeneral } from '../../view/resultsSeriesGeneral.js';
 import { resultsViewStage } from '../../view/resultsStage-view.js';
 import { resultGeneral, resultStage, resultStages } from './helper.js';
 
@@ -35,6 +36,7 @@ export async function handlerResults(ctx, cbqData) {
 
 		//необходимо искать сначала более длинный составной ключ
 		if (cbqData.includes('result_General_')) return await resultGeneral(ctx, cbqData);
+		if (cbqData.includes('result_GSeries_')) return await resultsSeriesGeneral(ctx, cbqData);
 		if (cbqData.includes('result_Team_')) return await beingDeveloped(ctx);
 		if (cbqData.includes('result_Stage_')) return await resultsViewStage(ctx, cbqData);
 		if (cbqData.includes('result_')) return await resultsView(ctx, cbqData);
