@@ -13,6 +13,7 @@ import { downloadScheduleBase } from './scenes/schedule/download.js';
 import { uploadScheduleBase } from './scenes/schedule/upload.js';
 import { confirmUploadScheduleScene } from './scenes/schedule/confirm.js';
 import { convertTime } from './utility/date-convert.js';
+import { filterMessage } from './middleware/filter-message.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -32,6 +33,7 @@ const stage = new Scenes.Stage([
 
 bot.use(session());
 bot.use(stage.middleware());
+bot.use(filterMessage);
 
 bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
@@ -41,6 +43,7 @@ bot.command('excel', async ctx => ctx.scene.enter('uploadProtocol'));
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
 bot.command('myid', async ctx => await ctx.reply(`Ваш ID Telegram: ${ctx.message.from.id}`));
 bot.command('/test', async ctx => {
+	// console.log(ctx.message.chat.type);
 	const time = '1:00:00';
 	console.log(convertTime(time));
 });
