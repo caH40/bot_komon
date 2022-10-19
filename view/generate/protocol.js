@@ -1,6 +1,6 @@
-import { protocol } from '../../modules/text.js';
+import { protocol, protocolChartMobile } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
-import { protocolDesktop } from '../../utility/chart-sizes.js';
+import { protocolDesktop, protocolMobile } from '../../utility/chart-sizes.js';
 
 export function viewDesktop(data) {
 	try {
@@ -24,6 +24,27 @@ export function viewDesktop(data) {
 				`\n`;
 		});
 		return `${tableHeader}${body}${protocol.rowDLine}`;
+	} catch (error) {
+		console.log(error);
+	}
+}
+export function viewMobile(data) {
+	try {
+		const tableHeader =
+			protocolChartMobile.rowDLine + protocolChartMobile.titles + protocolChartMobile.rowDLine;
+		let body = '';
+
+		data.forEach(row => {
+			body =
+				body +
+				'|' +
+				format(row.name, protocolMobile.name) +
+				format(String(row.time), protocolMobile.time) +
+				format(String(row.placeAbsolute), protocolMobile.placeAbsolute) +
+				format(row.category, protocolMobile.category) +
+				`\n`;
+		});
+		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;
 	} catch (error) {
 		console.log(error);
 	}

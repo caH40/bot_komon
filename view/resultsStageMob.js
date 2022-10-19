@@ -4,7 +4,7 @@ import { Series } from '../Model/Series.js';
 import { Stage } from '../Model/Stage.js';
 import { divisionChart } from '../utility/chart-division.js';
 import { secondesToTime } from '../utility/date-convert.js';
-import { viewDesktop } from './generate/protocol.js';
+import { viewMobile } from './generate/protocol.js';
 
 export async function resultsViewStageMob(ctx, category, stageId) {
 	try {
@@ -12,7 +12,7 @@ export async function resultsViewStageMob(ctx, category, stageId) {
 		const seriesId = stagesDB[0].seriesId;
 		const seriesNumber = stagesDB[0].number;
 		const seriesType = stagesDB[0].type;
-		const { name, type } = await Series.findOne({ _id: seriesId });
+		const { name } = await Series.findOne({ _id: seriesId });
 
 		let resultsDB = [];
 		// 'T' общий протокол
@@ -26,12 +26,12 @@ export async function resultsViewStageMob(ctx, category, stageId) {
 		resultsDB = resultsDB.map(elm => elm.toObject());
 		resultsDB.forEach(elm => (elm.time = secondesToTime(elm.time)));
 
-		const title = `${name}, ${type}, Этап №${seriesNumber}, ${seriesType}`;
+		const title = `${name}, Этап ${seriesNumber}, ${seriesType}`;
 
 		const charts = divisionChart(resultsDB);
 		for (let i = 0; i < charts.length; i++) {
 			await ctx
-				.replyWithHTML(`<pre>${title}\n${viewDesktop(charts[i])}</pre>`, clearCharts)
+				.replyWithHTML(`<pre>${title}\n${viewMobile(charts[i])}</pre>`, clearCharts)
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		}
 		return true;
