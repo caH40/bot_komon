@@ -4,8 +4,6 @@ import { convertTime } from '../utility/date-convert.js';
 
 export async function protocolToDB(dataResult, seriesId, stageId) {
 	try {
-		console.log('dataResult', dataResult);
-		console.log('stageId', stageId);
 		//riderId ,берется после идентификации райдера в протоколе
 		const length = dataResult.length;
 		for (let index = 0; index < length; index++) {
@@ -23,7 +21,7 @@ export async function protocolToDB(dataResult, seriesId, stageId) {
 				teamCurrent: dataResult[index].teamCurrent,
 				pointsStage: dataResult[index].pointsStage,
 			});
-			console.log('result', result);
+
 			const response = await result.save().catch(error => console.log(error));
 			if (response) {
 				await Stage.findOneAndUpdate({ _id: stageId }, { $set: { hasResults: true } });

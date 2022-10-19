@@ -1,4 +1,8 @@
-import { resultStageCatKeyboard, resultStagesKeyboard } from '../../keyboard/keyboard.js';
+import {
+	resultSeriesGeneralKeyboard,
+	resultStageCatKeyboard,
+	resultStagesKeyboard,
+} from '../../keyboard/keyboard.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
 
@@ -23,6 +27,19 @@ export async function resultStage(ctx, cbqData) {
 		return await ctx.editMessageText(
 			`Результаты этапа №${number} ${name}`,
 			resultStageCatKeyboard(stageId)
+		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function resultGeneral(ctx, cbqData) {
+	try {
+		const _id = cbqData.slice(15);
+		const { name } = await Series.findOne({ _id });
+
+		return await ctx.editMessageText(
+			`Генеральный зачет серии ${name}.`,
+			resultSeriesGeneralKeyboard(_id)
 		);
 	} catch (error) {
 		console.log(error);

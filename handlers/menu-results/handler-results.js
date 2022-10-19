@@ -2,7 +2,7 @@ import { resultSeriesBtn, seriesBtn } from '../../keyboard/button/schedule-btn.j
 import { beingDeveloped } from '../../modules/beingDeveloped.js';
 import { resultsView } from '../../view/results-view.js';
 import { resultsViewStage } from '../../view/resultsStage-view.js';
-import { resultStage, resultStages } from './helper.js';
+import { resultGeneral, resultStage, resultStages } from './helper.js';
 
 export async function handlerResults(ctx, cbqData) {
 	try {
@@ -34,7 +34,7 @@ export async function handlerResults(ctx, cbqData) {
 		// результаты
 
 		//необходимо искать сначала более длинный составной ключ
-		if (cbqData.includes('result_General_')) return await beingDeveloped(ctx);
+		if (cbqData.includes('result_General_')) return await resultGeneral(ctx, cbqData);
 		if (cbqData.includes('result_Team_')) return await beingDeveloped(ctx);
 		if (cbqData.includes('result_Stage_')) return await resultsViewStage(ctx, cbqData);
 		if (cbqData.includes('result_')) return await resultsView(ctx, cbqData);

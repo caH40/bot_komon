@@ -45,6 +45,15 @@ export function resultStageCatKeyboard(stageId) {
 		[Markup.button.callback('Главное меню', 'main')],
 	]);
 }
+export function resultSeriesGeneralKeyboard(seriesId) {
+	return Markup.inlineKeyboard([
+		[Markup.button.callback('Категория "A"', `result_GSeries_A_${seriesId}`)],
+		[Markup.button.callback('Категория "B"', `result_GSeries_B_${seriesId}`)],
+		[Markup.button.callback('Категория "C"', `result_GSeries_C_${seriesId}`)],
+		[Markup.button.callback('Категория "W"', `result_GSeries_W_${seriesId}`)],
+		[Markup.button.callback('Главное меню', 'main')],
+	]);
+}
 // меню выбора админ кабинета
 export const accountAdminKeyboard = Markup.inlineKeyboard([
 	[Markup.button.callback('Загрузить протокол', 'admin_getProtocol')],
