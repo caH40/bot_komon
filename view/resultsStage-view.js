@@ -25,11 +25,8 @@ export async function resultsViewStage(ctx, cbqData) {
 		}
 
 		resultsDB = resultsDB.sort((a, b) => a.time - b.time);
-
 		resultsDB = resultsDB.map(elm => elm.toObject());
-		resultsDB.forEach(elm => {
-			elm.time = secondesToTime(elm.time);
-		});
+		resultsDB.forEach(elm => (elm.time = secondesToTime(elm.time)));
 
 		const title = `${name}, ${type}, Этап №${seriesNumber}, ${seriesType}`;
 

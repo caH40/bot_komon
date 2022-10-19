@@ -1,7 +1,6 @@
 import { protocol } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
 import { protocolDesktop } from '../../utility/chart-sizes.js';
-import { secondesToTime } from '../../utility/date-convert.js';
 
 export function viewDesktop(data) {
 	try {
@@ -29,6 +28,3 @@ export function viewDesktop(data) {
 		console.log(error);
 	}
 }
-// function ternary(date) {
-// 	return typeof date == 'number' ? secondesToTime(date) : date;
-// }

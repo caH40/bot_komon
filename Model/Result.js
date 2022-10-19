@@ -20,6 +20,7 @@ const resultSchema = new Schema({
 	pointsSprint: Number,
 	pointsMountain: Number,
 	isUnderChecking: { type: String, default: false },
+	comment: String,
 });
 
 export const Result = model('Result', resultSchema);
