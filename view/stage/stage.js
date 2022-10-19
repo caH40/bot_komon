@@ -1,5 +1,5 @@
-import { resultsViewStageDes } from './resultsStageDes.js';
-import { resultsViewStageMob } from './resultsStageMob.js';
+import { resultsViewStageDes } from './desktop.js';
+import { resultsViewStageMob } from './mobile.js';
 
 export async function resultsViewStage(ctx, cbqData) {
 	try {

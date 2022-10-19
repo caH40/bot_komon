@@ -3,7 +3,7 @@ import { mobVsDesKeyboard } from '../../keyboard/keyboard.js';
 import { beingDeveloped } from '../../modules/beingDeveloped.js';
 import { resultsView } from '../../view/results-view.js';
 import { resultsSeriesGeneral } from '../../view/series_general/series-general.js';
-import { resultsViewStage } from '../../view/resultsStage-view.js';
+import { resultsViewStage } from '../../view/stage/stage.js';
 import { resultGeneral, resultStage, resultStages } from './helper.js';
 
 export async function handlerResults(ctx, cbqData) {
