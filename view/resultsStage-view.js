@@ -3,6 +3,7 @@ import { Result } from '../Model/Result.js';
 import { Series } from '../Model/Series.js';
 import { Stage } from '../Model/Stage.js';
 import { divisionChart } from '../utility/chart-division.js';
+import { secondesToTime } from '../utility/date-convert.js';
 import { viewDesktop } from './generate/protocol.js';
 
 export async function resultsViewStage(ctx, cbqData) {
@@ -22,6 +23,13 @@ export async function resultsViewStage(ctx, cbqData) {
 		} else {
 			resultsDB = await Result.find({ stageId, category });
 		}
+
+		resultsDB = resultsDB.sort((a, b) => a.time - b.time);
+
+		resultsDB = resultsDB.map(elm => elm.toObject());
+		resultsDB.forEach(elm => {
+			elm.time = secondesToTime(elm.time);
+		});
 
 		const title = `${name}, ${type}, Этап №${seriesNumber}, ${seriesType}`;
 

@@ -14,7 +14,7 @@ export function viewDesktop(data) {
 				'|' +
 				format(row.name, protocolDesktop.name) +
 				format(row.teamCurrent, protocolDesktop.teamCurrent) +
-				format(ternary(row.time), protocolDesktop.time) +
+				format(String(row.time), protocolDesktop.time) +
 				format(row.gap, protocolDesktop.gap) +
 				format(String(row.placeAbsolute), protocolDesktop.placeAbsolute) +
 				format(row.category, protocolDesktop.category) +
@@ -29,6 +29,6 @@ export function viewDesktop(data) {
 		console.log(error);
 	}
 }
-function ternary(date) {
-	return typeof date == 'number' ? secondesToTime(date) : date;
-}
+// function ternary(date) {
+// 	return typeof date == 'number' ? secondesToTime(date) : date;
+// }
