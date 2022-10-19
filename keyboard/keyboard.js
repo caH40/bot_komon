@@ -76,5 +76,5 @@ export function resultStagesKeyboard(series) {
 	return keyboard;
 }
 export const clearCharts = Markup.inlineKeyboard([
-	[Markup.button.callback('Очистить таблицы', `clear`)],
+	[Markup.button.callback('Очистить сообщения', `clear`)],
 ]);
