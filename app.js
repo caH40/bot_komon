@@ -14,6 +14,7 @@ import { uploadScheduleBase } from './scenes/schedule/upload.js';
 import { confirmUploadScheduleScene } from './scenes/schedule/confirm.js';
 import { convertTime } from './utility/date-convert.js';
 import { filterMessage } from './middleware/filter-message.js';
+import { registrationWizard } from './scenes/wizard-scene.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -29,6 +30,7 @@ const stage = new Scenes.Stage([
 	downloadScheduleBase(),
 	uploadScheduleBase(),
 	confirmUploadScheduleScene(),
+	registrationWizard(),
 ]);
 
 bot.use(session());
@@ -42,11 +44,7 @@ bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
 bot.command('excel', async ctx => ctx.scene.enter('uploadProtocol'));
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
 bot.command('myid', async ctx => await ctx.reply(`Ваш ID Telegram: ${ctx.message.from.id}`));
-bot.command('/test', async ctx => {
-	// console.log(ctx.message.chat.type);
-	const time = '1:00:00';
-	console.log(convertTime(time));
-});
+bot.command('/test', async ctx => await ctx.scene.enter('registration'));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 
 bot.launch();

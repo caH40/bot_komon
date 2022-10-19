@@ -12,6 +12,7 @@ const riderSchema = new Schema({
 	telegramUsername: String,
 	telegramId: { type: Number, unique: true },
 	cycleTrainer: String,
+	zwiftPower: String,
 	yearBirth: String,
 	category: String,
 	gender: String,
