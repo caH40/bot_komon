@@ -46,6 +46,7 @@ bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
 bot.command('myid', async ctx => await ctx.reply(`Ваш ID Telegram: ${ctx.message.from.id}`));
 // bot.command('/test', async ctx => await ctx.scene.enter('registration'));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
+bot.on('message', async ctx => console.log(JSON.parse(ctx.message.text)));
 
 bot.launch();
 

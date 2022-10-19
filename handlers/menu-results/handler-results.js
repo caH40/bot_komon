@@ -1,4 +1,5 @@
 import { resultSeriesBtn, seriesBtn } from '../../keyboard/button/schedule-btn.js';
+import { mobVsDesKeyboard } from '../../keyboard/keyboard.js';
 import { beingDeveloped } from '../../modules/beingDeveloped.js';
 import { resultsView } from '../../view/results-view.js';
 import { resultsSeriesGeneral } from '../../view/resultsSeriesGeneral.js';
@@ -12,10 +13,19 @@ export async function handlerResults(ctx, cbqData) {
 				cbqData === 'main_series' ||
 				cbqData.includes('series_') ||
 				cbqData.includes('result_') ||
+				cbqData.includes('view_') ||
 				cbqData.includes('stage_')
 			)
 		)
 			return;
+
+		if (cbqData.includes('view_')) {
+			const queryData = cbqData.slice(5);
+			return await ctx.editMessageText(
+				'Выбор используемого устройства для корректного отображения таблиц.',
+				mobVsDesKeyboard(queryData)
+			);
+		}
 
 		if (cbqData === 'main_series')
 			return ctx.editMessageText('Результаты заездов. Выбор серии заездов.', await seriesBtn());
@@ -35,6 +45,8 @@ export async function handlerResults(ctx, cbqData) {
 		// результаты
 
 		//необходимо искать сначала более длинный составной ключ
+
+		// if (cbqData.includes('result_General_')) return await resultGeneral(ctx, cbqData);
 		if (cbqData.includes('result_General_')) return await resultGeneral(ctx, cbqData);
 		if (cbqData.includes('result_GSeries_')) return await resultsSeriesGeneral(ctx, cbqData);
 		if (cbqData.includes('result_Team_')) return await beingDeveloped(ctx);

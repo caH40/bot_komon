@@ -37,11 +37,11 @@ export function resultSeriesKeyboard(seriesId) {
 }
 export function resultStageCatKeyboard(stageId) {
 	return Markup.inlineKeyboard([
-		[Markup.button.callback('Общий протокол', `result_Stage_T_${stageId}`)],
-		[Markup.button.callback('Категория "A"', `result_Stage_A_${stageId}`)],
-		[Markup.button.callback('Категория "B"', `result_Stage_B_${stageId}`)],
-		[Markup.button.callback('Категория "C"', `result_Stage_C_${stageId}`)],
-		[Markup.button.callback('Категория "W"', `result_Stage_W_${stageId}`)],
+		[Markup.button.callback('Общий протокол', `view_result_Stage_T_${stageId}`)],
+		[Markup.button.callback('Категория "A"', `view_result_Stage_A_${stageId}`)],
+		[Markup.button.callback('Категория "B"', `view_result_Stage_B_${stageId}`)],
+		[Markup.button.callback('Категория "C"', `view_result_Stage_C_${stageId}`)],
+		[Markup.button.callback('Категория "W"', `view_result_Stage_W_${stageId}`)],
 		[Markup.button.callback('Главное меню', 'main')],
 	]);
 }
@@ -78,3 +78,15 @@ export function resultStagesKeyboard(series) {
 export const clearCharts = Markup.inlineKeyboard([
 	[Markup.button.callback('Очистить сообщения', `clear`)],
 ]);
+
+export function mobVsDesKeyboard(queryData) {
+	const keyboard = Markup.inlineKeyboard([
+		[
+			Markup.button.callback('Десктопное отображение', `Des_${queryData}`),
+			Markup.button.callback('Мобильное отображение', `Mob_${queryData}`),
+		],
+		[Markup.button.callback('Главное меню', 'main')],
+	]);
+
+	return keyboard;
+}
