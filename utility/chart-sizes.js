@@ -41,3 +41,9 @@ export const generalDesktop = {
 	team: 14,
 	pointsGeneral: 5,
 };
+export const generalMobile = {
+	place: 3,
+	name: 15,
+	team: 7,
+	pointsGeneral: 3,
+};

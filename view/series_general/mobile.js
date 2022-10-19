@@ -3,7 +3,7 @@ import { Result } from '../../Model/Result.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
 import { divisionChart } from '../../utility/chart-division.js';
-import { viewDesktop } from '../generate/general.js';
+import { viewDesktop, viewMobile } from '../generate/general.js';
 
 export async function resultsSeriesGeneralMob(ctx, category, seriesId) {
 	try {
@@ -49,14 +49,13 @@ export async function resultsSeriesGeneralMob(ctx, category, seriesId) {
 			rider.place = index + 1;
 		});
 
-		const title = `${name}, ${type}, Генеральный зачет, Категория "${category}"`;
+		const title = `${name},Ген. зачет,"${category}"`;
 
 		const charts = divisionChart(resultsGeneral);
-		// console.log(charts);
 
 		for (let i = 0; i < charts.length; i++) {
 			await ctx
-				.replyWithHTML(`<pre>${title}\n${viewDesktop(charts[i])}</pre>`, clearCharts)
+				.replyWithHTML(`<pre>${title}\n${viewMobile(charts[i])}</pre>`, clearCharts)
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		}
 
