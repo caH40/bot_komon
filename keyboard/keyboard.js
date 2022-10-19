@@ -47,10 +47,10 @@ export function resultStageCatKeyboard(stageId) {
 }
 export function resultSeriesGeneralKeyboard(seriesId) {
 	return Markup.inlineKeyboard([
-		[Markup.button.callback('Категория "A"', `result_GSeries_A_${seriesId}`)],
-		[Markup.button.callback('Категория "B"', `result_GSeries_B_${seriesId}`)],
-		[Markup.button.callback('Категория "C"', `result_GSeries_C_${seriesId}`)],
-		[Markup.button.callback('Категория "W"', `result_GSeries_W_${seriesId}`)],
+		[Markup.button.callback('Категория "A"', `view_result_GSeries_A_${seriesId}`)],
+		[Markup.button.callback('Категория "B"', `view_result_GSeries_B_${seriesId}`)],
+		[Markup.button.callback('Категория "C"', `view_result_GSeries_C_${seriesId}`)],
+		[Markup.button.callback('Категория "W"', `view_result_GSeries_W_${seriesId}`)],
 		[Markup.button.callback('Главное меню', 'main')],
 	]);
 }

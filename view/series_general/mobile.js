@@ -1,16 +1,12 @@
-import { clearCharts } from '../keyboard/keyboard.js';
-import { Result } from '../Model/Result.js';
-import { Series } from '../Model/Series.js';
-import { Stage } from '../Model/Stage.js';
-import { divisionChart } from '../utility/chart-division.js';
-import { secondesToTime } from '../utility/date-convert.js';
-import { viewDesktop } from './generate/general.js';
+import { clearCharts } from '../../keyboard/keyboard.js';
+import { Result } from '../../Model/Result.js';
+import { Series } from '../../Model/Series.js';
+import { Stage } from '../../Model/Stage.js';
+import { divisionChart } from '../../utility/chart-division.js';
+import { viewDesktop } from '../generate/general.js';
 
-export async function resultsSeriesGeneral(ctx, cbqData) {
+export async function resultsSeriesGeneralMob(ctx, category, seriesId) {
 	try {
-		const seriesId = cbqData.slice(17);
-		const category = cbqData.slice(15, 16);
-
 		const stagesDB = await Stage.find({ seriesId, hasResults: true });
 		const seriesIds = stagesDB.map(stage => stage._id);
 
