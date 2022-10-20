@@ -1,12 +1,16 @@
-import { clearCharts } from '../../keyboard/keyboard.js';
+import { clearCharts, mainMenuKeyboard } from '../../keyboard/keyboard.js';
 import { Result } from '../../Model/Result.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
 import { divisionChart } from '../../utility/chart-division.js';
-import { viewDesktop, viewMobile } from '../generate/general.js';
+import { viewMobile } from '../generate/general.js';
 
 export async function resultsSeriesGeneralMob(ctx, category, seriesId) {
 	try {
+		await ctx.editMessageText(
+			`❗<b>Главное меню. Выбор основных функций.</b>\n<i>main</i>`,
+			mainMenuKeyboard
+		);
 		const stagesDB = await Stage.find({ seriesId, hasResults: true });
 		const seriesIds = stagesDB.map(stage => stage._id);
 

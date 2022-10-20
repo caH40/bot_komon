@@ -1,4 +1,4 @@
-import { clearCharts } from '../../keyboard/keyboard.js';
+import { clearCharts, mainMenuKeyboard } from '../../keyboard/keyboard.js';
 import { Result } from '../../Model/Result.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
@@ -8,6 +8,10 @@ import { viewMobile } from '../generate/protocol.js';
 
 export async function resultsViewStageMob(ctx, category, stageId) {
 	try {
+		await ctx.editMessageText(
+			`❗<b>Главное меню. Выбор основных функций.</b>\n<i>main</i>`,
+			mainMenuKeyboard
+		);
 		const stagesDB = await Stage.find({ _id: stageId });
 		const seriesId = stagesDB[0].seriesId;
 		const seriesNumber = stagesDB[0].number;
