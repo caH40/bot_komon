@@ -7,6 +7,8 @@ const seriesSchema = new Schema({
 	description: String,
 	type: String,
 	organizer: String,
+	hasGeneral: Boolean,
+	hasTeams: Boolean,
 });
 
 export const Series = model('Series', seriesSchema);

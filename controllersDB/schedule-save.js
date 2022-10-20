@@ -10,6 +10,8 @@ export async function scheduleToDB(dataSeries, dataStages) {
 			description: dataSeries[0].description,
 			type: dataSeries[0].type,
 			organizer: dataSeries[0].organizer,
+			hasGeneral: dataSeries[0].hasGeneral,
+			hasTeams: dataSeries[0].hasTeams,
 		});
 		const response = await series.save().catch(error => console.log(error));
 

@@ -57,6 +57,8 @@ export async function getExcel(ctx, fileName) {
 				description: elm['Описание'],
 				type: elm['Тип'],
 				organizer: elm['Организатор'],
+				hasGeneral: elm['Генеральный зачет'] === 'да' ? true : false,
+				hasTeams: elm['Командный зачет'] === 'да' ? true : false,
 			};
 		});
 

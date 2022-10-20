@@ -13,8 +13,8 @@ export const downloadScheduleBase = () => {
 			//путь на сервере для хранения полученного файла
 			const dlPath = 'src/schedule/';
 			ctx.session.data.dlPath = dlPath;
-			const isRight = await getFileTelegram(ctx, dlPath);
-			if (isRight) await ctx.scene.enter('uploadSchedule');
+			const isSuccessful = await getFileTelegram(ctx, dlPath);
+			if (isSuccessful) await ctx.scene.enter('uploadSchedule');
 		});
 
 		schedule.command('quit', async ctx => await ctx.scene.leave('downloadSchedule'));

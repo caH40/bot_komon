@@ -15,6 +15,8 @@ export function viewDesktopSeries(data) {
 				format(row.name, seriesDesktop.name) +
 				format(row.dateStart, seriesDesktop.dateStart) +
 				format(row.type, seriesDesktop.type) +
+				format(String(row.hasGeneral), seriesDesktop.hasGeneral) +
+				format(String(row.hasTeams), seriesDesktop.hasTeams) +
 				`\n`;
 		});
 		return `${tableHeader}${body}${seriesChart.rowDLine}`;

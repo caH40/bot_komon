@@ -42,6 +42,8 @@ export const seriesDesktop = {
 	dateStart: 14,
 	type: 11,
 	organizer: 14,
+	hasGeneral: 10,
+	hasTeams: 10,
 };
 export const generalDesktop = {
 	place: 5,
