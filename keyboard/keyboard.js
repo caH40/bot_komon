@@ -25,7 +25,7 @@ export function scheduleKeyboard(series) {
 	const keyboard = {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			series.map(elm => Markup.button.callback(`${elm.name} 🚵‍♀️`, 'schedule_' + elm._id)),
+			series.map(elm => Markup.button.callback(`${elm.name} 🚵‍♀️`, 'view_schedule_' + elm._id)),
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};

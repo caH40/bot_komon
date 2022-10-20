@@ -9,7 +9,7 @@ import { viewMobile } from '../generate/protocol.js';
 export async function resultsViewStageMob(ctx, category, stageId) {
 	try {
 		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>\n<i>main</i>`,
+			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
 			mainMenuKeyboard
 		);
 		const stagesDB = await Stage.find({ _id: stageId });

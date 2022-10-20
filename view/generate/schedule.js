@@ -1,6 +1,6 @@
-import { scheduleChart } from '../../modules/text.js';
+import { scheduleChart, scheduleChartMobile } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
-import { scheduleDesktop } from '../../utility/chart-sizes.js';
+import { scheduleDesktop, scheduleMobile } from '../../utility/chart-sizes.js';
 
 export function viewDesktop(data, title = '') {
 	try {
@@ -23,6 +23,28 @@ export function viewDesktop(data, title = '') {
 				`\n`;
 		});
 		return `${title}\n${tableHeader}${body}${scheduleChart.rowDLine}`;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export function viewMobile(data, title = '') {
+	try {
+		const tableHeader =
+			scheduleChartMobile.rowDLine + scheduleChartMobile.titles + scheduleChartMobile.rowDLine;
+		let body = '';
+
+		data.forEach(row => {
+			body =
+				body +
+				'|' +
+				format(String(row.number), scheduleMobile.number) +
+				format(ternary(row.dateStart), scheduleMobile.dateStart) +
+				format(row.distance, scheduleMobile.distance) +
+				format(row.type, scheduleMobile.type) +
+				`\n`;
+		});
+		return `${title}\n${tableHeader}${body}${scheduleChartMobile.rowDLine}`;
 	} catch (error) {
 		console.log(error);
 	}

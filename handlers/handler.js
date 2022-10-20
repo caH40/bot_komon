@@ -2,7 +2,7 @@ import { scheduleBtn } from '../keyboard/button/schedule-btn.js';
 import { mainMenuKeyboard, accountAdminKeyboard, accountKeyboard } from '../keyboard/keyboard.js';
 import { beingDeveloped } from '../modules/beingDeveloped.js';
 
-import { scheduleView } from '../view/schedule-view.js';
+import { scheduleView } from '../view/schedule/schedule-view.js';
 
 import { handlerResults } from './menu-results/handler-results.js';
 
@@ -20,11 +20,11 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		// console.log(cbqData); //❗
+		console.log(cbqData); //❗
 		// первый уровень меню
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
-				`❗<b>Главное меню. Выбор основных функций.</b>\n<i>main</i>`,
+				`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
 				mainMenuKeyboard
 			);
 		// первый уровень меню

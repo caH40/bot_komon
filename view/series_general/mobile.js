@@ -8,7 +8,7 @@ import { viewMobile } from '../generate/general.js';
 export async function resultsSeriesGeneralMob(ctx, category, seriesId) {
 	try {
 		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>\n<i>main</i>`,
+			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
 			mainMenuKeyboard
 		);
 		const stagesDB = await Stage.find({ seriesId, hasResults: true });

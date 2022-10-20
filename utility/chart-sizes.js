@@ -10,6 +10,13 @@ export const scheduleDesktop = {
 	link: 37,
 };
 
+export const scheduleMobile = {
+	number: 2,
+	dateStart: 10,
+	distance: 4,
+	type: 12,
+};
+
 export const protocolMobile = {
 	name: 15,
 	time: 8,
