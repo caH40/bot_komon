@@ -20,7 +20,7 @@ export const scheduleMobile = {
 export const protocolMobile = {
 	name: 15,
 	time: 8,
-	placeAbsolute: 3,
+	placeCategory: 3,
 	category: 2,
 };
 

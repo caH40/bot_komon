@@ -41,7 +41,7 @@ export function viewMobile(data) {
 				'|' +
 				format(row.name, protocolMobile.name) +
 				format(String(row.time), protocolMobile.time) +
-				format(String(row.placeAbsolute), protocolMobile.placeAbsolute) +
+				format(String(row.placeCategory), protocolMobile.placeCategory) +
 				format(row.category, protocolMobile.category) +
 				`\n`;
 		});
