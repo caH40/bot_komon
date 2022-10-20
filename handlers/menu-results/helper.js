@@ -28,7 +28,7 @@ export async function resultStage(ctx, cbqData) {
 		const { name } = await Series.findOne({ _id: seriesId });
 
 		return await ctx.editMessageText(
-			`<b>Результаты этапа №${number} ${name}.</b>\n<i>menu/series/standings/stages/stage</i>`,
+			`<b>📝 Результаты этапа №${number} ${name}.</b>\n<i>menu/series/standings/stages/stage</i>`,
 			resultStageCatKeyboard(stageId)
 		);
 	} catch (error) {
