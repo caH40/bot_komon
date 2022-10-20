@@ -6,6 +6,7 @@ import { Stage } from '../../Model/Stage.js';
 import { divisionChart } from '../../utility/chart-division.js';
 import { secondesToTime } from '../../utility/date-convert.js';
 import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
+import { gapValue, maxValue } from './utilites.js';
 
 export async function resultsViewStage(ctx, cbqData) {
 	try {
@@ -33,13 +34,9 @@ export async function resultsViewStage(ctx, cbqData) {
 
 		resultsDB = resultsDB.sort((a, b) => a.time - b.time);
 		resultsDB = resultsDB.map(elm => elm.toObject());
-		//вычисление отставаний
-		const lengthResult = resultsDB.length;
-		for (let i = 0; i < lengthResult; i++) {
-			resultsDB[i].gap = resultsDB[i].time - resultsDB[0].time;
-			if (i + 1 !== lengthResult)
-				resultsDB[i + 1].gapPrev = resultsDB[i + 1].time - resultsDB[i].time;
-		}
+
+		resultsDB = await gapValue(resultsDB);
+		resultsDB = await maxValue(resultsDB);
 
 		resultsDB.forEach(elm => {
 			elm.gap = secondesToTime(elm.gap);

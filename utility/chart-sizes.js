@@ -34,8 +34,8 @@ export const protocolDesktop = {
 	category: 4,
 	placeCategory: 6,
 	pointsStage: 5,
-	watt: 4,
-	wattPerKg: 5,
+	watt: 7,
+	wattPerKg: 8,
 };
 export const seriesDesktop = {
 	name: 23,
