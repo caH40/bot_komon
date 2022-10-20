@@ -43,7 +43,7 @@ export const protocol = {
 };
 export const protocolChartMobile = {
 	rowDLine: `|===============================|\n`,
-	titles: `|Участник       |Время   |Мс.|Гр|\n`,
+	titles: `|Участник       |Время   |Мст|Гр|\n`,
 };
 
 export const general = {
@@ -53,7 +53,7 @@ export const general = {
 
 export const generalChartMobile = {
 	rowDLine: `|===============================|\n`,
-	titles: `|Мс.|Участник       |Команда|Оч.|\n`,
+	titles: `|Мст|Участник       |Команда|Оч.|\n`,
 };
 
 export const scheduleChart = {
