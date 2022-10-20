@@ -8,6 +8,7 @@ const stageSchema = new Schema({
 	number: Number,
 	type: String,
 	dateStart: Number,
+	timeStart: Number,
 	world: String,
 	route: String,
 	distance: String,
