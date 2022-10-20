@@ -18,9 +18,8 @@ export async function maxValue(results) {
 		});
 
 		results.forEach(rider => {
-			if (rider.watt === riderMaxWatt.watt) rider.watt = rider.watt + ' max';
-			if (rider.wattPerKg === riderMaxWattPerKg.wattPerKg)
-				rider.wattPerKg = rider.wattPerKg + ' max';
+			if (rider.watt === maxWatt) rider.watt = maxWatt + ' max';
+			if (rider.wattPerKg === maxWattPerKg) rider.wattPerKg = maxWattPerKg + ' max';
 		});
 
 		return results;
