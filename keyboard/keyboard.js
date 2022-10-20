@@ -43,9 +43,9 @@ export function resultSeriesKeyboard(seriesId) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
+			[Markup.button.callback('Результаты этапов 📝', `result_Stages_${seriesId}`)],
 			[Markup.button.callback('Генеральный зачет 👑', `result_General_${seriesId}`)],
 			[Markup.button.callback('Командный зачет 🤝', `result_Team_${seriesId}`)],
-			[Markup.button.callback('Результаты этапов 📝', `result_Stages_${seriesId}`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};
