@@ -22,7 +22,7 @@ export async function handlerResults(ctx, cbqData) {
 		if (cbqData.includes('view_')) {
 			const queryData = cbqData.slice(5);
 			return await ctx.editMessageText(
-				'Выбор используемого устройства для корректного отображения таблиц.',
+				'<b>👨‍💻 Выбор используемого устройства.</b>',
 				mobVsDesKeyboard(queryData)
 			);
 		}

@@ -114,8 +114,8 @@ export function mobVsDesKeyboard(queryData) {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
 			[
-				Markup.button.callback('Десктопное отображение', `Des_${queryData}`),
-				Markup.button.callback('Мобильное отображение', `Mob_${queryData}`),
+				Markup.button.callback('Десктоп 💻', `Des_${queryData}`),
+				Markup.button.callback('Смартфон 📱', `Mob_${queryData}`),
 			],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
