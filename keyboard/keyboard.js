@@ -1,5 +1,6 @@
 import { Markup } from 'telegraf';
 import { accountBtn } from './button/account.js';
+import { resultSeriesBtn } from './button/schedule-btn.js';
 // главное меню
 export const mainMenuKeyboard = {
 	parse_mode: 'html',
@@ -39,15 +40,10 @@ export async function accountKeyboard(ctx) {
 	};
 }
 // меню выбора зачетов серии
-export function resultSeriesKeyboard(seriesId) {
+export async function resultSeriesKeyboard(cbqData) {
 	return {
 		parse_mode: 'html',
-		...Markup.inlineKeyboard([
-			[Markup.button.callback('Результаты этапов 📝', `result_Stages_${seriesId}`)],
-			[Markup.button.callback('Генеральный зачет 👑', `result_General_${seriesId}`)],
-			[Markup.button.callback('Командный зачет 🤝', `result_Team_${seriesId}`)],
-			[Markup.button.callback('Главное меню ❗️', 'main')],
-		]),
+		...Markup.inlineKeyboard(await resultSeriesBtn(cbqData)),
 	};
 }
 export function resultStageCatKeyboard(stageId) {

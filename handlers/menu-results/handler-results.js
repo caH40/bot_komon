@@ -1,5 +1,5 @@
-import { resultSeriesBtn, seriesBtn } from '../../keyboard/button/schedule-btn.js';
-import { mobVsDesKeyboard } from '../../keyboard/keyboard.js';
+import { seriesBtn } from '../../keyboard/button/schedule-btn.js';
+import { mobVsDesKeyboard, resultSeriesKeyboard } from '../../keyboard/keyboard.js';
 import { beingDeveloped } from '../../modules/beingDeveloped.js';
 import { resultsSeriesGeneral } from '../../view/series_general/series-general.js';
 import { resultsViewStage } from '../../view/stage/stage.js';
@@ -35,7 +35,7 @@ export async function handlerResults(ctx, cbqData) {
 		if (cbqData.includes('series_')) {
 			return await ctx.editMessageText(
 				'<b>🏆 Результаты заездов.\nВыбор зачетов. Выбор результатов отдельных этапов.</b>\n<i>menu/series/standings</i>',
-				await resultSeriesBtn(cbqData)
+				await resultSeriesKeyboard(cbqData)
 			);
 		}
 		// четвертый уровень меню
