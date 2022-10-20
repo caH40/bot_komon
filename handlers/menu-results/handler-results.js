@@ -28,11 +28,14 @@ export async function handlerResults(ctx, cbqData) {
 		}
 
 		if (cbqData === 'main_series')
-			return ctx.editMessageText('Результаты заездов. Выбор серии заездов.', await seriesBtn());
+			return ctx.editMessageText(
+				'<b>Результаты заездов. Выбор серии заездов.</b>\n<i>menu/series</i>',
+				await seriesBtn()
+			);
 
 		if (cbqData.includes('series_')) {
 			return await ctx.editMessageText(
-				'Результаты заездов. Выбор зачетов. Выбор результатов отдельных этапов. ',
+				'<b>Результаты заездов. Выбор зачетов. Выбор результатов отдельных этапов.</b>\n<i>menu/series/standings</i>',
 				await resultSeriesBtn(cbqData)
 			);
 		}
