@@ -1,7 +1,7 @@
 import { Scenes } from 'telegraf';
-import { registrationToDB } from '../controllersDB/registration-save.js';
+import { registrationToDB } from '../../controllersDB/registration-save.js';
 
-export const registrationWizard = () => {
+export function registrationWizard() {
 	try {
 		return new Scenes.WizardScene(
 			'registration',
@@ -18,34 +18,50 @@ export const registrationWizard = () => {
 					ctx.wizard.state.account.first_name = ctx.message.from.first_name;
 				}
 				await ctx.replyWithHTML(
-					`Здравствуйте ${ctx.wizard.state.account.first_name}!\nРегистрация райдера проводится для правильного отображения Ваших заездов в протоколах соревнований.\n<i>Для выхода и отмены ввода данных /quit</i>\n<b>Введите ваше имя (ru):</b>`
+					`Здравствуйте ${ctx.wizard.state.account.first_name}!\nРегистрация райдера проводится для правильного отображения Ваших заездов в протоколах соревнований.\n<i>Для выхода нажсите /quit</i>\n<b>Введите ваше имя (ru):</b>`
 				);
 				return ctx.wizard.next();
 			},
 			async ctx => {
-				const text = ctx.message.text;
-				if (text === '/quit') return ctx.scene.leave();
-				ctx.wizard.state.account.firstName = text;
-				await ctx.replyWithHTML(`<b>Введите вашу фамилию (ru):</b>`);
-				return ctx.wizard.next();
+				try {
+					const text = await checkText(ctx);
+					if (!text) {
+						await ctx.replyWithHTML('Вы вышли из регистрации!');
+						return ctx.scene.leave();
+					}
+					ctx.wizard.state.account.firstName = text;
+					await ctx.replyWithHTML(`<b>Введите вашу фамилию (ru):</b>`);
+					return ctx.wizard.next();
+				} catch (error) {
+					console.log(error);
+				}
 			},
 			async ctx => {
-				const text = ctx.message.text;
-				if (text === '/quit') return ctx.scene.leave();
+				const text = await checkText(ctx);
+				if (!text) {
+					await ctx.replyWithHTML('Вы вышли из регистрации!');
+					return ctx.scene.leave();
+				}
 				ctx.wizard.state.account.lastName = text;
 				await ctx.replyWithHTML(`<b>Введите год рождения (4ре цифры):</b>`);
 				return ctx.wizard.next();
 			},
 			async ctx => {
-				const text = ctx.message.text;
-				if (text === '/quit') return ctx.scene.leave();
+				const text = await checkText(ctx);
+				if (!text) {
+					await ctx.replyWithHTML('Вы вышли из регистрации!');
+					return ctx.scene.leave();
+				}
 				ctx.wizard.state.account.yearBirth = text;
 				await ctx.replyWithHTML(`<b>Введите Ваш пол (мужской/женский):</b>`);
 				return ctx.wizard.next();
 			},
 			async ctx => {
-				const text = ctx.message.text;
-				if (text === '/quit') return ctx.scene.leave();
+				const text = await checkText(ctx);
+				if (!text) {
+					await ctx.replyWithHTML('Вы вышли из регистрации!');
+					return ctx.scene.leave();
+				}
 				if (text !== 'мужской' && text !== 'женский') {
 					await ctx.reply(`Необходимо ввести "мужской" или "женский"`);
 					ctx.wizard.back();
@@ -57,22 +73,31 @@ export const registrationWizard = () => {
 				return ctx.wizard.next();
 			},
 			async ctx => {
-				const text = ctx.message.text;
-				if (text === '/quit') return ctx.scene.leave();
+				const text = await checkText(ctx);
+				if (!text) {
+					await ctx.replyWithHTML('Вы вышли из регистрации!');
+					return ctx.scene.leave();
+				}
 				ctx.wizard.state.account.firstNameZwift = text;
 				await ctx.replyWithHTML(`<b>Введите lastname в Звифте (en):</b>`);
 				return ctx.wizard.next();
 			},
 			async ctx => {
-				const text = ctx.message.text;
-				if (text === '/quit') return ctx.scene.leave();
+				const text = await checkText(ctx);
+				if (!text) {
+					await ctx.replyWithHTML('Вы вышли из регистрации!');
+					return ctx.scene.leave();
+				}
 				ctx.wizard.state.account.lastNameZwift = text;
 				await ctx.replyWithHTML(`<b>Какой у Вас велотрейнер:</b>`);
 				return ctx.wizard.next();
 			},
 			async ctx => {
-				const text = ctx.message.text;
-				if (text === '/quit') return ctx.scene.leave();
+				const text = await checkText(ctx);
+				if (!text) {
+					await ctx.replyWithHTML('Вы вышли из регистрации!');
+					return ctx.scene.leave();
+				}
 				ctx.wizard.state.account.cycleTrainer = text;
 				await ctx.replyWithHTML(`<b>Ссылка на Ваш аккаунт в https://zwiftpower.com/</b>`, {
 					disable_web_page_preview: true,
@@ -80,8 +105,11 @@ export const registrationWizard = () => {
 				return ctx.wizard.next();
 			},
 			async ctx => {
-				const text = ctx.message.text;
-				if (text === '/quit') return ctx.scene.leave();
+				const text = await checkText(ctx);
+				if (!text) {
+					await ctx.replyWithHTML('Вы вышли из регистрации!');
+					return ctx.scene.leave();
+				}
 				ctx.wizard.state.account.zwiftPower = text;
 				await ctx.replyWithHTML(
 					`Проверьте данные:\n<b>Имя:</b> ${ctx.wizard.state.account.firstName};\n<b>Фамилия:</b> ${ctx.wizard.state.account.lastName};\n<b>Год рождения:</b> ${ctx.wizard.state.account.yearBirth};\n<b>Пол:</b> ${ctx.wizard.state.account.gender};\n<b>Имя в Звифте:</b> ${ctx.wizard.state.account.firstNameZwift};\n<b>Фамилия в Звифте:</b> ${ctx.wizard.state.account.lastNameZwift};\n<b>Велотрейнер:</b> ${ctx.wizard.state.account.cycleTrainer};\n<b>ZwiftPower:</b> ${ctx.wizard.state.account.zwiftPower};\n========================\nЕсли всё верно, для сохранения наберите /save\nДля повторного ввода данный /repeat\nДля выхода без сохранения информации /quit`
@@ -89,7 +117,7 @@ export const registrationWizard = () => {
 				return ctx.wizard.next();
 			},
 			async ctx => {
-				const text = ctx.message.text;
+				const text = await checkText(ctx);
 				if (text === '/save') {
 					const response = await registrationToDB(ctx.wizard.state.account);
 					if (response) {
@@ -106,4 +134,13 @@ export const registrationWizard = () => {
 	} catch (error) {
 		console.log(error);
 	}
-};
+}
+
+async function checkText(ctx) {
+	if (!ctx.message) {
+		await ctx.replyWithHTML('❗При регистрации необходимо вводить только символы❗\n');
+		return false;
+	}
+	if (ctx.message.text === '/quit') return false;
+	return ctx.message.text;
+}

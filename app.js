@@ -12,9 +12,8 @@ import { confirmUploadProtocolScene } from './scenes/protocol/confirm.js';
 import { downloadScheduleBase } from './scenes/schedule/download.js';
 import { uploadScheduleBase } from './scenes/schedule/upload.js';
 import { confirmUploadScheduleScene } from './scenes/schedule/confirm.js';
-import { convertTime } from './utility/date-convert.js';
 import { filterMessage } from './middleware/filter-message.js';
-import { registrationWizard } from './scenes/wizard-scene.js';
+import { registrationWizard } from './scenes/registration/registration.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
