@@ -1,6 +1,6 @@
 import { clearCharts } from '../../keyboard/keyboard.js';
 
-import { viewMobile } from '../generate/protocol.js';
+import { viewMobile } from '../generate/stage-result.js';
 
 export async function resultsViewStageMob(ctx, charts, title) {
 	try {

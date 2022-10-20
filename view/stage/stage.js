@@ -33,7 +33,19 @@ export async function resultsViewStage(ctx, cbqData) {
 
 		resultsDB = resultsDB.sort((a, b) => a.time - b.time);
 		resultsDB = resultsDB.map(elm => elm.toObject());
-		resultsDB.forEach(elm => (elm.time = secondesToTime(elm.time)));
+		//вычисление отставаний
+		const lengthResult = resultsDB.length;
+		for (let i = 0; i < lengthResult; i++) {
+			resultsDB[i].gap = resultsDB[i].time - resultsDB[0].time;
+			if (i + 1 !== lengthResult)
+				resultsDB[i + 1].gapPrev = resultsDB[i + 1].time - resultsDB[i].time;
+		}
+
+		resultsDB.forEach(elm => {
+			elm.gap = secondesToTime(elm.gap);
+			elm.time = secondesToTime(elm.time);
+			elm.gapPrev = secondesToTime(elm.gapPrev);
+		});
 
 		const title = `${name}, Этап ${seriesNumber}, ${seriesType}`;
 

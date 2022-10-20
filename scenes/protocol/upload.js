@@ -3,7 +3,7 @@ import { deleteFile } from '../../file-manager/file-delete.js';
 import { getExcel } from '../../file-manager/xlsx/protocol.js';
 import { text } from '../../modules/text.js';
 import { divisionChart } from '../../utility/chart-division.js';
-import { viewDesktop } from '../../view/generate/protocol.js';
+import { viewDesktop } from '../../view/generate/stage-result.js';
 
 const { leave } = Scenes.Stage;
 

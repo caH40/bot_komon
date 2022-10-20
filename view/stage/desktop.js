@@ -1,5 +1,5 @@
 import { clearCharts } from '../../keyboard/keyboard.js';
-import { viewDesktop } from '../generate/protocol.js';
+import { viewDesktop } from '../generate/stage-result.js';
 
 export async function resultsViewStageDes(ctx, charts, title) {
 	try {

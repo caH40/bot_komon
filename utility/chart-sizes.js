@@ -25,15 +25,16 @@ export const protocolMobile = {
 };
 
 export const protocolDesktop = {
-	name: 25,
-	teamCurrent: 14,
-	time: 11,
-	gap: 7,
-	placeAbsolute: 9,
-	category: 6,
-	placeCategory: 9,
+	name: 21,
+	teamCurrent: 13,
+	time: 10,
+	gap: 8,
+	gapPrev: 8,
+	placeAbsolute: 6,
+	category: 4,
+	placeCategory: 6,
 	pointsStage: 5,
-	watt: 5,
+	watt: 4,
 	wattPerKg: 5,
 };
 export const seriesDesktop = {

@@ -15,6 +15,7 @@ export function viewDesktop(data) {
 				format(row.teamCurrent, protocolDesktop.teamCurrent) +
 				format(String(row.time), protocolDesktop.time) +
 				format(row.gap, protocolDesktop.gap) +
+				format(row.gapPrev, protocolDesktop.gapPrev) +
 				format(String(row.placeAbsolute), protocolDesktop.placeAbsolute) +
 				format(row.category, protocolDesktop.category) +
 				format(String(row.placeCategory), protocolDesktop.placeCategory) +
