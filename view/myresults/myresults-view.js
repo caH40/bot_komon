@@ -6,6 +6,11 @@ import { myResultsViewMob } from './mobile.js';
 
 export async function myResults(ctx, cbqData) {
 	try {
+		await ctx.editMessageText(
+			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
+			await mainMenuKeyboard(ctx)
+		);
+
 		const view = cbqData.slice(0, 3);
 
 		const userId = ctx.update.callback_query.message.chat.id;
