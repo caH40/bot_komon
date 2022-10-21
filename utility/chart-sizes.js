@@ -29,10 +29,10 @@ export const myResultsDesktop = {
 };
 
 export const myResultsMobile = {
-	nameSeries: 18,
-	number: 2,
-	placeAbsolute: 4,
-	placeCategory: 4,
+	nameSeries: 19,
+	number: 3,
+	placeAbsolute: 3,
+	placeCategory: 3,
 };
 
 export const protocolMobile = {

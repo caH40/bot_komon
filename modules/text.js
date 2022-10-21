@@ -71,7 +71,7 @@ export const myResultsChart = {
 };
 export const myResultsChartMobile = {
 	rowDLine: `|===============================|\n`,
-	titles: `|Серия             |Эт|МсАб|МсГр|\n`,
+	titles: `|Серия              |Этп|МсА|МсГ|\n`,
 };
 
 export const seriesChart = {
