@@ -13,7 +13,16 @@ import { downloadScheduleBase } from './scenes/schedule/download.js';
 import { uploadScheduleBase } from './scenes/schedule/upload.js';
 import { confirmUploadScheduleScene } from './scenes/schedule/confirm.js';
 import { filterMessage } from './middleware/filter-message.js';
-import { registrationWizard } from './scenes/registration/registration.js';
+import {
+	firstSceneReg,
+	secondSceneReg,
+	thirdSceneReg,
+	fourthSceneReg,
+	fifthSceneReg,
+	sixthSceneReg,
+	seventhSceneReg,
+	eighthSceneReg,
+} from './scenes/registration/registration.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -29,7 +38,14 @@ const stage = new Scenes.Stage([
 	downloadScheduleBase(),
 	uploadScheduleBase(),
 	confirmUploadScheduleScene(),
-	registrationWizard(),
+	firstSceneReg,
+	secondSceneReg,
+	thirdSceneReg,
+	fourthSceneReg,
+	fifthSceneReg,
+	sixthSceneReg,
+	seventhSceneReg,
+	eighthSceneReg,
 ]);
 
 bot.use(session());

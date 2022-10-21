@@ -21,7 +21,7 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		// console.log(cbqData); //❗❗❗
+		console.log(cbqData); //❗❗❗
 		// первый уровень меню
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
@@ -32,7 +32,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData.includes('_m_3_1_V--myResults')) return await myResults(ctx, cbqData);
 		// ===========================================================================
 		// первый уровень меню
-		if (cbqData === 'account_registration') return await ctx.scene.enter('registration');
+		if (cbqData === 'account_registration') return await ctx.scene.enter('firstSceneReg');
 
 		// Обработчик ветки меню Результаты
 		const isCompleted = await handlerResults(ctx, cbqData);
