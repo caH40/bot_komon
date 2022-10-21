@@ -1,7 +1,7 @@
 import { scheduleBtn } from '../keyboard/button/schedule-btn.js';
 import { mainMenuKeyboard, accountAdminKeyboard, accountKeyboard } from '../keyboard/keyboard.js';
 import { beingDeveloped } from '../modules/beingDeveloped.js';
-import { myResults } from '../view/myresults/my-results.js';
+import { myResults } from '../view/myresults/myresults-view.js';
 
 import { scheduleView } from '../view/schedule/schedule-view.js';
 
@@ -29,7 +29,7 @@ export async function handler(ctx, cbqData) {
 				await mainMenuKeyboard(ctx)
 			);
 
-		if (cbqData.includes('_m_3_1_V--myResults')) return await myResults(ctx);
+		if (cbqData.includes('_m_3_1_V--myResults')) return await myResults(ctx, cbqData);
 		// ===========================================================================
 		// первый уровень меню
 		if (cbqData === 'account_registration') return await ctx.scene.enter('registration');

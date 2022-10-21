@@ -17,6 +17,24 @@ export const scheduleMobile = {
 	type: 12,
 };
 
+export const myResultsDesktop = {
+	sequenceNumber: 3,
+	nameSeries: 27,
+	dateStart: 11,
+	number: 4,
+	type: 13,
+	placeAbsolute: 9,
+	placeCategory: 9,
+	quantityRiders: 10,
+};
+
+export const myResultsMobile = {
+	number: 2,
+	dateStart: 10,
+	distance: 4,
+	type: 12,
+};
+
 export const protocolMobile = {
 	name: 15,
 	time: 8,
