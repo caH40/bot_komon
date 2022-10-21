@@ -37,18 +37,14 @@ export function viewMobile(data, title = '') {
 			body =
 				body +
 				'|' +
+				format(row.nameSeries, myResultsMobile.nameSeries) +
 				format(String(row.number), myResultsMobile.number) +
-				format(ternary(row.dateStart), myResultsMobile.dateStart) +
-				format(row.distance, myResultsMobile.distance) +
-				format(row.type, myResultsMobile.type) +
+				format(String(row.placeAbsolute), myResultsMobile.placeAbsolute) +
+				format(String(row.placeCategory), myResultsMobile.placeCategory) +
 				`\n`;
 		});
 		return `${title}\n${tableHeader}${body}${myResultsChartMobile.rowDLine}`;
 	} catch (error) {
 		console.log(error);
 	}
-}
-
-function ternary(date) {
-	return typeof date == 'number' ? new Date(date).toLocaleDateString() : date;
 }

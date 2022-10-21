@@ -71,7 +71,7 @@ export const myResultsChart = {
 };
 export const myResultsChartMobile = {
 	rowDLine: `|===============================|\n`,
-	titles: `|№ |Дата      |Д.км|Тип заезда  |\n`,
+	titles: `|Серия             |Эт|МсАб|МсГр|\n`,
 };
 
 export const seriesChart = {

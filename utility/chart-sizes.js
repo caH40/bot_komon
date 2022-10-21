@@ -29,10 +29,10 @@ export const myResultsDesktop = {
 };
 
 export const myResultsMobile = {
+	nameSeries: 18,
 	number: 2,
-	dateStart: 10,
-	distance: 4,
-	type: 12,
+	placeAbsolute: 4,
+	placeCategory: 4,
 };
 
 export const protocolMobile = {
