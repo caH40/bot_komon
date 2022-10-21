@@ -1,5 +1,6 @@
 export async function start(ctx) {
 	try {
+		await ctx.deleteMessage();
 		const userName = ctx.message.from.first_name;
 
 		ctx.replyWithHTML(
