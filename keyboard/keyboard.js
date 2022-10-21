@@ -1,15 +1,20 @@
 import { Markup } from 'telegraf';
-import { accountBtn } from './button/account.js';
+import { mainBtn } from './button/main.js';
 import { resultSeriesBtn } from './button/schedule-btn.js';
 // главное меню
-export const mainMenuKeyboard = {
+export async function mainMenuKeyboard(ctx) {
+	return { parse_mode: 'html', ...Markup.inlineKeyboard(await mainBtn(ctx)) };
+}
+export const accountKeyboard = {
 	parse_mode: 'html',
 	...Markup.inlineKeyboard([
-		[Markup.button.callback('Результаты заездов 🏆', 'main_series')],
-		[Markup.button.callback('Расписание заездов 📅', 'main_schedule')],
-		[Markup.button.callback('Личный кабинет 🔑', 'main_account')],
+		[Markup.button.callback('Мои результаты 🏅', 'account_myResults')],
+		[Markup.button.callback('Регистрация 🆔', 'account_registration')],
+		[Markup.button.callback('Команда 🤝', 'team')],
+		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
+
 // меню выбора результатов серий main_series
 export function seriesKeyboard(series) {
 	const keyboard = {
@@ -31,13 +36,6 @@ export function scheduleKeyboard(series) {
 		]),
 	};
 	return keyboard;
-}
-// меню выбора личного кабинета
-export async function accountKeyboard(ctx) {
-	return {
-		parse_mode: 'html',
-		...Markup.inlineKeyboard(await accountBtn(ctx)),
-	};
 }
 // меню выбора зачетов серии
 export async function resultSeriesKeyboard(cbqData) {

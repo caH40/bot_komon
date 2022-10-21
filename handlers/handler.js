@@ -25,7 +25,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
 				`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
-				mainMenuKeyboard
+				await mainMenuKeyboard(ctx)
 			);
 		// первый уровень меню
 		if (cbqData === 'account_registration') return await ctx.scene.enter('registration');
@@ -42,7 +42,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData === 'main_account')
 			return await ctx.editMessageText(
 				'<b>🔑 Личный кабинет.</b>\n<i>main/account</i>',
-				await accountKeyboard(ctx)
+				accountKeyboard
 			);
 		if (cbqData === 'account_adminAcc')
 			return await ctx.editMessageText(

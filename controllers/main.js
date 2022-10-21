@@ -6,7 +6,7 @@ export async function mainMenu(ctx) {
 		ctx.session.data.messagesIdForDelete = [];
 		await ctx.replyWithHTML(
 			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
-			mainMenuKeyboard
+			await mainMenuKeyboard(ctx)
 		);
 	} catch (error) {
 		console.log(error);
