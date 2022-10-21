@@ -38,14 +38,14 @@ const stage = new Scenes.Stage([
 	downloadScheduleBase(),
 	uploadScheduleBase(),
 	confirmUploadScheduleScene(),
-	firstSceneReg,
-	secondSceneReg,
-	thirdSceneReg,
-	fourthSceneReg,
-	fifthSceneReg,
-	sixthSceneReg,
-	seventhSceneReg,
-	eighthSceneReg,
+	firstSceneReg(),
+	secondSceneReg(),
+	thirdSceneReg(),
+	fourthSceneReg(),
+	fifthSceneReg(),
+	sixthSceneReg(),
+	seventhSceneReg(),
+	eighthSceneReg(),
 ]);
 
 bot.use(session());
