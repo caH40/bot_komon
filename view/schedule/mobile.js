@@ -5,7 +5,7 @@ export async function scheduleViewMob(ctx, stagesDB, title) {
 	try {
 		await ctx.editMessageText(
 			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
-			mainMenuKeyboard
+			await mainMenuKeyboard(ctx)
 		);
 		await ctx
 			.replyWithHTML('<pre>' + viewMobile(stagesDB, title) + '</pre>', clearCharts)

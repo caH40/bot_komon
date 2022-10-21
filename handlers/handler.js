@@ -1,6 +1,7 @@
 import { scheduleBtn } from '../keyboard/button/schedule-btn.js';
 import { mainMenuKeyboard, accountAdminKeyboard, accountKeyboard } from '../keyboard/keyboard.js';
 import { beingDeveloped } from '../modules/beingDeveloped.js';
+import { myResults } from '../view/myresults/my-results.js';
 
 import { scheduleView } from '../view/schedule/schedule-view.js';
 
@@ -20,13 +21,16 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		// console.log(cbqData); //❗
+		console.log(cbqData); //❗
 		// первый уровень меню
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
 				`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
 				await mainMenuKeyboard(ctx)
 			);
+
+		if (cbqData.includes('_m_3_1_V--myResults')) return await myResults(ctx);
+		// ===========================================================================
 		// первый уровень меню
 		if (cbqData === 'account_registration') return await ctx.scene.enter('registration');
 
@@ -44,6 +48,7 @@ export async function handler(ctx, cbqData) {
 				'<b>🔑 Личный кабинет.</b>\n<i>main/account</i>',
 				accountKeyboard
 			);
+
 		if (cbqData === 'account_adminAcc')
 			return await ctx.editMessageText(
 				'<b>🛠️ Админ кабинет.</b>\n<i>main/account/admin</i>',

@@ -8,7 +8,7 @@ export async function mainMenuKeyboard(ctx) {
 export const accountKeyboard = {
 	parse_mode: 'html',
 	...Markup.inlineKeyboard([
-		[Markup.button.callback('Мои результаты 🏅', 'account_myResults')],
+		[Markup.button.callback('Мои результаты 🏅', 'm_3_1_V--myResults')],
 		[Markup.button.callback('Регистрация 🆔', 'account_registration')],
 		[Markup.button.callback('Команда 🤝', 'team')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
