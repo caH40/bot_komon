@@ -1,6 +1,6 @@
 import { general, generalChartMobile } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
-import { generalDesktop, generalMobile } from '../../utility/chart-sizes.js';
+import { rowSize } from '../../utility/chart-sizes.js';
 
 export function viewDesktop(data) {
 	try {
@@ -11,10 +11,10 @@ export function viewDesktop(data) {
 			body =
 				body +
 				'|' +
-				format(String(row.place), generalDesktop.place) +
-				format(String(row.name), generalDesktop.name) +
-				format(String(row.team), generalDesktop.team) +
-				format(String(row.pointsGeneral), generalDesktop.pointsGeneral) +
+				format(String(row.place), rowSize.general.desktop.place) +
+				format(String(row.name), rowSize.general.desktop.name) +
+				format(String(row.team), rowSize.general.desktop.team) +
+				format(String(row.pointsGeneral), rowSize.general.desktop.pointsGeneral) +
 				`\n`;
 		});
 		return `${tableHeader}${body}${general.rowDLine}`;
@@ -32,10 +32,10 @@ export function viewMobile(data) {
 			body =
 				body +
 				'|' +
-				format(String(row.place), generalMobile.place) +
-				format(String(row.name), generalMobile.name) +
-				format(String(row.team), generalMobile.team) +
-				format(String(row.pointsGeneral), generalMobile.pointsGeneral) +
+				format(String(row.place), rowSize.general.mobile.place) +
+				format(String(row.name), rowSize.general.mobile.name) +
+				format(String(row.team), rowSize.general.mobile.team) +
+				format(String(row.pointsGeneral), rowSize.general.mobile.pointsGeneral) +
 				`\n`;
 		});
 		return `${tableHeader}${body}${generalChartMobile.rowDLine}`;

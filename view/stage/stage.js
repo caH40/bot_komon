@@ -16,8 +16,9 @@ export async function resultsViewStage(ctx, cbqData) {
 
 		await ctx.editMessageText(
 			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
-			mainMenuKeyboard(ctx)
+			await mainMenuKeyboard(ctx)
 		);
+
 		const stagesDB = await Stage.find({ _id: stageId });
 		const seriesId = stagesDB[0].seriesId;
 		const seriesNumber = stagesDB[0].number;

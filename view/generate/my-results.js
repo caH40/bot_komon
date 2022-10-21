@@ -1,6 +1,6 @@
 import { myResultsChart, myResultsChartMobile } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
-import { myResultsMobile, myResultsDesktop } from '../../utility/chart-sizes.js';
+import { rowSize } from '../../utility/chart-sizes.js';
 
 export function viewDesktop(data, title = '') {
 	try {
@@ -11,14 +11,14 @@ export function viewDesktop(data, title = '') {
 			body =
 				body +
 				'|' +
-				format(String(row.sequenceNumber), myResultsDesktop.sequenceNumber) +
-				format(row.nameSeries, myResultsDesktop.nameSeries) +
-				format(String(row.dateStart), myResultsDesktop.dateStart) +
-				format(String(row.number), myResultsDesktop.number) +
-				format(row.type, myResultsDesktop.type) +
-				format(String(row.placeAbsolute), myResultsDesktop.placeAbsolute) +
-				format(String(row.placeCategory), myResultsDesktop.placeCategory) +
-				format(String(row.quantityRiders), myResultsDesktop.quantityRiders) +
+				format(String(row.sequenceNumber), rowSize.myResults.desktop.sequenceNumber) +
+				format(row.nameSeries, rowSize.myResults.desktop.nameSeries) +
+				format(String(row.dateStart), rowSize.myResults.desktop.dateStart) +
+				format(String(row.number), rowSize.myResults.desktop.number) +
+				format(row.type, rowSize.myResults.desktop.type) +
+				format(String(row.placeAbsolute), rowSize.myResults.desktop.placeAbsolute) +
+				format(String(row.placeCategory), rowSize.myResults.desktop.placeCategory) +
+				format(String(row.quantityRiders), rowSize.myResults.desktop.quantityRiders) +
 				`\n`;
 		});
 		return `${title}\n${tableHeader}${body}${myResultsChart.rowDLine}`;
@@ -37,10 +37,10 @@ export function viewMobile(data, title = '') {
 			body =
 				body +
 				'|' +
-				format(row.nameSeries, myResultsMobile.nameSeries) +
-				format(String(row.number), myResultsMobile.number) +
-				format(String(row.placeAbsolute), myResultsMobile.placeAbsolute) +
-				format(String(row.placeCategory), myResultsMobile.placeCategory) +
+				format(row.nameSeries, rowSize.myResults.mobile.nameSeries) +
+				format(String(row.number), rowSize.myResults.mobile.number) +
+				format(String(row.placeAbsolute), rowSize.myResults.mobile.placeAbsolute) +
+				format(String(row.placeCategory), rowSize.myResults.mobile.placeCategory) +
 				`\n`;
 		});
 		return `${title}\n${tableHeader}${body}${myResultsChartMobile.rowDLine}`;

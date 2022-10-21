@@ -3,6 +3,7 @@ import { mainBtn } from './button/main.js';
 import { resultSeriesBtn } from './button/schedule-btn.js';
 // главное меню
 export async function mainMenuKeyboard(ctx) {
+	console.log('Hi===================');
 	return { parse_mode: 'html', ...Markup.inlineKeyboard(await mainBtn(ctx)) };
 }
 export const accountKeyboard = {

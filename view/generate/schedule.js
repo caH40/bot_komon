@@ -1,6 +1,6 @@
 import { scheduleChart, scheduleChartMobile } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
-import { scheduleDesktop, scheduleMobile } from '../../utility/chart-sizes.js';
+import { rowSize } from '../../utility/chart-sizes.js';
 
 export function viewDesktop(data, title = '') {
 	try {
@@ -11,15 +11,15 @@ export function viewDesktop(data, title = '') {
 			body =
 				body +
 				'|' +
-				format(String(row.number), scheduleDesktop.number) +
-				format(ternary(row.dateStart), scheduleDesktop.dateStart) +
-				format(row.world, scheduleDesktop.world) +
-				format(row.route, scheduleDesktop.route) +
-				format(row.laps, scheduleDesktop.laps) +
-				format(row.distance, scheduleDesktop.distance) +
-				format(row.ascent, scheduleDesktop.ascent) +
-				format(row.type, scheduleDesktop.type) +
-				format(row.link, scheduleDesktop.link) +
+				format(String(row.number), rowSize.schedule.desktop.number) +
+				format(ternary(row.dateStart), rowSize.schedule.desktop.dateStart) +
+				format(row.world, rowSize.schedule.desktop.world) +
+				format(row.route, rowSize.schedule.desktop.route) +
+				format(row.laps, rowSize.schedule.desktop.laps) +
+				format(row.distance, rowSize.schedule.desktop.distance) +
+				format(row.ascent, rowSize.schedule.desktop.ascent) +
+				format(row.type, rowSize.schedule.desktop.type) +
+				format(row.link, rowSize.schedule.desktop.link) +
 				`\n`;
 		});
 		return `${title}\n${tableHeader}${body}${scheduleChart.rowDLine}`;
@@ -38,10 +38,10 @@ export function viewMobile(data, title = '') {
 			body =
 				body +
 				'|' +
-				format(String(row.number), scheduleMobile.number) +
-				format(ternary(row.dateStart), scheduleMobile.dateStart) +
-				format(row.distance, scheduleMobile.distance) +
-				format(row.type, scheduleMobile.type) +
+				format(String(row.number), rowSize.schedule.mobile.number) +
+				format(ternary(row.dateStart), rowSize.schedule.mobile.dateStart) +
+				format(row.distance, rowSize.schedule.mobile.distance) +
+				format(row.type, rowSize.schedule.mobile.type) +
 				`\n`;
 		});
 		return `${title}\n${tableHeader}${body}${scheduleChartMobile.rowDLine}`;

@@ -1,6 +1,6 @@
 import { seriesChart } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
-import { seriesDesktop } from '../../utility/chart-sizes.js';
+import { rowSize } from '../../utility/chart-sizes.js';
 
 export function viewDesktopSeries(data) {
 	try {
@@ -11,12 +11,12 @@ export function viewDesktopSeries(data) {
 			body =
 				body +
 				'|' +
-				format(row.organizer, seriesDesktop.organizer) +
-				format(row.name, seriesDesktop.name) +
-				format(row.dateStart, seriesDesktop.dateStart) +
-				format(row.type, seriesDesktop.type) +
-				format(String(row.hasGeneral), seriesDesktop.hasGeneral) +
-				format(String(row.hasTeams), seriesDesktop.hasTeams) +
+				format(row.organizer, rowSize.series.desktop.organizer) +
+				format(row.name, rowSize.series.desktop.name) +
+				format(row.dateStart, rowSize.series.desktop.dateStart) +
+				format(row.type, rowSize.series.desktop.type) +
+				format(String(row.hasGeneral), rowSize.series.desktop.hasGeneral) +
+				format(String(row.hasTeams), rowSize.series.desktop.hasTeams) +
 				`\n`;
 		});
 		return `${tableHeader}${body}${seriesChart.rowDLine}`;

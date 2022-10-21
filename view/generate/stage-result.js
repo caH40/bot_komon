@@ -1,6 +1,6 @@
 import { protocol, protocolChartMobile } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
-import { protocolDesktop, protocolMobile } from '../../utility/chart-sizes.js';
+import { rowSize } from '../../utility/chart-sizes.js';
 
 export function viewDesktop(data) {
 	try {
@@ -11,17 +11,17 @@ export function viewDesktop(data) {
 			body =
 				body +
 				'|' +
-				format(row.name, protocolDesktop.name) +
-				format(row.teamCurrent, protocolDesktop.teamCurrent) +
-				format(String(row.time), protocolDesktop.time) +
-				format(row.gap, protocolDesktop.gap) +
-				format(row.gapPrev, protocolDesktop.gapPrev) +
-				format(String(row.placeAbsolute), protocolDesktop.placeAbsolute) +
-				format(row.category, protocolDesktop.category) +
-				format(String(row.placeCategory), protocolDesktop.placeCategory) +
-				format(String(row.pointsStage), protocolDesktop.pointsStage) +
-				format(String(row.watt), protocolDesktop.watt) +
-				format(String(row.wattPerKg), protocolDesktop.wattPerKg) +
+				format(row.name, rowSize.protocol.desktop.name) +
+				format(row.teamCurrent, rowSize.protocol.desktop.teamCurrent) +
+				format(String(row.time), rowSize.protocol.desktop.time) +
+				format(row.gap, rowSize.protocol.desktop.gap) +
+				format(row.gapPrev, rowSize.protocol.desktop.gapPrev) +
+				format(String(row.placeAbsolute), rowSize.protocol.desktop.placeAbsolute) +
+				format(row.category, rowSize.protocol.desktop.category) +
+				format(String(row.placeCategory), rowSize.protocol.desktop.placeCategory) +
+				format(String(row.pointsStage), rowSize.protocol.desktop.pointsStage) +
+				format(String(row.watt), rowSize.protocol.desktop.watt) +
+				format(String(row.wattPerKg), rowSize.protocol.desktop.wattPerKg) +
 				`\n`;
 		});
 		return `${tableHeader}${body}${protocol.rowDLine}`;
@@ -39,10 +39,10 @@ export function viewMobile(data) {
 			body =
 				body +
 				'|' +
-				format(row.name, protocolMobile.name) +
-				format(String(row.time), protocolMobile.time) +
-				format(String(row.placeCategory), protocolMobile.placeCategory) +
-				format(row.category, protocolMobile.category) +
+				format(row.name, rowSize.protocol.mobile.name) +
+				format(String(row.time), rowSize.protocol.mobile.time) +
+				format(String(row.placeCategory), rowSize.protocol.mobile.placeCategory) +
+				format(row.category, rowSize.protocol.mobile.category) +
 				`\n`;
 		});
 		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;
