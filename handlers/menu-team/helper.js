@@ -10,7 +10,7 @@ export async function teamMain(ctx) {
 			return await ctx.replyWithHTML('Для этого меню необходима <b>регистрация!</b> 🆔');
 
 		let title = riderDB.teamId?.name
-			? `Команда riderDB.teamId?.name 💪`
+			? `Команда "${riderDB.teamId?.name}" 💪`
 			: '🤝 Пора присоединяться к команде или создать свою!';
 
 		return await ctx.editMessageText(`<b>${title}</b>`, teamKeyboard(riderDB));

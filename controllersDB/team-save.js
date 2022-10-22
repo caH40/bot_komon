@@ -12,10 +12,16 @@ export async function registrationToDB(data) {
 		});
 
 		const response = await team.save();
-		if (response) {
-			return response;
+		if (!response) return console.log('Ошибка при сохранении данных команды!');
+
+		const rider = await Rider.findOneAndUpdate(
+			{ telegramId: data.telegramId },
+			{ $set: { teamId: response._id } }
+		);
+		if (rider) {
+			return rider;
 		} else {
-			console.log('Ошибка при сохранении данных регистрации пользователя!');
+			console.log(`Ошибка при сохранении teamId ${response._id} в документа Rider`);
 		}
 	} catch (error) {
 		console.log(error);
