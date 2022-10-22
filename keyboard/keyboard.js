@@ -66,6 +66,17 @@ export function resultStageCatKeyboard(stageId) {
 		]),
 	};
 }
+export function teamLeaveKeyboard(userId) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([
+			[Markup.button.callback('Да, хочу выйти из команды ❌', `m_3_2_4_1_E--teamLeave_${userId}`)],
+			[Markup.button.callback('<< назад >>', `m_3_2_`)],
+
+			[Markup.button.callback('Главное меню ❗️', 'main')],
+		]),
+	};
+}
 export function resultSeriesGeneralKeyboard(seriesId) {
 	return {
 		parse_mode: 'html',

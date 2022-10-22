@@ -13,7 +13,6 @@ export async function handlerResults(ctx, cbqData) {
 				cbqData.includes('series_') ||
 				cbqData.includes('result_') ||
 				cbqData.includes('view_') ||
-				cbqData.includes('V--') ||
 				cbqData.includes('stage_')
 			)
 		)
@@ -24,12 +23,6 @@ export async function handlerResults(ctx, cbqData) {
 			return await ctx.editMessageText(
 				'<b>👨‍💻 Выбор используемого устройства.</b>',
 				mobVsDesKeyboard(queryData)
-			);
-		}
-		if (cbqData.includes('V--')) {
-			return await ctx.editMessageText(
-				'<b>👨‍💻 Выбор используемого устройства.</b>',
-				mobVsDesKeyboard(cbqData)
 			);
 		}
 
