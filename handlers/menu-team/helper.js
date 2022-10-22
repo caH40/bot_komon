@@ -1,5 +1,6 @@
-import { teamKeyboard } from '../../keyboard/keyboard.js';
+import { teamKeyboard, teamsKeyboard } from '../../keyboard/keyboard.js';
 import { Rider } from '../../Model/Rider.js';
+import { Team } from '../../Model/Team.js';
 
 export async function teamMain(ctx) {
 	try {
@@ -10,9 +11,27 @@ export async function teamMain(ctx) {
 
 		let title = riderDB.teamId?.name
 			? `Команда riderDB.teamId?.name 💪`
-			: 'Пора вступать или создать свою команду! 🤝';
+			: '🤝 Пора присоединяться к команде или создать свою!';
 
 		return await ctx.editMessageText(`<b>${title}</b>`, teamKeyboard(riderDB));
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function teamJoin(ctx) {
+	try {
+		const teamDB = await Team.find();
+		if (teamDB.length === 0)
+			return await ctx
+				.replyWithHTML('Очень странно, но ни одной команды не зарегистрировано 🤷‍♂️')
+				.then(m => {
+					ctx.session.data.messagesIdForDelete.push(m.message_id);
+				});
+
+		return await ctx.editMessageText(
+			`<b>📌 Список зарегистрированных команд</b>`,
+			teamsKeyboard(teamDB)
+		);
 	} catch (error) {
 		console.log(error);
 	}

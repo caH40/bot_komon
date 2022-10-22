@@ -1,7 +1,7 @@
 import { Markup } from 'telegraf';
 import { mainBtn } from './button/main.js';
 import { resultSeriesBtn } from './button/schedule-btn.js';
-import { teamBtn } from './button/team.js';
+import { teamBtn, teamsBtn } from './button/team.js';
 // главное меню
 export async function mainMenuKeyboard(ctx) {
 	return { parse_mode: 'html', ...Markup.inlineKeyboard(await mainBtn(ctx)) };
@@ -15,8 +15,13 @@ export const accountKeyboard = {
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
+
 export function teamKeyboard(rider) {
 	return { parse_mode: 'html', ...Markup.inlineKeyboard(teamBtn(rider)) };
+}
+
+export function teamsKeyboard(teams) {
+	return { parse_mode: 'html', ...Markup.inlineKeyboard(teamsBtn(teams)) };
 }
 
 // меню выбора результатов серий main_series
