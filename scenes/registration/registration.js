@@ -140,7 +140,9 @@ export function fifthSceneReg() {
 		const t = textJson.scenes.registration;
 		let counter = 0;
 		const fifthScene = new Scenes.BaseScene('fifthSceneReg');
-		fifthScene.enter(async ctx => await ctx.replyWithHTML(t.fifth.question));
+		fifthScene.enter(
+			async ctx => await ctx.replyWithHTML(t.fifth.question, { disable_web_page_preview: true })
+		);
 		fifthScene.command('/quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
