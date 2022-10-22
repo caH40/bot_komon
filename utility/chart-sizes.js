@@ -1,4 +1,16 @@
 export const rowSize = {
+	teamRiders: {
+		desktop: {
+			sequence: 4,
+			name: 30,
+			quantity: 6,
+		},
+		mobile: {
+			sequence: 2,
+			name: 21,
+			quantity: 6,
+		},
+	},
 	schedule: {
 		desktop: {
 			number: 4,

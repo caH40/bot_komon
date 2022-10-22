@@ -1,10 +1,10 @@
 import { clearCharts } from '../../keyboard/keyboard.js';
-import { viewDesktop } from '../generate/my-results.js';
+import { viewDesktop } from '../generate/riders.js';
 
-export async function listRidersViewDes(ctx, myResults, title) {
+export async function listRidersViewDes(ctx, riders, title) {
 	try {
 		await ctx
-			.replyWithHTML('<pre>' + viewDesktop(myResults, title) + '</pre>', clearCharts)
+			.replyWithHTML('<pre>' + viewDesktop(riders, title) + '</pre>', clearCharts)
 			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
 		return;

@@ -74,6 +74,15 @@ export const myResultsChartMobile = {
 	titles: `|Серия              |Этп|МсА|МсГ|\n`,
 };
 
+export const teamRidersChart = {
+	rowDLine: `============================================\n`,
+	titles: `|№   |Имя участника                 |Заезды|\n`,
+};
+export const teamRidersChartMobile = {
+	rowDLine: `|===============================|\n`,
+	titles: `|№ |Имя участника        |Кл.зд.|\n`,
+};
+
 export const seriesChart = {
 	rowDLine: `=========================================================================================\n`,
 	titles: `|Организатор   |Наименвоание           |Дата старта   |Тип        |Ген. зачет|Ком. зачет|\n`,

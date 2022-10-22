@@ -9,7 +9,9 @@ export async function teamLeaveDB(ctx, cbqData) {
 		const teamDB = await Team.findOne({ capitan: riderId });
 		if (teamDB)
 			return await ctx
-				.reply('Вы не можете покинуть команду, так как являетесь её создателем и капитаном.')
+				.reply(
+					'Вы не можете выйти из состава команды, так как являетесь её создателем и капитаном.'
+				)
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
 		const response = await Rider.findOneAndUpdate(
