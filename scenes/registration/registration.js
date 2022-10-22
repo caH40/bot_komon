@@ -3,6 +3,7 @@ import { Scenes } from 'telegraf';
 import { registrationToDB } from '../../controllersDB/registration-save.js';
 import { getTelegramId } from './telegramid.js';
 import textJson from '../../locales/ru.json' assert { type: 'json' };
+import { finalMessage } from '../../locales/template.js';
 import {
 	validationGender,
 	validationLink,
@@ -10,7 +11,6 @@ import {
 	validationNameRus,
 	validationYear,
 } from './validation.js';
-import { finalMessage } from './finalmessage.js';
 
 const t = textJson.scenes.registration;
 

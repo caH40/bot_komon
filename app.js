@@ -1,28 +1,13 @@
 import 'dotenv/config';
-import { Scenes, session, Telegraf } from 'telegraf';
+import { session, Telegraf } from 'telegraf';
 import mongoose from 'mongoose';
 
 import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
 import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
-import { downloadProtocolBase } from './scenes/protocol/download.js';
-import { uploadProtocolBase } from './scenes/protocol/upload.js';
-import { confirmUploadProtocolScene } from './scenes/protocol/confirm.js';
-import { downloadScheduleBase } from './scenes/schedule/download.js';
-import { uploadScheduleBase } from './scenes/schedule/upload.js';
-import { confirmUploadScheduleScene } from './scenes/schedule/confirm.js';
 import { filterMessage } from './middleware/filter-message.js';
-import {
-	firstSceneReg,
-	secondSceneReg,
-	thirdSceneReg,
-	fourthSceneReg,
-	fifthSceneReg,
-	sixthSceneReg,
-	seventhSceneReg,
-	eighthSceneReg,
-} from './scenes/registration/registration.js';
+import { activationScenes } from './scenes/activation-scenes.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -31,22 +16,7 @@ await mongoose
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const stage = new Scenes.Stage([
-	downloadProtocolBase(),
-	uploadProtocolBase(),
-	confirmUploadProtocolScene(),
-	downloadScheduleBase(),
-	uploadScheduleBase(),
-	confirmUploadScheduleScene(),
-	firstSceneReg(),
-	secondSceneReg(),
-	thirdSceneReg(),
-	fourthSceneReg(),
-	fifthSceneReg(),
-	sixthSceneReg(),
-	seventhSceneReg(),
-	eighthSceneReg(),
-]);
+const stage = activationScenes();
 
 bot.use(session());
 bot.use(stage.middleware());
