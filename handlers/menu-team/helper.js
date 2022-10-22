@@ -11,11 +11,8 @@ export async function teamMain(ctx) {
 		let title = riderDB.teamId?.name
 			? `Команда riderDB.teamId?.name 💪`
 			: 'Пора вступать или создать свою команду! 🤝';
-		console.log(title);
 
-		// const stagesDB = await Stage.find({ seriesId, hasResults: true });
-
-		return await ctx.editMessageText(`<b>${title}</b>`, teamKeyboard);
+		return await ctx.editMessageText(`<b>${title}</b>`, await teamKeyboard(ctx, riderDB));
 	} catch (error) {
 		console.log(error);
 	}
