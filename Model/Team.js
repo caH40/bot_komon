@@ -5,10 +5,12 @@ const { Schema, model } = pkg;
 
 const teamSchema = new Schema({
 	name: { type: String, unique: true },
-	firstName: { type: mongoose.Schema.Types.ObjectId, ref: 'Rider' },
+	captain: { type: mongoose.Schema.Types.ObjectId, ref: 'Rider' },
 	description: String,
+	groupName: String,
+	link: String,
 	isAllowed: { type: Boolean, default: false },
-	requestRiders: Array,
+	requestRiders: [Number],
 });
 
 export const Team = model('Team', teamSchema);

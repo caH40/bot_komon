@@ -16,6 +16,7 @@ import {
 	seventhSceneReg,
 	eighthSceneReg,
 } from '../scenes/registration/registration.js';
+import { firstSceneCreateTeam, secondSceneCreateTeam } from './team_create/team-create.js';
 
 export function activationScenes() {
 	try {
@@ -34,6 +35,8 @@ export function activationScenes() {
 			sixthSceneReg(),
 			seventhSceneReg(),
 			eighthSceneReg(),
+			firstSceneCreateTeam(),
+			secondSceneCreateTeam(),
 		]);
 	} catch (error) {
 		console.log(error);

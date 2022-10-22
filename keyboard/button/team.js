@@ -7,7 +7,7 @@ export function teamBtn(rider) {
 				? [Markup.button.callback('Список райдеров 📜', 'm_3_2_V--listRiders')]
 				: [],
 			rider.teamId?.name ? [] : [Markup.button.callback('Присоединиться 🙏', 'm_3_2_2_')],
-			rider.teamId?.name ? [] : [Markup.button.callback('Создать ⚒️', 'm_3_2_S__create')],
+			rider.teamId?.name ? [] : [Markup.button.callback('Создать ⚒️', 'm_3_2_3_S__create')],
 			rider.teamId?.name ? [Markup.button.callback('Покинуть команду 🚪', 'm_3_2_4_')] : [],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		];
