@@ -1,6 +1,6 @@
 import { Markup } from 'telegraf';
 
-export async function teamBtn(ctx, rider) {
+export function teamBtn(rider) {
 	try {
 		return [
 			rider.teamId?.name
@@ -9,7 +9,7 @@ export async function teamBtn(ctx, rider) {
 			rider.teamId?.name ? [] : [Markup.button.callback('Присоединиться 🙏', 'm_3_2_2_')],
 			[
 				rider.teamId?.name ? [] : Markup.button.callback('Создать ⚒️', 'm_3_2_V__sceneCreate'),
-				Markup.button.callback('Выйти 🚪', 'm_3_2_4_'),
+				Markup.button.callback('Покинуть команду 🚪', 'm_3_2_4_'),
 			],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		];

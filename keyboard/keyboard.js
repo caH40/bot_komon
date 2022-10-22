@@ -15,8 +15,8 @@ export const accountKeyboard = {
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
-export async function teamKeyboard(ctx, riderDB) {
-	return { parse_mode: 'html', ...Markup.inlineKeyboard(await teamBtn(ctx, riderDB)) };
+export function teamKeyboard(rider) {
+	return { parse_mode: 'html', ...Markup.inlineKeyboard(teamBtn(rider)) };
 }
 
 // меню выбора результатов серий main_series

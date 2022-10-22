@@ -12,7 +12,7 @@ export async function teamMain(ctx) {
 			? `Команда riderDB.teamId?.name 💪`
 			: 'Пора вступать или создать свою команду! 🤝';
 
-		return await ctx.editMessageText(`<b>${title}</b>`, await teamKeyboard(ctx, riderDB));
+		return await ctx.editMessageText(`<b>${title}</b>`, teamKeyboard(riderDB));
 	} catch (error) {
 		console.log(error);
 	}
