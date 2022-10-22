@@ -12,10 +12,10 @@ import {
 	validationYear,
 } from './validation.js';
 
-const t = textJson.scenes.registration;
-
 export function firstSceneReg() {
 	try {
+		const t = textJson.scenes.registration;
+		let counter = 0;
 		const firstScene = new Scenes.BaseScene('firstSceneReg');
 		firstScene.enter(async ctx => {
 			ctx.session.data.account = {};
@@ -25,6 +25,10 @@ export function firstSceneReg() {
 			await ctx.replyWithHTML(t.first.question);
 		});
 		firstScene.on('message', async ctx => {
+			counter++;
+			const isManyAttempts = await attempts(ctx, counter);
+			if (isManyAttempts) return await ctx.scene.leave();
+
 			const text = ctx.message.text;
 			ctx.session.data.messagesIdForDelete.push(ctx.message.message_id);
 			const isValid = validationNameRus(text);
@@ -42,9 +46,15 @@ export function firstSceneReg() {
 
 export function secondSceneReg() {
 	try {
+		const t = textJson.scenes.registration;
+		let counter = 0;
 		const secondScene = new Scenes.BaseScene('secondSceneReg');
 		secondScene.enter(async ctx => await ctx.replyWithHTML(t.second.question));
 		secondScene.on('message', async ctx => {
+			counter++;
+			const isManyAttempts = await attempts(ctx, counter);
+			if (isManyAttempts) return await ctx.scene.leave();
+
 			const text = ctx.message.text;
 			const isValid = validationNameRus(text);
 			if (isValid) {
@@ -61,9 +71,15 @@ export function secondSceneReg() {
 
 export function thirdSceneReg() {
 	try {
+		const t = textJson.scenes.registration;
+		let counter = 0;
 		const thirdScene = new Scenes.BaseScene('thirdSceneReg');
 		thirdScene.enter(async ctx => await ctx.replyWithHTML(t.third.question));
 		thirdScene.on('message', async ctx => {
+			counter++;
+			const isManyAttempts = await attempts(ctx, counter);
+			if (isManyAttempts) return await ctx.scene.leave();
+
 			const text = ctx.message.text;
 			const isValid = validationYear(text);
 			if (isValid) {
@@ -80,11 +96,16 @@ export function thirdSceneReg() {
 
 export function fourthSceneReg() {
 	try {
+		const t = textJson.scenes.registration;
+		let counter = 0;
 		const fourthScene = new Scenes.BaseScene('fourthSceneReg');
 		fourthScene.enter(async ctx => await ctx.replyWithHTML(t.fourth.question));
 		fourthScene.on('message', async ctx => {
-			const text = ctx.message.text;
+			counter++;
+			const isManyAttempts = await attempts(ctx, counter);
+			if (isManyAttempts) return await ctx.scene.leave();
 
+			const text = ctx.message.text;
 			const isValid = validationGender(text);
 			if (isValid) {
 				ctx.session.data.account.gender = text;
@@ -100,11 +121,16 @@ export function fourthSceneReg() {
 
 export function fifthSceneReg() {
 	try {
+		const t = textJson.scenes.registration;
+		let counter = 0;
 		const fifthScene = new Scenes.BaseScene('fifthSceneReg');
 		fifthScene.enter(async ctx => await ctx.replyWithHTML(t.fifth.question));
 		fifthScene.on('message', async ctx => {
-			const text = ctx.message.text;
+			counter++;
+			const isManyAttempts = await attempts(ctx, counter);
+			if (isManyAttempts) return await ctx.scene.leave();
 
+			const text = ctx.message.text;
 			const isValid = validationNameEn(text);
 			if (isValid) {
 				ctx.session.data.account.firstNameZwift = text;
@@ -120,11 +146,16 @@ export function fifthSceneReg() {
 
 export function sixthSceneReg() {
 	try {
+		const t = textJson.scenes.registration;
+		let counter = 0;
 		const sixthScene = new Scenes.BaseScene('sixthSceneReg');
 		sixthScene.enter(async ctx => await ctx.replyWithHTML(t.sixth.question));
 		sixthScene.on('message', async ctx => {
-			const text = ctx.message.text;
+			counter++;
+			const isManyAttempts = await attempts(ctx, counter);
+			if (isManyAttempts) return await ctx.scene.leave();
 
+			const text = ctx.message.text;
 			const isValid = validationNameEn(text);
 			if (isValid) {
 				ctx.session.data.account.lastNameZwift = text;
@@ -140,11 +171,16 @@ export function sixthSceneReg() {
 
 export function seventhSceneReg() {
 	try {
+		const t = textJson.scenes.registration;
+		let counter = 0;
 		const seventhScene = new Scenes.BaseScene('seventhSceneReg');
 		seventhScene.enter(async ctx => await ctx.replyWithHTML(t.seventh.question));
 		seventhScene.on('message', async ctx => {
-			const text = ctx.message.text;
+			counter++;
+			const isManyAttempts = await attempts(ctx, counter);
+			if (isManyAttempts) return await ctx.scene.leave();
 
+			const text = ctx.message.text;
 			const isValid = validationNameEn(text);
 			if (isValid) {
 				ctx.session.data.account.cycleTrainer = text;
@@ -160,6 +196,8 @@ export function seventhSceneReg() {
 
 export function eighthSceneReg() {
 	try {
+		const t = textJson.scenes.registration;
+		let counter = 0;
 		const eighthScene = new Scenes.BaseScene('eighthSceneReg');
 		eighthScene.enter(async ctx => {
 			await ctx.replyWithHTML(t.eighth.question, {
@@ -179,8 +217,11 @@ export function eighthSceneReg() {
 		eighthScene.command('quit', async ctx => await ctx.scene.leave());
 
 		eighthScene.on('message', async ctx => {
-			const text = ctx.message.text;
+			counter++;
+			const isManyAttempts = await attempts(ctx, counter);
+			if (isManyAttempts) return await ctx.scene.leave();
 
+			const text = ctx.message.text;
 			const isValid = validationLink(text);
 			if (isValid) {
 				ctx.session.data.account.zwiftPower = text;
@@ -193,6 +234,18 @@ export function eighthSceneReg() {
 			});
 		});
 		return eighthScene;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+async function attempts(ctx, counter) {
+	try {
+		const t = textJson.scenes.registration;
+
+		if (counter > 4) {
+			return await await ctx.reply(t.attempts);
+		}
 	} catch (error) {
 		console.log(error);
 	}
