@@ -6,6 +6,7 @@ import { myResults } from '../view/myresults/myresults-view.js';
 import { scheduleView } from '../view/schedule/schedule-view.js';
 
 import { handlerResults } from './menu-results/handler-results.js';
+import { handlerTeam } from './menu-team/handler-menu.js';
 
 export async function handler(ctx, cbqData) {
 	try {
@@ -21,7 +22,7 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		// console.log(cbqData); //❗❗❗
+		console.log(cbqData); //❗❗❗
 		// первый уровень меню
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
@@ -30,6 +31,9 @@ export async function handler(ctx, cbqData) {
 			);
 
 		if (cbqData.includes('_m_3_1_V--myResults')) return await myResults(ctx, cbqData);
+		//меню "Команда"
+		if (cbqData.includes('m_3_2')) return await handlerTeam(ctx, cbqData);
+
 		// ===========================================================================
 		// первый уровень меню
 		if (cbqData === 'account_registration') return await ctx.scene.enter('firstSceneReg');

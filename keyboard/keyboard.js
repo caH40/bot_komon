@@ -10,7 +10,16 @@ export const accountKeyboard = {
 	...Markup.inlineKeyboard([
 		[Markup.button.callback('Мои результаты 🏅', 'm_3_1_V--myResults')],
 		[Markup.button.callback('Регистрация 🆔', 'account_registration')],
-		[Markup.button.callback('Команда 🤝', 'team')],
+		[Markup.button.callback('Команда 🤝', 'm_3_2_')],
+		[Markup.button.callback('Главное меню ❗️', 'main')],
+	]),
+};
+export const teamKeyboard = {
+	parse_mode: 'html',
+	...Markup.inlineKeyboard([
+		[Markup.button.callback('Список райдеров 📜', 'm_3_1_V--myResults')],
+		[Markup.button.callback('Присоединиться 🙏', 'account_registration')],
+		[Markup.button.callback('Создать ⚒️', 'm_3_2_'), Markup.button.callback('Выйти 🚪', 'm_3_2_')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
