@@ -5,7 +5,7 @@ const { Schema, model } = pkg;
 
 const teamSchema = new Schema({
 	name: { type: String, unique: true },
-	captain: { type: mongoose.Schema.Types.ObjectId, ref: 'Rider' },
+	capitan: { type: mongoose.Schema.Types.ObjectId, ref: 'Rider', required: true },
 	description: String,
 	groupName: String,
 	link: String,

@@ -15,3 +15,15 @@ export function finalMessage(ctx) {
 Для выхода <b>без сохранения</b> информации <u>/quit</u>
 `;
 }
+export function finalMessageTeamCr(ctx) {
+	return `
+Проверьте данные:
+<b>Название команды:</b> ${ctx.session.data.teamCreate.name};
+<b>Краткое описание:</b> ${ctx.session.data.teamCreate.description};
+<b>Капитан команды:</b> ${ctx.session.data.teamCreate.telegramUsername};
+========================
+Если всё верно, для <b>сохранения</b> наберите <u>/save</u>
+Для <b>повторного ввода</b> данный <u>/repeat</u>
+Для выхода <b>без сохранения</b> информации <u>/quit</u>
+`;
+}

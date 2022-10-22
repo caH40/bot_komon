@@ -2,8 +2,9 @@ import { Scenes } from 'telegraf';
 
 import { getTelegramId } from './telegramid.js';
 import textJson from '../../locales/ru.json' assert { type: 'json' };
-import { finalMessage } from '../../locales/template.js';
+import { finalMessageTeamCr } from '../../locales/template.js';
 import { validationDescription, validationName } from './validation.js';
+import { registrationToDB } from '../../controllersDB/team-save.js';
 
 export function firstSceneCreateTeam() {
 	try {
@@ -11,10 +12,10 @@ export function firstSceneCreateTeam() {
 		let counter = 0;
 		const firstScene = new Scenes.BaseScene('firstSceneCreateTeam');
 		firstScene.enter(async ctx => {
-			ctx.session.data.account = {};
+			ctx.session.data.teamCreate = {};
 			getTelegramId(ctx);
 
-			const nameTg = ctx.session.data.account.first_name;
+			const nameTg = ctx.session.data.teamCreate.first_name;
 			await ctx.replyWithHTML(t.first.welcome1 + nameTg + t.first.welcome2);
 			await ctx.replyWithHTML(t.first.question);
 		});
@@ -31,7 +32,7 @@ export function firstSceneCreateTeam() {
 			ctx.session.data.messagesIdForDelete.push(ctx.message.message_id);
 			const isValid = validationName(text);
 			if (isValid) {
-				ctx.session.data.account.name = text;
+				ctx.session.data.teamCreate.name = text;
 				return ctx.scene.enter('secondSceneCreateTeam');
 			}
 			await ctx.reply('t.first.wrong');
@@ -52,6 +53,17 @@ export function secondSceneCreateTeam() {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
+		secondScene.command('save', async ctx => {
+			const response = await registrationToDB(ctx.session.data.teamCreate);
+			if (response) {
+				await ctx.reply(t.second.successfulDB);
+			} else {
+				await ctx.reply(t.second.wrongDB);
+			}
+			return await ctx.scene.leave();
+		});
+		secondScene.command('repeat', async ctx => await ctx.scene.enter('firstSceneCreateTeam'));
+		secondScene.command('quit', async ctx => await ctx.scene.leave());
 		secondScene.on('message', async ctx => {
 			counter++;
 			const isManyAttempts = await attempts(ctx, counter);
@@ -60,11 +72,8 @@ export function secondSceneCreateTeam() {
 			const text = ctx.message.text;
 			const isValid = validationDescription(text);
 			if (isValid) {
-				ctx.session.data.account.description = text;
-
-				console.log(ctx.session.data.account);
-				//
-				return ctx.scene.leave();
+				ctx.session.data.teamCreate.description = text;
+				return await ctx.replyWithHTML(finalMessageTeamCr(ctx));
 			}
 			await ctx.reply('t.second.wrong');
 		});
