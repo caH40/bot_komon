@@ -14,6 +14,7 @@ import { listRiders } from '../view/team/riders-view.js';
 
 import { handlerResults } from './menu-results/handler-results.js';
 import { handlerTeam } from './menu-team/handler-menu.js';
+import { teamChooseForJoin } from './menu-team/helper.js';
 
 export async function handler(ctx, cbqData) {
 	try {
@@ -40,6 +41,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData.includes('_m_3_1_V--myResults')) return await myResults(ctx, cbqData);
 		if (cbqData.includes('m_3_2_V--listRiders')) return await listRiders(ctx, cbqData);
 		if (cbqData.includes('m_3_2_4_1_E--teamLeave_')) return await teamLeaveDB(ctx, cbqData);
+		if (cbqData.includes('m_3_2_2_all_E__teamJoin_')) return await teamChooseForJoin(ctx, cbqData);
 		// ловим V-- для выбора устройства
 		if (cbqData.includes('V--')) {
 			return await ctx.editMessageText(
