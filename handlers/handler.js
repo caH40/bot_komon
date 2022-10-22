@@ -1,11 +1,6 @@
 import { teamLeaveDB } from '../controllersDB/team-leave.js';
 import { scheduleBtn } from '../keyboard/button/schedule-btn.js';
-import {
-	mainMenuKeyboard,
-	adminKeyboard,
-	accountKeyboard,
-	mobVsDesKeyboard,
-} from '../keyboard/keyboard.js';
+import { mainMenuKeyboard, accountKeyboard, mobVsDesKeyboard } from '../keyboard/keyboard.js';
 import { beingDeveloped } from '../modules/beingDeveloped.js';
 import { myResults } from '../view/myresults/myresults-view.js';
 
@@ -15,6 +10,7 @@ import { listRiders } from '../view/team/riders-view.js';
 import { handlerResults } from './menu-results/handler-results.js';
 import { handlerTeam } from './menu-team/handler-menu.js';
 import { teamChooseForJoin } from './menu-team/helper.js';
+import { handlerAdmin } from './menu_admin/handler-menu.js';
 
 export async function handler(ctx, cbqData) {
 	try {
@@ -52,11 +48,7 @@ export async function handler(ctx, cbqData) {
 		//меню "Команда"
 		if (cbqData.includes('m_3_2')) return await handlerTeam(ctx, cbqData);
 		// меню "Админ кабинет"
-		if (cbqData === 'm_4_')
-			return await ctx.editMessageText(
-				'<b>🛠️ Админ кабинет.</b>\n<i>main/account/admin</i>',
-				adminKeyboard
-			);
+		if (cbqData.includes('m_4_')) return await handlerAdmin(ctx, cbqData);
 
 		// ===========================================================================
 		// первый уровень меню

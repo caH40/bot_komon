@@ -19,6 +19,15 @@ export const accountKeyboard = {
 export function teamKeyboard(rider) {
 	return { parse_mode: 'html', ...Markup.inlineKeyboard(teamBtn(rider)) };
 }
+export function teamForApprovalKeyboard(teamId) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([
+			Markup.button.callback('Одобрить', `m_4_team_add_Y_${teamId}`),
+			Markup.button.callback('Отклонить', `m_4_team_add_N_${teamId}`),
+		]),
+	};
+}
 
 export function teamsKeyboard(teams) {
 	return { parse_mode: 'html', ...Markup.inlineKeyboard(teamsBtn(teams)) };
@@ -96,6 +105,14 @@ export const adminKeyboard = {
 		[Markup.button.callback('Управление командами', 'm_4_1_')],
 		[Markup.button.callback('Загрузить протокол', 'admin_getProtocol')],
 		[Markup.button.callback('Загрузить расписание', 'admin_getSchedule')],
+		[Markup.button.callback('Главное меню ❗️', 'main')],
+	]),
+};
+export const adminTeamKeyboard = {
+	parse_mode: 'html',
+	...Markup.inlineKeyboard([
+		[Markup.button.callback('Заявки на создание команды', 'm_4_1_1_')],
+		[Markup.button.callback('Удалить команду', 'm_4_1_2_')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
