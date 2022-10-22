@@ -19,7 +19,7 @@ export function teamsBtn(teams) {
 	try {
 		return [
 			...teams.map(team => [
-				Markup.button.callback(`${team.name} 👍`, 'm_3_2_2_V__team_${team._id}'),
+				Markup.button.callback(`${team.name} 👍`, `m_3_2_2_V__team_${team._id}`),
 			]),
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		];

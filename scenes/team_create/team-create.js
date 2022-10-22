@@ -5,6 +5,7 @@ import textJson from '../../locales/ru.json' assert { type: 'json' };
 import { finalMessageTeamCr } from '../../locales/template.js';
 import { validationDescription, validationName } from './validation.js';
 import { registrationToDB } from '../../controllersDB/team-save.js';
+import { Rider } from '../../Model/Rider.js';
 
 export function firstSceneCreateTeam() {
 	try {
@@ -14,7 +15,6 @@ export function firstSceneCreateTeam() {
 		firstScene.enter(async ctx => {
 			ctx.session.data.teamCreate = {};
 			getTelegramId(ctx);
-
 			const nameTg = ctx.session.data.teamCreate.first_name;
 			await ctx.replyWithHTML(t.first.welcome1 + nameTg + t.first.welcome2);
 			await ctx.replyWithHTML(t.first.question);

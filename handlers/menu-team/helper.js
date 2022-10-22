@@ -1,4 +1,9 @@
-import { teamKeyboard, teamLeaveKeyboard, teamsKeyboard } from '../../keyboard/keyboard.js';
+import {
+	mainMenuKeyboard,
+	teamKeyboard,
+	teamLeaveKeyboard,
+	teamsKeyboard,
+} from '../../keyboard/keyboard.js';
 import { Rider } from '../../Model/Rider.js';
 import { Team } from '../../Model/Team.js';
 
@@ -30,6 +35,17 @@ export async function teamJoin(ctx) {
 			`<b>📌 Список зарегистрированных команд</b>`,
 			teamsKeyboard(teamDB)
 		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function teamCreate(ctx) {
+	try {
+		await ctx.editMessageText(
+			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
+			await mainMenuKeyboard(ctx)
+		);
+		return await ctx.scene.enter('firstSceneCreateTeam');
 	} catch (error) {
 		console.log(error);
 	}
