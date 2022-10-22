@@ -2,7 +2,7 @@ import { teamLeaveDB } from '../controllersDB/team-leave.js';
 import { scheduleBtn } from '../keyboard/button/schedule-btn.js';
 import {
 	mainMenuKeyboard,
-	accountAdminKeyboard,
+	adminKeyboard,
 	accountKeyboard,
 	mobVsDesKeyboard,
 } from '../keyboard/keyboard.js';
@@ -30,7 +30,7 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		// console.log(cbqData); //❗❗❗
+		console.log(cbqData); //❗❗❗
 		// первый уровень меню
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
@@ -51,6 +51,12 @@ export async function handler(ctx, cbqData) {
 		}
 		//меню "Команда"
 		if (cbqData.includes('m_3_2')) return await handlerTeam(ctx, cbqData);
+		// меню "Админ кабинет"
+		if (cbqData === 'm_4_')
+			return await ctx.editMessageText(
+				'<b>🛠️ Админ кабинет.</b>\n<i>main/account/admin</i>',
+				adminKeyboard
+			);
 
 		// ===========================================================================
 		// первый уровень меню
@@ -71,11 +77,6 @@ export async function handler(ctx, cbqData) {
 				accountKeyboard
 			);
 
-		if (cbqData === 'account_adminAcc')
-			return await ctx.editMessageText(
-				'<b>🛠️ Админ кабинет.</b>\n<i>main/account/admin</i>',
-				accountAdminKeyboard
-			);
 		// третий уровень меню
 
 		// четвертый уровень меню

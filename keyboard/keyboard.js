@@ -90,9 +90,10 @@ export function resultSeriesGeneralKeyboard(seriesId) {
 	};
 }
 // меню выбора админ кабинета
-export const accountAdminKeyboard = {
+export const adminKeyboard = {
 	parse_mode: 'html',
 	...Markup.inlineKeyboard([
+		[Markup.button.callback('Управление командами', 'm_4_1_')],
 		[Markup.button.callback('Загрузить протокол', 'admin_getProtocol')],
 		[Markup.button.callback('Загрузить расписание', 'admin_getSchedule')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
