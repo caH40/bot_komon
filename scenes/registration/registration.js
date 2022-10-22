@@ -105,7 +105,7 @@ export function fourthSceneReg() {
 			const isManyAttempts = await attempts(ctx, counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
-			const text = ctx.message.text;
+			const text = ctx.message.text?.toLowerCase();
 			const isValid = validationGender(text);
 			if (isValid) {
 				ctx.session.data.account.gender = text;
