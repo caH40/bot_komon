@@ -1,4 +1,3 @@
-import { Context } from 'telegraf';
 import { Rider } from '../Model/Rider.js';
 import { Team } from '../Model/Team.js';
 
