@@ -9,6 +9,7 @@ import {
 	teamManagement,
 	teamRemove,
 	teamRemoveRider,
+	teamWait,
 } from './helper.js';
 
 export async function handlerTeam(ctx, cbqData) {
@@ -25,6 +26,7 @@ export async function handlerTeam(ctx, cbqData) {
 		if (cbqData.includes('m_3_2_5_1_E_')) return await teamAddRiderDB(ctx, cbqData);
 		if (cbqData.includes('m_3_2_5_2_E_')) return await teamRemoveRiderDB(ctx, cbqData);
 		if (cbqData === 'm_3_2_5_4_E') return await teamRemove(ctx, cbqData);
+		if (cbqData === 'm_3_2_0_wait') return await teamWait(ctx, cbqData);
 	} catch (error) {
 		console.log(error);
 	}
