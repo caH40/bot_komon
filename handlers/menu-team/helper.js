@@ -160,6 +160,11 @@ export async function teamRemove(ctx) {
 		await ctx
 			.reply(`Вы удалили команду "${riderDB.teamId.name}"`)
 			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+
+		return await ctx.editMessageText(
+			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
+			await mainMenuKeyboard(ctx)
+		);
 	} catch (error) {
 		console.log(error);
 	}
