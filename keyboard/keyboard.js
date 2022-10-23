@@ -98,6 +98,7 @@ export function teamManagementKeyboard(userId) {
 		...Markup.inlineKeyboard([
 			[Markup.button.callback('Удалить райдера из команды ❌', `m_3_2_5_1_`)],
 			[Markup.button.callback('Изменить описание 📝', `m_3_2_5_2_`)],
+			[Markup.button.callback('Удаление команды ❌❌', `m_3_2_5_3_E`)],
 			[Markup.button.callback('<< назад >>', `m_3_2_`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),

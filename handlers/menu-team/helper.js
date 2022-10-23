@@ -86,7 +86,7 @@ export async function teamCreate(ctx) {
 export async function teamLeave(ctx) {
 	try {
 		const userId = ctx.update.callback_query.from.id;
-		console.log(ctx.update.callback_query);
+
 		const riderDB = await Rider.findOne({ telegramId: userId }).populate('teamId');
 		let teamName = riderDB.teamId?.name;
 
@@ -135,6 +135,31 @@ export async function teamRemoveRider(ctx) {
 				.reply(title, teamRemoveRiderKeyboard(rider._id))
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		});
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function teamRemove(ctx) {
+	try {
+		const userId = ctx.update.callback_query.from.id;
+		const riderDB = await Rider.findOne({ telegramId: userId }).populate('teamId');
+		const ridersDB = await Rider.find({ teamId: riderDB.teamId._id });
+
+		if (ridersDB.length > 1)
+			return await ctx
+				.reply(
+					'Вы не можите удалить команду, если в ней есть райдеры. Сначала необходимо удалить райдеров из команды.'
+				)
+				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+
+		await Team.findOneAndDelete({ _id: riderDB.teamId._id }).catch(error => console.log(error));
+		await Rider.findOneAndUpdate({ telegramId: userId }, { $unset: { teamId: 1 } }).catch(error =>
+			console.log(error)
+		);
+
+		await ctx
+			.reply(`Вы удалили команду "${riderDB.teamId.name}"`)
+			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 	} catch (error) {
 		console.log(error);
 	}

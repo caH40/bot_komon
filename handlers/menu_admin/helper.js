@@ -40,8 +40,8 @@ export async function approvalTeam(ctx, cbqData) {
 		const time = new Date().toLocaleString();
 		const title =
 			action === 'Y'
-				? `Создание команды "${teamDB.name}" одобрено! ${time}`
-				: `Создание команды "${teamDB.name}" отклонено! ${time}`;
+				? `${time}. Создание команды "${teamDB.name}" одобрено!`
+				: `${time}. Создание команды "${teamDB.name}" отклонено!`;
 		console.log(title);
 
 		await ctx.telegram.sendMessage(teamDB.capitan.telegramId, title);

@@ -26,7 +26,7 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		console.log(cbqData); //❗❗❗
+		// console.log(cbqData); //❗❗❗
 		// первый уровень меню
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
