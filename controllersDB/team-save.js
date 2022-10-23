@@ -4,10 +4,11 @@ import { Team } from '../Model/Team.js';
 export async function registrationToDB(data) {
 	try {
 		const capitan = await Rider.findOne({ telegramId: data.telegramId });
-
 		// райдер может состоять только в одной команде
 		if (capitan.teamId)
-			return await ctx.reply(
+			console.log(
+				new Date().toLocaleString(),
+				'team-save.js',
 				'Спортсмен может состоять только в одной команде. Необходимо выйти из команды в который Вы состоите и только потом создавать новую!'
 			);
 

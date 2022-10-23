@@ -9,7 +9,7 @@ import { Team } from '../../Model/Team.js';
 
 export async function teamMain(ctx) {
 	try {
-		const userId = ctx.update.callback_query.from.id;
+		const userId = ctx.update.callback_query.message.chat.id;
 		const riderDB = await Rider.findOne({ telegramId: userId }).populate('teamId');
 		if (!riderDB)
 			return await ctx.replyWithHTML('Для этого меню необходима <b>регистрация!</b> 🆔');
@@ -59,9 +59,6 @@ export async function teamJoin(ctx) {
 		if (teamDB.length === 0)
 			return await ctx
 				.replyWithHTML('Очень странно, не создано ни одной команды 🤷‍♂️')
-				.then(m => {
-					ctx.session.data.messagesIdForDelete.push(m.message_id);
-				})
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
 		return await ctx.editMessageText(

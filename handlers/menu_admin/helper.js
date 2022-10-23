@@ -1,4 +1,5 @@
 import { teamForApprovalKeyboard, teamKeyboard } from '../../keyboard/keyboard.js';
+import { Rider } from '../../Model/Rider.js';
 import { Team } from '../../Model/Team.js';
 
 export async function requestTeam(ctx) {
@@ -31,7 +32,10 @@ export async function approvalTeam(ctx, cbqData) {
 		const teamDB = await Team.findOne({ _id: teamId }).populate('capitan');
 		console.log(teamDB);
 		if (action === 'Y') await Team.findOneAndUpdate({ _id: teamId }, { $set: { isAllowed: true } });
-		if (action === 'N') await Team.findOneAndDelete({ _id: teamId });
+		if (action === 'N') {
+			await Rider.findOneAndUpdate({ teamId }, { $unset: { teamId: 1 } });
+			await Team.findOneAndDelete({ _id: teamId });
+		}
 
 		const time = new Date().toLocaleString();
 		const title =

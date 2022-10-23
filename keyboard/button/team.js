@@ -2,6 +2,7 @@ import { Markup } from 'telegraf';
 
 export function teamBtn(rider) {
 	try {
+		console.log('rider', rider);
 		return [
 			rider.teamId?.name
 				? [Markup.button.callback('Список райдеров 📜', `m_3_2_V--listRiders_${rider.teamId.name}`)]

@@ -111,7 +111,7 @@ export const adminKeyboard = {
 export const adminTeamKeyboard = {
 	parse_mode: 'html',
 	...Markup.inlineKeyboard([
-		[Markup.button.callback('Заявки на создание команды', 'm_4_1_1_')],
+		[Markup.button.callback('Заявки на создание команды', 'm_4_1_1_E')],
 		[Markup.button.callback('Удалить команду', 'm_4_1_2_')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
