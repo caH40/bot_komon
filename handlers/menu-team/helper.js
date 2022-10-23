@@ -2,6 +2,8 @@ import {
 	mainMenuKeyboard,
 	teamKeyboard,
 	teamLeaveKeyboard,
+	teamManagementKeyboard,
+	teamRemoveRiderKeyboard,
 	teamsKeyboard,
 } from '../../keyboard/keyboard.js';
 import { Rider } from '../../Model/Rider.js';
@@ -26,7 +28,7 @@ export async function teamMain(ctx) {
 export async function teamChooseForJoin(ctx, cbqData) {
 	try {
 		const teamId = cbqData.slice(24);
-		const userId = ctx.update.callback_query.message.chat.id;
+		const userId = ctx.update.callback_query.from.id;
 
 		const riderDB = await Rider.findOneAndUpdate(
 			{ telegramId: userId },
@@ -84,6 +86,7 @@ export async function teamCreate(ctx) {
 export async function teamLeave(ctx) {
 	try {
 		const userId = ctx.update.callback_query.from.id;
+		console.log(ctx.update.callback_query);
 		const riderDB = await Rider.findOne({ telegramId: userId }).populate('teamId');
 		let teamName = riderDB.teamId?.name;
 
@@ -91,6 +94,47 @@ export async function teamLeave(ctx) {
 			`<b>🚪 Выход из команды "${teamName}"</b>`,
 			teamLeaveKeyboard(riderDB._id)
 		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function teamManagement(ctx) {
+	try {
+		const userId = ctx.update.callback_query.from.id;
+
+		const riderDB = await Rider.findOne({ telegramId: userId }).populate('teamId');
+		let teamName = riderDB.teamId?.name;
+
+		return await ctx.editMessageText(
+			`<b>💼 Управление командой "${teamName}"</b>`,
+			teamManagementKeyboard(riderDB._id)
+		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function teamRemoveRider(ctx) {
+	try {
+		const userId = ctx.update.callback_query.from.id;
+
+		const riderDB = await Rider.findOne({ telegramId: userId }).populate('teamId');
+		let teamId = riderDB.teamId?._id;
+		const ridersDB = await Rider.find({ $and: [{ teamId }, { _id: { $ne: riderDB._id } }] });
+
+		if (ridersDB.length === 0)
+			return await ctx
+				.reply('Вы единственный райдер в команде, Вам негоко удалять из команды!')
+				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+
+		ridersDB.forEach(async rider => {
+			let title = `
+Райдер: ${rider.lastName} ${rider.firstName}
+Звифт: ${rider.lastNameZwift} ${rider.firstNameZwift}
+`;
+			await ctx
+				.reply(title, teamRemoveRiderKeyboard(rider._id))
+				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+		});
 	} catch (error) {
 		console.log(error);
 	}

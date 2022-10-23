@@ -28,6 +28,12 @@ export function teamForApprovalKeyboard(teamId) {
 		]),
 	};
 }
+export function teamRemoveRiderKeyboard(rider) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([Markup.button.callback('Удалить райдера', `m_3_2_5_1_E_${rider}`)]),
+	};
+}
 
 export function teamsKeyboard(teams) {
 	return { parse_mode: 'html', ...Markup.inlineKeyboard(teamsBtn(teams)) };
@@ -82,6 +88,17 @@ export function teamLeaveKeyboard(userId) {
 			[Markup.button.callback('Да, хочу выйти из команды ❌', `m_3_2_4_1_E--teamLeave_${userId}`)],
 			[Markup.button.callback('<< назад >>', `m_3_2_`)],
 
+			[Markup.button.callback('Главное меню ❗️', 'main')],
+		]),
+	};
+}
+export function teamManagementKeyboard(userId) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([
+			[Markup.button.callback('Удалить райдера из команды ❌', `m_3_2_5_1_`)],
+			[Markup.button.callback('Изменить описание 📝', `m_3_2_5_2_`)],
+			[Markup.button.callback('<< назад >>', `m_3_2_`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};

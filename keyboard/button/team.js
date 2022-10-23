@@ -4,11 +4,17 @@ import { Rider } from '../../Model/Rider.js';
 export async function teamBtn(rider) {
 	try {
 		let isAllowed = false;
+		let capitanId;
 		if (rider.teamId) {
 			const riderDB = await Rider.findOne({ _id: rider._id }).populate('teamId');
 			isAllowed = riderDB.teamId.isAllowed;
+			capitanId = riderDB.teamId.capitan;
 		}
-		// if (isAllowed) {
+
+		let isCapitan = false;
+
+		if (rider._id?.toString() === capitanId?.toString()) isCapitan = true;
+
 		return [
 			rider.teamId?.name && isAllowed
 				? [Markup.button.callback('Список райдеров 📜', `m_3_2_V--listRiders_${rider.teamId.name}`)]
@@ -18,12 +24,11 @@ export async function teamBtn(rider) {
 			rider.teamId?.name && isAllowed
 				? [Markup.button.callback('Покинуть команду 🚪', 'm_3_2_4_')]
 				: [],
+			rider.teamId?.name && isAllowed && isCapitan
+				? [Markup.button.callback('Управление командой 💼', 'm_3_2_5_')]
+				: [],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		];
-		// } else {
-		// 	return [[Markup.button.callback('Главное меню ❗️', 'main')]];
-		// 	// return [[Markup.button.callback('Ваша заявка на рассмотрении', 'main')]];
-		// }
 	} catch (error) {
 		console.log(error);
 	}
