@@ -18,7 +18,7 @@ export async function teamMain(ctx) {
 			? `Команда "${riderDB.teamId?.name}" 💪`
 			: '🤝 Пора присоединяться к команде или создать свою!';
 
-		return await ctx.editMessageText(`<b>${title}</b>`, teamKeyboard(riderDB));
+		return await ctx.editMessageText(`<b>${title}</b>`, await teamKeyboard(riderDB));
 	} catch (error) {
 		console.log(error);
 	}
@@ -55,7 +55,7 @@ export async function teamChooseForJoin(ctx, cbqData) {
 
 export async function teamJoin(ctx) {
 	try {
-		const teamDB = await Team.find();
+		const teamDB = await Team.find({ isAllowed: true });
 		if (teamDB.length === 0)
 			return await ctx
 				.replyWithHTML('Очень странно, не создано ни одной команды 🤷‍♂️')

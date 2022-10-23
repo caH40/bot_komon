@@ -16,8 +16,8 @@ export const accountKeyboard = {
 	]),
 };
 
-export function teamKeyboard(rider) {
-	return { parse_mode: 'html', ...Markup.inlineKeyboard(teamBtn(rider)) };
+export async function teamKeyboard(rider) {
+	return { parse_mode: 'html', ...Markup.inlineKeyboard(await teamBtn(rider)) };
 }
 export function teamForApprovalKeyboard(teamId) {
 	return {

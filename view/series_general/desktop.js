@@ -56,7 +56,6 @@ export async function resultsSeriesGeneralDes(ctx, category, seriesId) {
 		const title = `${name}, ${type}, Генеральный зачет, Категория "${category}"`;
 
 		const charts = divisionChart(resultsGeneral);
-		// console.log(charts);
 
 		for (let i = 0; i < charts.length; i++) {
 			await ctx
