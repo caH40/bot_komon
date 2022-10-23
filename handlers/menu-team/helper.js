@@ -143,7 +143,7 @@ export async function teamRemove(ctx) {
 	try {
 		const userId = ctx.update.callback_query.from.id;
 		const riderDB = await Rider.findOne({ telegramId: userId }).populate('teamId');
-		const ridersDB = await Rider.find({ teamId: riderDB.teamId._id });
+		const ridersDB = await Rider.find({ teamId: riderDB?.teamId._id });
 
 		if (ridersDB.length > 1)
 			return await ctx
