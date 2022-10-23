@@ -5,7 +5,8 @@ import textJson from '../../locales/ru.json' assert { type: 'json' };
 import { finalMessageTeamCr } from '../../locales/template.js';
 import { validationDescription, validationName } from './validation.js';
 import { registrationToDB } from '../../controllersDB/team-save.js';
-import { Rider } from '../../Model/Rider.js';
+
+import { sendMessageAdmin } from './message.js';
 
 export function firstSceneCreateTeam() {
 	try {
@@ -57,6 +58,7 @@ export function secondSceneCreateTeam() {
 			const response = await registrationToDB(ctx.session.data.teamCreate);
 			if (response) {
 				await ctx.reply(t.second.successfulDB);
+				await sendMessageAdmin(ctx);
 			} else {
 				await ctx.reply(t.second.wrongDB);
 			}
