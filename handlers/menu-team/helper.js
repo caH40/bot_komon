@@ -1,3 +1,4 @@
+import { addRiderDB, notAddRiderDB } from '../../controllersDB/team-add-rider.js';
 import {
 	mainMenuKeyboard,
 	teamAddRiderKeyboard,
@@ -34,7 +35,7 @@ export async function teamChooseForJoin(ctx, cbqData) {
 		const riderDB = await Rider.findOne({ telegramId: userId });
 		const teamDB = await Team.findOneAndUpdate(
 			{ _id: teamId },
-			{ $addToSet: { requestRiders: riderDB._id } },
+			{ $addToSet: { requestRiders: riderDB._id.toString() } },
 			{ returnDocument: 'after' }
 		).populate('capitan');
 
@@ -130,15 +131,28 @@ export async function teamAddRider(ctx) {
 				.reply('Нет заявок активных заявок в команду.')
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
-		candidates.forEach(async rider => {
+		candidates.forEach(async _id => {
+			const riderDB = await Rider.findOne({ _id });
 			let title = `
-Райдер: ${rider.lastName} ${rider.firstName}
-Звифт: ${rider.lastNameZwift} ${rider.firstNameZwift}
+Райдер: ${riderDB.lastName} ${riderDB.firstName}
+Звифт: ${riderDB.lastNameZwift} ${riderDB.firstNameZwift}
 `;
 			await ctx
-				.reply(title, teamAddRiderKeyboard(rider._id))
+				.reply(title, teamAddRiderKeyboard(riderDB._id))
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		});
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function teamApprovalRider(ctx, cbqData) {
+	try {
+		const action = cbqData.slice(14, 15);
+		const candidateId = cbqData.slice(16);
+
+		if (action === 'Y') await addRiderDB(ctx, candidateId);
+		if (action === 'N') await notAddRiderDB(ctx, candidateId);
 	} catch (error) {
 		console.log(error);
 	}
@@ -202,14 +216,9 @@ export async function teamRemove(ctx) {
 }
 export async function teamWait(ctx) {
 	try {
-		await ctx
+		return await ctx
 			.reply(`Надо немного подождать до принятия решения капитаном команды...`)
 			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
-
-		return await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
-			await mainMenuKeyboard(ctx)
-		);
 	} catch (error) {
 		console.log(error);
 	}

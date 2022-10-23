@@ -32,8 +32,8 @@ export function teamAddRiderKeyboard(rider) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			Markup.button.callback('Одобрить', `m_3_2_5_1_E_${rider}`),
-			Markup.button.callback('Отклонить', `m_3_2_5_1_E_${rider}`),
+			Markup.button.callback('Одобрить', `m_3_2_5_1_add_Y_${rider}`),
+			Markup.button.callback('Отклонить', `m_3_2_5_1_add_N_${rider}`),
 		]),
 	};
 }

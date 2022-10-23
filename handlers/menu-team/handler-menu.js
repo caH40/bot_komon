@@ -1,7 +1,7 @@
-import { teamAddRiderDB } from '../../controllersDB/team-add-rider.js';
 import { teamRemoveRiderDB } from '../../controllersDB/team-del-rider.js';
 import {
 	teamAddRider,
+	teamApprovalRider,
 	teamCreate,
 	teamJoin,
 	teamLeave,
@@ -23,7 +23,7 @@ export async function handlerTeam(ctx, cbqData) {
 		if (cbqData === 'm_3_2_5_') return await teamManagement(ctx);
 		if (cbqData === 'm_3_2_5_1_') return await teamAddRider(ctx);
 		if (cbqData === 'm_3_2_5_2_') return await teamRemoveRider(ctx);
-		if (cbqData.includes('m_3_2_5_1_E_')) return await teamAddRiderDB(ctx, cbqData);
+		if (cbqData.includes('m_3_2_5_1_add_')) return await teamApprovalRider(ctx, cbqData);
 		if (cbqData.includes('m_3_2_5_2_E_')) return await teamRemoveRiderDB(ctx, cbqData);
 		if (cbqData === 'm_3_2_5_4_E') return await teamRemove(ctx, cbqData);
 		if (cbqData === 'm_3_2_0_wait') return await teamWait(ctx, cbqData);
