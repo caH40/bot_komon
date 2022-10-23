@@ -4,7 +4,6 @@ import { Rider } from '../Model/Rider.js';
 export async function teamRemoveRiderDB(ctx, cbqData) {
 	try {
 		const riderId = cbqData.slice(12);
-		console.log(riderId);
 
 		const response = await Rider.findOneAndUpdate(
 			{ _id: riderId },

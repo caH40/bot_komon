@@ -10,7 +10,7 @@ const teamSchema = new Schema({
 	groupName: String,
 	link: String,
 	isAllowed: { type: Boolean, default: false },
-	requestRiders: [Number],
+	requestRiders: { type: Array },
 });
 
 export const Team = model('Team', teamSchema);

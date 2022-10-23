@@ -28,10 +28,19 @@ export function teamForApprovalKeyboard(teamId) {
 		]),
 	};
 }
+export function teamAddRiderKeyboard(rider) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([
+			Markup.button.callback('Одобрить', `m_3_2_5_1_E_${rider}`),
+			Markup.button.callback('Отклонить', `m_3_2_5_1_E_${rider}`),
+		]),
+	};
+}
 export function teamRemoveRiderKeyboard(rider) {
 	return {
 		parse_mode: 'html',
-		...Markup.inlineKeyboard([Markup.button.callback('Удалить райдера', `m_3_2_5_1_E_${rider}`)]),
+		...Markup.inlineKeyboard([Markup.button.callback('Удалить райдера', `m_3_2_5_2_E_${rider}`)]),
 	};
 }
 
@@ -96,9 +105,10 @@ export function teamManagementKeyboard(userId) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			[Markup.button.callback('Удалить райдера из команды ❌', `m_3_2_5_1_`)],
-			[Markup.button.callback('Изменить описание 📝', `m_3_2_5_2_`)],
-			[Markup.button.callback('Удаление команды ❌❌', `m_3_2_5_3_E`)],
+			[Markup.button.callback('Заявки на вступление в команду ✔️', `m_3_2_5_1_`)],
+			[Markup.button.callback('Удалить райдера из команды ❌', `m_3_2_5_2_`)],
+			[Markup.button.callback('Изменить описание 📝', `m_3_2_5_3_`)],
+			[Markup.button.callback('Удаление команды ❌❌', `m_3_2_5_4_E`)],
 			[Markup.button.callback('<< назад >>', `m_3_2_`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),

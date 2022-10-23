@@ -1,5 +1,6 @@
 import {
 	mainMenuKeyboard,
+	teamAddRiderKeyboard,
 	teamKeyboard,
 	teamLeaveKeyboard,
 	teamManagementKeyboard,
@@ -30,14 +31,18 @@ export async function teamChooseForJoin(ctx, cbqData) {
 		const teamId = cbqData.slice(24);
 		const userId = ctx.update.callback_query.from.id;
 
-		const riderDB = await Rider.findOneAndUpdate(
-			{ telegramId: userId },
-			{ $set: { teamId: teamId } },
+		const riderDB = await Rider.findOne({ telegramId: userId });
+		const teamDB = await Team.findOneAndUpdate(
+			{ _id: teamId },
+			{ $addToSet: { requestRiders: riderDB._id } },
 			{ returnDocument: 'after' }
-		);
-		if (riderDB.teamId) {
+		).populate('capitan');
+
+		if (teamDB.requestRiders.includes(riderDB._id)) {
 			await ctx
-				.reply('Вы присоединились к команде!')
+				.reply(
+					`Вы подали заявку на присоединение к команде "${teamDB.name}". Капитан команды @${teamDB.capitan.telegramUsername} рассмотрит заявку и примет решение.`
+				)
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		} else {
 			await ctx
@@ -113,6 +118,32 @@ export async function teamManagement(ctx) {
 		console.log(error);
 	}
 }
+export async function teamAddRider(ctx) {
+	try {
+		const userId = ctx.update.callback_query.from.id;
+
+		const riderDB = await Rider.findOne({ telegramId: userId }).populate('teamId');
+		const candidates = riderDB.teamId.requestRiders;
+
+		if (candidates.length === 0)
+			return await ctx
+				.reply('Нет заявок активных заявок в команду.')
+				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+
+		candidates.forEach(async rider => {
+			let title = `
+Райдер: ${rider.lastName} ${rider.firstName}
+Звифт: ${rider.lastNameZwift} ${rider.firstNameZwift}
+`;
+			await ctx
+				.reply(title, teamAddRiderKeyboard(rider._id))
+				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+		});
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 export async function teamRemoveRider(ctx) {
 	try {
 		const userId = ctx.update.callback_query.from.id;
