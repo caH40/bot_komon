@@ -30,7 +30,6 @@ export async function approvalTeam(ctx, cbqData) {
 		const teamId = cbqData.slice(15);
 
 		const teamDB = await Team.findOne({ _id: teamId }).populate('capitan');
-		console.log(teamDB);
 		if (action === 'Y') await Team.findOneAndUpdate({ _id: teamId }, { $set: { isAllowed: true } });
 		if (action === 'N') {
 			await Rider.findOneAndUpdate({ teamId }, { $unset: { teamId: 1 } });
@@ -42,7 +41,6 @@ export async function approvalTeam(ctx, cbqData) {
 			action === 'Y'
 				? `${time}. Создание команды "${teamDB.name}" одобрено!`
 				: `${time}. Создание команды "${teamDB.name}" отклонено!`;
-		console.log(title);
 
 		await ctx.telegram.sendMessage(teamDB.capitan.telegramId, title);
 		return await ctx

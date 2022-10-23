@@ -123,7 +123,7 @@ export async function teamRemoveRider(ctx) {
 
 		if (ridersDB.length === 0)
 			return await ctx
-				.reply('Вы единственный райдер в команде, Вам негоко удалять из команды!')
+				.reply('Вы единственный райдер в команде, Вам некого удалять из команды!')
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
 		ridersDB.forEach(async rider => {
