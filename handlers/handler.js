@@ -26,7 +26,7 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		console.log(cbqData); //❗❗❗
+		// console.log(cbqData); //❗❗❗
 		// первый уровень меню
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
@@ -68,10 +68,6 @@ export async function handler(ctx, cbqData) {
 				'<b>🔑 Личный кабинет.</b>\n<i>main/account</i>',
 				accountKeyboard
 			);
-
-		// третий уровень меню
-
-		// четвертый уровень меню
 
 		// обработка запросов из админ кабинета
 		if (cbqData === 'admin_getProtocol') return await ctx.scene.enter('getProtocol');

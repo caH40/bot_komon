@@ -26,9 +26,7 @@ export async function teamBtn(rider) {
 			hasTeam && isAllowed
 				? [Markup.button.callback('Список райдеров 📜', `m_3_2_V--listRiders_${rider.teamId.name}`)]
 				: [],
-			hasTeam || isCandidate
-				? [Markup.button.callback('Ваша заявка на рассмотрении', 'm_3_2_0_wait')]
-				: [],
+			isCandidate ? [Markup.button.callback('Ваша заявка на рассмотрении', 'm_3_2_0_wait')] : [],
 			hasTeam || isCandidate ? [] : [Markup.button.callback('Присоединиться 🙏', 'm_3_2_2_')],
 			hasTeam || isCandidate ? [] : [Markup.button.callback('Создать ⚒️', 'm_3_2_3_S__create')],
 			hasTeam && isAllowed ? [Markup.button.callback('Покинуть команду 🚪', 'm_3_2_4_')] : [],
