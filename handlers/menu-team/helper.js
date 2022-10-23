@@ -40,6 +40,17 @@ export async function teamChooseForJoin(ctx, cbqData) {
 		).populate('capitan');
 
 		if (teamDB.requestRiders.includes(riderDB._id)) {
+			const time = new Date().toLocaleString();
+			await ctx.telegram.sendMessage(
+				teamDB.capitan.telegramId,
+				`
+${time}. Поступила заявка от райдера ${riderDB.lastName} ${riderDB.firstName} на присоединение к Вашей команде. Для рассмотрение заявок:
+Личный кабинет >>
+Команда >>
+Управление командой >>
+Заявки на вступление в команду >>
+`
+			);
 			await ctx
 				.reply(
 					`Вы подали заявку на присоединение к команде "${teamDB.name}". Капитан команды @${teamDB.capitan.telegramUsername} рассмотрит заявку и примет решение.`
