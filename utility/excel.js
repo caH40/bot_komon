@@ -9,10 +9,10 @@ export function changeTitles(dataXlsx) {
 				placeAbsolute: elm['Место общее'],
 				placeCategory: elm['Место в группе'],
 				pointsStage: elm['Очки'],
-				category: elm['Группа'],
-				categoryCurrent: elm['Группа обновленная'],
 				wattPerKg: elm[`Вт\\кг`],
 				watt: elm['Ватты'],
+				gender: elm['Пол'],
+				telegramId: elm['telegramId'],
 			};
 		});
 	} catch (error) {

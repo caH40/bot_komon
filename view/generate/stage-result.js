@@ -8,6 +8,7 @@ export function viewDesktop(data) {
 		let body = '';
 
 		data.forEach(row => {
+			const category = row.category ? row.category : row.categoryCurrent;
 			body =
 				body +
 				'|' +
@@ -17,7 +18,7 @@ export function viewDesktop(data) {
 				format(row.gap, rowSize.protocol.desktop.gap) +
 				format(row.gapPrev, rowSize.protocol.desktop.gapPrev) +
 				format(String(row.placeAbsolute), rowSize.protocol.desktop.placeAbsolute) +
-				format(row.category, rowSize.protocol.desktop.category) +
+				format(category, rowSize.protocol.desktop.category) +
 				format(String(row.placeCategory), rowSize.protocol.desktop.placeCategory) +
 				format(String(row.pointsStage), rowSize.protocol.desktop.pointsStage) +
 				format(String(row.watt), rowSize.protocol.desktop.watt) +
@@ -36,13 +37,14 @@ export function viewMobile(data) {
 		let body = '';
 
 		data.forEach(row => {
+			const category = row.category ? row.category : row.categoryCurrent;
 			body =
 				body +
 				'|' +
 				format(row.name, rowSize.protocol.mobile.name) +
 				format(String(row.time), rowSize.protocol.mobile.time) +
 				format(String(row.placeCategory), rowSize.protocol.mobile.placeCategory) +
-				format(row.category, rowSize.protocol.mobile.category) +
+				format(category, rowSize.protocol.mobile.category) +
 				`\n`;
 		});
 		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;

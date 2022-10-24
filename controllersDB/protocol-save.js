@@ -1,5 +1,7 @@
 import { Result } from '../Model/Result.js';
+import { Rider } from '../Model/Rider.js';
 import { Stage } from '../Model/Stage.js';
+import { ruleCategory } from '../utility/category-rule.js';
 import { convertTime } from '../utility/date-convert.js';
 
 export async function protocolToDB(dataResult, seriesId, stageId) {
@@ -7,17 +9,22 @@ export async function protocolToDB(dataResult, seriesId, stageId) {
 		//riderId ,берется после идентификации райдера в протоколе
 		const length = dataResult.length;
 		for (let index = 0; index < length; index++) {
+			let categoryCurrent = ruleCategory(
+				dataResult[index].watt,
+				dataResult[index].wattPerKg,
+				dataResult[index].gender
+			);
+			let riderId = await Rider.findOne({ telegramId: dataResult[index].telegramId });
 			let result = new Result({
 				stageId,
-				name: dataResult[index].name,
+				riderId,
+				name: dataResult[index].name, //
 				placeAbsolute: dataResult[index].placeAbsolute,
-				placeCategory: dataResult[index].placeCategory,
 				watt: dataResult[index].watt,
 				wattPerKg: dataResult[index].wattPerKg,
 				time: convertTime(dataResult[index].time),
-				gap: dataResult[index].gap,
-				category: dataResult[index].category,
-				categoryCurrent: dataResult[index].categoryCurrent,
+				category: riderId?.category,
+				categoryCurrent,
 				teamCurrent: dataResult[index].teamCurrent,
 				pointsStage: dataResult[index].pointsStage,
 			});

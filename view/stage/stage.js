@@ -25,21 +25,31 @@ export async function resultsViewStage(ctx, cbqData) {
 		const seriesType = stagesDB[0].type;
 		const { name } = await Series.findOne({ _id: seriesId });
 
-		let resultsDB = [];
+		const resultsDB = await Result.find({ stageId });
+		// resultsDB.forEach(result => {
+		// 	result.category = result.category
+		// 		? result.category
+		// 		: ruleCategory(result.watt, result.wattPerKg, result.gender);
+		// });
 		// 'T' общий протокол
+		let results = resultsDB.map(result => result.toObject());
+
 		if (category === 'T') {
-			resultsDB = await Result.find({ stageId });
+			results = results.sort((a, b) => a.time - b.time);
 		} else {
-			resultsDB = await Result.find({ stageId, category });
+			results = results
+				.filter(result =>
+					result.category ? result.category === category : result.categoryCurrent === category
+				)
+				.sort((a, b) => a.time - b.time);
 		}
 
-		resultsDB = resultsDB.sort((a, b) => a.time - b.time);
-		resultsDB = resultsDB.map(elm => elm.toObject());
+		results.forEach((result, index) => (result.placeCategory = index + 1));
 
-		resultsDB = await gapValue(resultsDB);
-		resultsDB = await maxValue(resultsDB);
+		results = await gapValue(results);
+		results = await maxValue(results);
 
-		resultsDB.forEach(elm => {
+		results.forEach(elm => {
 			elm.gap = secondesToTime(elm.gap);
 			elm.time = secondesToTime(elm.time);
 			elm.gapPrev = secondesToTime(elm.gapPrev);
@@ -47,7 +57,7 @@ export async function resultsViewStage(ctx, cbqData) {
 
 		const title = `${name}, Этап ${seriesNumber}, ${seriesType}`;
 
-		const charts = divisionChart(resultsDB);
+		const charts = divisionChart(results);
 
 		if (view === 'Des') return resultsViewStageDes(ctx, charts, title);
 		if (view === 'Mob') return resultsViewStageMob(ctx, charts, title);
