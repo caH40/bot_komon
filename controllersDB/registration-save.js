@@ -1,3 +1,4 @@
+import { Result } from '../Model/Result.js';
 import { Rider } from '../Model/Rider.js';
 
 export async function registrationToDB(data) {
@@ -35,9 +36,17 @@ export async function registrationToDB(data) {
 			category: data.category,
 			gender: data.gender,
 		});
-		const response = await rider.save();
-		if (response) {
-			return response;
+		const riderSaved = await rider.save();
+		if (riderSaved) {
+			const result = await Result.find({ name: { $regex: data.lastNameZwift.slice(0, 4) } });
+			//нашлось больше одного совпадения, значит не вставлять riderId в результат
+			if (result.length === 1) {
+				return await Result.findOneAndUpdate(
+					{ _id: result[0]._id },
+					{ $set: { riderId: riderSaved._id } }
+				);
+			}
+			return riderSaved;
 		} else {
 			console.log('Ошибка при сохранении данных регистрации пользователя!');
 		}
