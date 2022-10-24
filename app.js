@@ -8,6 +8,7 @@ import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
 import { filterMessage } from './middleware/filter-message.js';
 import { activationScenes } from './scenes/activation-scenes.js';
+import { ruleCategory } from './modules/category-rule.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -29,7 +30,7 @@ bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
 // bot.command('excel', async ctx => ctx.scene.enter('uploadProtocol'));
 bot.hears('base', async ctx => await ctx.scene.enter('sampleBase'));
 bot.command('myid', async ctx => await ctx.reply(`Ваш ID Telegram: ${ctx.message.from.id}`));
-// bot.command('/test', async ctx => await ctx.scene.enter('registration'));
+// bot.command('/test', async ctx => console.log(ruleCategory(169, 2.19, 'мужской')));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 
 bot.launch();
