@@ -24,6 +24,7 @@ export async function getExcel(ctx, fileName) {
 
 		const total = XLSX.utils.sheet_to_json(sheet, { range: rowTitle, raw: false });
 
+		total.forEach(result => (result['Вт\\кг'] = result['Вт\\кг'].replace(',', '.')));
 		const dataStage = changeTitles(total);
 
 		return dataStage;
