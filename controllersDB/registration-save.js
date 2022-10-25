@@ -1,3 +1,4 @@
+import { Result } from '../Model/Result.js';
 import { Rider } from '../Model/Rider.js';
 
 export async function registrationToDB(data) {
@@ -37,9 +38,15 @@ export async function registrationToDB(data) {
 			category: data.category,
 			gender: data.gender,
 		});
-		const response = await rider.save();
-		if (response) {
-			return response;
+
+		const riderSaved = await rider.save();
+		if (riderSaved) {
+			const resultsDB = await Result.updateMany(
+				{ zwiftRiderId: riderSaved.zwiftId },
+				{ $set: { riderId: riderSaved._id } },
+				{ returnDocument: 'after' }
+			);
+			return resultsDB;
 		} else {
 			console.log('Ошибка при сохранении данных регистрации пользователя!');
 		}
