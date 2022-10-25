@@ -20,30 +20,33 @@ export async function resultsSeriesGeneralDes(ctx, category, seriesId) {
 			let results = await Result.find({ stageId: seriesIds[index] });
 			resultsSeries = [...resultsSeries, ...results];
 		}
+
 		// сначала необходимо найти все элементы с уникальными именами
-		let set = new Set();
+		let zwiftRiderIds = new Set();
 		let points = 0;
-		resultsSeries.forEach(elm => set.add(elm.name));
+		resultsSeries.forEach(elm => zwiftRiderIds.add(elm.zwiftRiderId));
 
 		let resultsGeneral = [];
-		set.forEach(name => {
+		zwiftRiderIds.forEach(zwiftRiderId => {
 			points = 0;
 			resultsSeries.forEach(elm => {
-				if (name === elm.name) points += elm.pointsStage;
+				if (zwiftRiderId === elm.zwiftRiderId) points += elm.pointsStage;
 			});
-			resultsGeneral.push({ name, pointsGeneral: points });
+			resultsGeneral.push({ zwiftRiderId, pointsGeneral: points });
 		});
 		//в будущем брать данные по группе и команде из коллекции Riders
 
 		resultsGeneral = resultsGeneral.map(rider => {
 			return {
-				name: rider.name,
+				zwiftRiderId: rider.zwiftRiderId,
 				pointsGeneral: rider.pointsGeneral,
-				category: resultsSeries.find(elm => elm.name === rider.name).category,
-				team: resultsSeries.find(elm => elm.name === rider.name).team ?? '',
+				name: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId).name,
+				category: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId)
+					.categoryCurrent,
+				team: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId).team ?? '',
 			};
 		});
-
+		console.log(resultsGeneral);
 		const { name, type } = await Series.findOne({ _id: seriesId });
 
 		resultsGeneral = resultsGeneral
