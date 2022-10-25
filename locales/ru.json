@@ -21,7 +21,7 @@
 				"wrong": "Необходимо ввести \"мужской\" или \"женский\"."
 			},
 			"fifth": {
-				"question": "<b>Введите firstname в Звифте (en): https://www.zwift.com/eu/feed</b>",
+				"question": "<b>Введите firstname в Звифте (en): https://www.zwift.com/eu/settings/profile</b>",
 				"wrong": "Введите название firstname используя латинский алфавит (En)"
 			},
 			"sixth": {
