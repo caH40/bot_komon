@@ -46,7 +46,7 @@ export async function resultsSeriesGeneralDes(ctx, category, seriesId) {
 				team: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId).team ?? '',
 			};
 		});
-		console.log(resultsGeneral);
+
 		const { name, type } = await Series.findOne({ _id: seriesId });
 
 		resultsGeneral = resultsGeneral
