@@ -267,6 +267,9 @@ export function eighthSceneReg() {
 			const isValid = validationLink(text);
 			if (isValid) {
 				ctx.session.data.account.zwiftPower = text;
+				const regExp = /\d+/;
+				ctx.session.data.account.zwiftId = text.match(regExp)[0];
+				ctx.session.data.account.zwiftPower = text;
 				return await ctx.replyWithHTML(finalMessage(ctx), {
 					disable_web_page_preview: true,
 				});

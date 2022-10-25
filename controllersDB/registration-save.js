@@ -12,6 +12,7 @@ export async function registrationToDB(data) {
 						lastName: data.lastName,
 						firstNameZwift: data.firstNameZwift,
 						lastNameZwift: data.lastNameZwift,
+						zwiftId: data.zwiftId,
 						telegramUsername: data.telegramUsername,
 						cycleTrainer: data.cycleTrainer,
 						zwiftPower: data.zwiftPower,
@@ -24,6 +25,7 @@ export async function registrationToDB(data) {
 
 		let rider = new Rider({
 			firstName: data.firstName,
+			zwiftId: data.zwiftId,
 			lastName: data.lastName,
 			firstNameZwift: data.firstNameZwift,
 			lastNameZwift: data.lastNameZwift,

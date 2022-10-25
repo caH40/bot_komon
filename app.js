@@ -26,11 +26,6 @@ bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
 bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
-// bot.on('message', async ctx => {
-// 	const text = ctx.message.text;
-// 	const result = await Result.find({ name: { $regex: text.slice(0, 4) } });
-// 	console.log(result);
-// });
 bot.command('myid', async ctx => await ctx.reply(`Ваш ID Telegram: ${ctx.message.from.id}`));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 

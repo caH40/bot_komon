@@ -46,7 +46,7 @@ export function validationNameEn(text) {
 }
 export function validationLink(text) {
 	try {
-		if (text.includes('zwiftpower.com/profile')) {
+		if (text.includes('zwiftpower.com/profile') && !text.includes('номер')) {
 			return true;
 		}
 		return false;
