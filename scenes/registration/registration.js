@@ -286,7 +286,7 @@ async function attempts(ctx, counter) {
 		const t = textJson.scenes.registration;
 
 		if (counter > 3) {
-			return await await ctx.reply(t.attempts);
+			return await ctx.reply(t.attempts);
 		}
 	} catch (error) {
 		console.log(error);

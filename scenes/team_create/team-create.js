@@ -11,10 +11,10 @@ import { sendMessageAdmin } from './message.js';
 export function firstSceneCreateTeam() {
 	try {
 		const t = textJson.scenes.teamCreate;
-		let counter = 0;
 		const firstScene = new Scenes.BaseScene('firstSceneCreateTeam');
 		firstScene.enter(async ctx => {
 			ctx.session.data.teamCreate = {};
+			ctx.session.data.teamCreate.counter = 0;
 			getTelegramId(ctx);
 			const nameTg = ctx.session.data.teamCreate.first_name;
 			await ctx.replyWithHTML(t.first.welcome1 + nameTg + t.first.welcome2);
@@ -25,8 +25,8 @@ export function firstSceneCreateTeam() {
 			return await ctx.scene.leave();
 		});
 		firstScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.teamCreate.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.teamCreate.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text;
@@ -36,7 +36,7 @@ export function firstSceneCreateTeam() {
 				ctx.session.data.teamCreate.name = text;
 				return ctx.scene.enter('secondSceneCreateTeam');
 			}
-			await ctx.reply('t.first.wrong');
+			await ctx.reply(t.first.wrong);
 		});
 		return firstScene;
 	} catch (error) {
@@ -49,7 +49,10 @@ export function secondSceneCreateTeam() {
 		const t = textJson.scenes.teamCreate;
 		let counter = 0;
 		const secondScene = new Scenes.BaseScene('secondSceneCreateTeam');
-		secondScene.enter(async ctx => await ctx.replyWithHTML(t.second.question));
+		secondScene.enter(async ctx => {
+			ctx.session.data.teamCreate.counter = 0;
+			await ctx.replyWithHTML(t.second.question);
+		});
 		secondScene.command('/quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
@@ -67,8 +70,8 @@ export function secondSceneCreateTeam() {
 		secondScene.command('repeat', async ctx => await ctx.scene.enter('firstSceneCreateTeam'));
 		secondScene.command('quit', async ctx => await ctx.scene.leave());
 		secondScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.teamCreate.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.teamCreate.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text;
@@ -77,7 +80,7 @@ export function secondSceneCreateTeam() {
 				ctx.session.data.teamCreate.description = text;
 				return await ctx.replyWithHTML(finalMessageTeamCr(ctx));
 			}
-			await ctx.reply('t.second.wrong');
+			await ctx.reply(t.second.wrong);
 		});
 		return secondScene;
 	} catch (error) {
@@ -89,8 +92,8 @@ async function attempts(ctx, counter) {
 	try {
 		const t = textJson.scenes.teamCreate;
 
-		if (counter > 4) {
-			return await await ctx.reply(t.attempts);
+		if (counter > 3) {
+			return await ctx.reply(t.attempts);
 		}
 	} catch (error) {
 		console.log(error);
