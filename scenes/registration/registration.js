@@ -24,7 +24,7 @@ export function firstSceneReg() {
 			await ctx.replyWithHTML(t.first.welcome1 + nameTg + t.first.welcome2);
 			await ctx.replyWithHTML(t.first.question);
 		});
-		firstScene.command('/quit', async ctx => {
+		firstScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
@@ -54,7 +54,7 @@ export function secondSceneReg() {
 		let counter = 0;
 		const secondScene = new Scenes.BaseScene('secondSceneReg');
 		secondScene.enter(async ctx => await ctx.replyWithHTML(t.second.question));
-		secondScene.command('/quit', async ctx => {
+		secondScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
@@ -83,7 +83,7 @@ export function thirdSceneReg() {
 		let counter = 0;
 		const thirdScene = new Scenes.BaseScene('thirdSceneReg');
 		thirdScene.enter(async ctx => await ctx.replyWithHTML(t.third.question));
-		thirdScene.command('/quit', async ctx => {
+		thirdScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
@@ -112,7 +112,7 @@ export function fourthSceneReg() {
 		let counter = 0;
 		const fourthScene = new Scenes.BaseScene('fourthSceneReg');
 		fourthScene.enter(async ctx => await ctx.replyWithHTML(t.fourth.question));
-		fourthScene.command('/quit', async ctx => {
+		fourthScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
@@ -143,7 +143,7 @@ export function fifthSceneReg() {
 		fifthScene.enter(
 			async ctx => await ctx.replyWithHTML(t.fifth.question, { disable_web_page_preview: true })
 		);
-		fifthScene.command('/quit', async ctx => {
+		fifthScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
@@ -172,7 +172,7 @@ export function sixthSceneReg() {
 		let counter = 0;
 		const sixthScene = new Scenes.BaseScene('sixthSceneReg');
 		sixthScene.enter(async ctx => await ctx.replyWithHTML(t.sixth.question));
-		sixthScene.command('/quit', async ctx => {
+		sixthScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
@@ -201,7 +201,7 @@ export function seventhSceneReg() {
 		let counter = 0;
 		const seventhScene = new Scenes.BaseScene('seventhSceneReg');
 		seventhScene.enter(async ctx => await ctx.replyWithHTML(t.seventh.question));
-		seventhScene.command('/quit', async ctx => {
+		seventhScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
@@ -244,8 +244,7 @@ export function eighthSceneReg() {
 			return await ctx.scene.leave();
 		});
 		eighthScene.command('repeat', async ctx => await ctx.scene.enter('firstSceneReg'));
-		eighthScene.command('quit', async ctx => await ctx.scene.leave());
-		eighthScene.command('/quit', async ctx => {
+		eighthScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
