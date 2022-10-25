@@ -11,6 +11,7 @@ const riderSchema = new Schema({
 	lastNameZwift: String,
 	telegramUsername: String,
 	telegramId: { type: Number, unique: true },
+	zwiftId: { type: Number, unique: true },
 	cycleTrainer: String,
 	zwiftPower: String,
 	yearBirth: String,

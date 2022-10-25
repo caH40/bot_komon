@@ -6,6 +6,7 @@ const { Schema, model } = pkg;
 const resultSchema = new Schema({
 	stageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Stage' },
 	riderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Rider' },
+	zwiftRiderId: { type: Number },
 	name: String,
 	placeAbsolute: Number,
 	wattPerKg: Number,

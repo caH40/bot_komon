@@ -14,10 +14,11 @@ export async function protocolToDB(dataResult, seriesId, stageId) {
 				dataResult[index].wattPerKg,
 				dataResult[index].gender
 			);
-			let riderId = await Rider.findOne({ telegramId: dataResult[index].telegramId });
+			let riderId = await Rider.findOne({ zwiftId: dataResult[index].zwiftId });
 			let result = new Result({
 				stageId,
 				riderId,
+				zwiftRiderId: dataResult[index].zwiftId,
 				name: dataResult[index].name, //
 				placeAbsolute: dataResult[index].placeAbsolute,
 				watt: dataResult[index].watt,

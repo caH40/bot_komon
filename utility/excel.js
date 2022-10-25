@@ -3,6 +3,7 @@ export function changeTitles(dataXlsx) {
 		return dataXlsx.map(elm => {
 			return {
 				name: elm['Имя участника'],
+				zwiftId: elm['zwiftid'],
 				teamCurrent: elm['Команда'],
 				time: elm['Время'],
 				gap: elm['Отставание'],
