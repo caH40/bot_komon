@@ -64,7 +64,7 @@ export async function riderCategory(ctx, text) {
 				riders.push(ridersDB[index]);
 			}
 
-			if (riders.length > 20)
+			if (riders.length > 5)
 				return await ctx.reply(
 					'Нашлось слишком много райдеров, сузьте поиск, увеличьте количество букв.  Для выхода /quit'
 				);
@@ -77,9 +77,9 @@ export async function riderCategory(ctx, text) {
 				await ctx
 					.reply(
 						`
-Фамилия: ${rider.lastName}
-Имя: ${rider.firstName}
-Текущая категория: ${rider.category ? rider.category : 'не присвоена'}
+Фамилия: <b>${rider.lastName}</b>
+Имя: <b>${rider.firstName}</b>
+Текущая категория: <b>${rider.category ? rider.category : 'не присвоена'}</b>
 <b>Выберите новую категорию райдеру:</b>`,
 						adminCatRidersKeyboard(rider._id)
 					)
@@ -104,19 +104,20 @@ export async function assignCatRider(ctx, cbqData) {
 		if (!riderDB)
 			return await ctx.reply('Произошла непредвиденная ошибка при сохранении категории...');
 
-		const title = `Вы изменили категорию райдера с "${
+		const title = `Вы изменили категорию райдера с <b>"${
 			riderDB.category ? riderDB.category : 'не присвоена'
-		}" на "${category}"`;
+		}"</b> на <b>"${category}"</b>`;
 
 		await ctx
-			.reply(title)
+			.replyWithHTML(title)
 			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
 		return await ctx.telegram.sendMessage(
 			riderDB.telegramId,
-			`Вам изменили категорию группы с  "${
+			`Вам изменили категорию группы с  <b>"${
 				riderDB.category ? riderDB.category : 'не присвоена'
-			}" на "${category}"`
+			}"</b> на <b>"${category}"</b>`,
+			{ parse_mode: 'html' }
 		);
 	} catch (error) {
 		console.log(error);

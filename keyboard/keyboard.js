@@ -158,9 +158,11 @@ export function adminCatRidersKeyboard(riderId) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			[Markup.button.callback('A', `m_4_4_1_E__A_${riderId}`)],
-			[Markup.button.callback('B', `m_4_4_1_E__B_${riderId}`)],
-			[Markup.button.callback('C', `m_4_4_1_E__C_${riderId}`)],
+			[
+				Markup.button.callback('A', `m_4_4_1_E__A_${riderId}`),
+				Markup.button.callback('B', `m_4_4_1_E__B_${riderId}`),
+				Markup.button.callback('C', `m_4_4_1_E__C_${riderId}`),
+			],
 		]),
 	};
 }
