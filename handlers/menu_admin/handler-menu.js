@@ -3,7 +3,14 @@ import {
 	adminKeyboard,
 	adminTeamKeyboard,
 } from '../../keyboard/keyboard.js';
-import { approvalTeam, assignCatRider, requestTeam, riderCategory } from './helper.js';
+import {
+	approvalTeam,
+	assignCategoryRiderFromStage,
+	assignCatRider,
+	categoryRiderFromStage,
+	requestTeam,
+	riderCategory,
+} from './helper.js';
 
 export async function handlerAdmin(ctx, cbqData) {
 	try {
@@ -16,9 +23,12 @@ export async function handlerAdmin(ctx, cbqData) {
 				'<b>🛠️ Установка категорий райдерам</b>',
 				adminCategoriesKeyboard
 			);
-		if (cbqData === 'm_4_4_1_') return await ctx.scene.enter('categoryRider');
+
 		if (cbqData === 'm_4_1_1_E') return await requestTeam(ctx);
+		if (cbqData === 'm_4_4_1_') return await ctx.scene.enter('categoryRider');
 		if (cbqData.includes('m_4_4_1_E')) return await assignCatRider(ctx, cbqData);
+		if (cbqData === 'm_4_4_2_') return await categoryRiderFromStage(ctx);
+		if (cbqData.includes('m_4_4_2_E')) return await assignCategoryRiderFromStage(ctx, cbqData);
 		if (cbqData.includes('m_4_team_add_')) return await approvalTeam(ctx, cbqData);
 	} catch (error) {
 		console.log(error);

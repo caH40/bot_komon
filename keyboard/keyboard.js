@@ -1,4 +1,5 @@
 import { Markup } from 'telegraf';
+import { buttonCatFromStageRiders } from './button/admin.js';
 import { mainBtn } from './button/main.js';
 import { resultSeriesBtn } from './button/schedule-btn.js';
 import { teamBtn, teamsBtn } from './button/team.js';
@@ -164,6 +165,12 @@ export function adminCatRidersKeyboard(riderId) {
 				Markup.button.callback('C', `m_4_4_1_E__C_${riderId}`),
 			],
 		]),
+	};
+}
+export function adminCatRidersFromStageKeyboard(stages) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard(buttonCatFromStageRiders(stages)),
 	};
 }
 

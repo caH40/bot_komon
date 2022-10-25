@@ -1,9 +1,12 @@
 import {
+	adminCatRidersFromStageKeyboard,
 	adminCatRidersKeyboard,
 	teamForApprovalKeyboard,
 	teamKeyboard,
 } from '../../keyboard/keyboard.js';
+import { Result } from '../../Model/Result.js';
 import { Rider } from '../../Model/Rider.js';
+import { Stage } from '../../Model/Stage.js';
 import { Team } from '../../Model/Team.js';
 
 export async function requestTeam(ctx) {
@@ -119,6 +122,43 @@ export async function assignCatRider(ctx, cbqData) {
 			}"</b> на <b>"${category}"</b>`,
 			{ parse_mode: 'html' }
 		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function categoryRiderFromStage(ctx) {
+	try {
+		const stagesDB = await Stage.find({ hasResults: true }).populate('seriesId');
+		return await ctx.editMessageText(
+			'<b>🛠️ Выберите заезд по результатам которого будут присвоены категории ❗️ всем участникам заезда (зарегистрированным участникам).</b>',
+			adminCatRidersFromStageKeyboard(stagesDB)
+		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function assignCategoryRiderFromStage(ctx, cbqData) {
+	try {
+		const stageId = cbqData.slice(11);
+		const resultDB = await Result.find({ stageId });
+
+		let message = '';
+		const ridersDB = await Rider.find();
+
+		for (let i = 0; i < ridersDB.length; i++) {
+			let newCategory = resultDB.find(
+				result => result.riderId?.toString() === ridersDB[i]._id.toString()
+			)?.categoryCurrent;
+
+			const riderUpdated = await Rider.findOneAndUpdate(
+				{ _id: ridersDB[i]._id },
+				{ $set: { category: newCategory } },
+				{ returnDocument: 'after' }
+			);
+			message += `${riderUpdated.lastName} ${riderUpdated.firstName} новая категория ${riderUpdated.category}\n`;
+		}
+
+		await ctx.reply(message);
 	} catch (error) {
 		console.log(error);
 	}
