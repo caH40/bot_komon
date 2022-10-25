@@ -33,11 +33,10 @@ export async function myResults(ctx, cbqData) {
 		let myResultsObj = resultsDB.map(result => result.toObject());
 		//получение уникальных stageId в которых участвовал райдер
 		let stageIds = new Set();
-		myResultsObj.forEach(result => stageIds.add(result.stageId));
+		myResultsObj.forEach(result => stageIds.add(result.stageId.toString()));
 		stageIds = Array.from(stageIds);
 
 		//подсчет количество участников
-
 		for (let i = 0; i < stageIds.length; i++) {
 			let stageDb = await Stage.findOne({ _id: stageIds[i] }).populate('seriesId');
 			for (let j = 0; j < myResultsObj.length; j++) {
@@ -50,9 +49,9 @@ export async function myResults(ctx, cbqData) {
 		}
 
 		for (let i = 0; i < stageIds.length; i++) {
-			let resultsDb = await Result.find({ stageIds: stageIds[i] });
+			let resultsDb = await Result.find({ stageId: stageIds[i] });
 			for (let j = 0; j < myResultsObj.length; j++) {
-				if (myResultsObj[j].stageId === stageIds[i]) {
+				if (myResultsObj[j].stageId.toString() === stageIds[i]) {
 					myResultsObj[j].quantityRiders = resultsDb.length;
 				}
 			}
