@@ -3,7 +3,7 @@ import {
 	adminKeyboard,
 	adminTeamKeyboard,
 } from '../../keyboard/keyboard.js';
-import { approvalTeam, requestTeam, riderCategory } from './helper.js';
+import { approvalTeam, assignCatRider, requestTeam, riderCategory } from './helper.js';
 
 export async function handlerAdmin(ctx, cbqData) {
 	try {
@@ -18,6 +18,7 @@ export async function handlerAdmin(ctx, cbqData) {
 			);
 		if (cbqData === 'm_4_4_1_') return await ctx.scene.enter('categoryRider');
 		if (cbqData === 'm_4_1_1_E') return await requestTeam(ctx);
+		if (cbqData.includes('m_4_4_1_E')) return await assignCatRider(ctx, cbqData);
 		if (cbqData.includes('m_4_team_add_')) return await approvalTeam(ctx, cbqData);
 	} catch (error) {
 		console.log(error);

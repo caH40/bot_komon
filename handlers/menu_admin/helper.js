@@ -63,7 +63,7 @@ export async function riderCategory(ctx, text) {
 			for (let index = 0; index < ridersDB.length; index++) {
 				riders.push(ridersDB[index]);
 			}
-			console.log(riders);
+
 			if (riders.length > 20)
 				return await ctx.reply(
 					'Нашлось слишком много райдеров, сузьте поиск, увеличьте количество букв.  Для выхода /quit'
@@ -74,19 +74,50 @@ export async function riderCategory(ctx, text) {
 				);
 
 			riders.forEach(async rider => {
-				await ctx.reply(
-					`
+				await ctx
+					.reply(
+						`
 Фамилия: ${rider.lastName}
 Имя: ${rider.firstName}
 Текущая категория: ${rider.category ? rider.category : 'не присвоена'}
 <b>Выберите новую категорию райдеру:</b>`,
-					adminCatRidersKeyboard(rider._id)
-				);
+						adminCatRidersKeyboard(rider._id)
+					)
+					.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 			});
 			return await ctx.scene.leave();
 		} catch (error) {
 			console.log(error);
 		}
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function assignCatRider(ctx, cbqData) {
+	try {
+		const category = cbqData.slice(11, 12);
+		const riderId = cbqData.slice(13);
+
+		const riderDB = await Rider.findOneAndUpdate({ _id: riderId }, { $set: { category } });
+
+		if (!riderDB)
+			return await ctx.reply('Произошла непредвиденная ошибка при сохранении категории...');
+
+		const title = `Вы изменили категорию райдера с "${
+			riderDB.category ? riderDB.category : 'не присвоена'
+		}" на "${category}"`;
+
+		await ctx
+			.reply(title)
+			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+
+		return await ctx.telegram.sendMessage(
+			riderDB.telegramId,
+			`Вам изменили категорию группы с  "${
+				riderDB.category ? riderDB.category : 'не присвоена'
+			}" на "${category}"`
+		);
 	} catch (error) {
 		console.log(error);
 	}
