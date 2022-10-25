@@ -15,10 +15,10 @@ import {
 export function firstSceneReg() {
 	try {
 		const t = textJson.scenes.registration;
-		let counter = 0;
 		const firstScene = new Scenes.BaseScene('firstSceneReg');
 		firstScene.enter(async ctx => {
 			ctx.session.data.account = {};
+			ctx.session.data.account.counter = 0;
 			getTelegramId(ctx);
 			const nameTg = ctx.session.data.account.first_name;
 			await ctx.replyWithHTML(t.first.welcome1 + nameTg + t.first.welcome2);
@@ -29,8 +29,8 @@ export function firstSceneReg() {
 			return await ctx.scene.leave();
 		});
 		firstScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.account.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text;
@@ -51,16 +51,18 @@ export function firstSceneReg() {
 export function secondSceneReg() {
 	try {
 		const t = textJson.scenes.registration;
-		let counter = 0;
 		const secondScene = new Scenes.BaseScene('secondSceneReg');
-		secondScene.enter(async ctx => await ctx.replyWithHTML(t.second.question));
+		secondScene.enter(async ctx => {
+			ctx.session.data.account.counter = 0;
+			await ctx.replyWithHTML(t.second.question);
+		});
 		secondScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
 		secondScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.account.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text;
@@ -80,16 +82,18 @@ export function secondSceneReg() {
 export function thirdSceneReg() {
 	try {
 		const t = textJson.scenes.registration;
-		let counter = 0;
 		const thirdScene = new Scenes.BaseScene('thirdSceneReg');
-		thirdScene.enter(async ctx => await ctx.replyWithHTML(t.third.question));
+		thirdScene.enter(async ctx => {
+			ctx.session.data.account.counter = 0;
+			await ctx.replyWithHTML(t.third.question);
+		});
 		thirdScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
 		thirdScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.account.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text;
@@ -109,16 +113,18 @@ export function thirdSceneReg() {
 export function fourthSceneReg() {
 	try {
 		const t = textJson.scenes.registration;
-		let counter = 0;
 		const fourthScene = new Scenes.BaseScene('fourthSceneReg');
-		fourthScene.enter(async ctx => await ctx.replyWithHTML(t.fourth.question));
+		fourthScene.enter(async ctx => {
+			ctx.session.data.account.counter = 0;
+			await ctx.replyWithHTML(t.fourth.question);
+		});
 		fourthScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
 		fourthScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.account.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text?.toLowerCase();
@@ -138,18 +144,18 @@ export function fourthSceneReg() {
 export function fifthSceneReg() {
 	try {
 		const t = textJson.scenes.registration;
-		let counter = 0;
 		const fifthScene = new Scenes.BaseScene('fifthSceneReg');
-		fifthScene.enter(
-			async ctx => await ctx.replyWithHTML(t.fifth.question, { disable_web_page_preview: true })
-		);
+		fifthScene.enter(async ctx => {
+			ctx.session.data.account.counter = 0;
+			await ctx.replyWithHTML(t.fifth.question, { disable_web_page_preview: true });
+		});
 		fifthScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
 		fifthScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.account.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text;
@@ -169,16 +175,18 @@ export function fifthSceneReg() {
 export function sixthSceneReg() {
 	try {
 		const t = textJson.scenes.registration;
-		let counter = 0;
 		const sixthScene = new Scenes.BaseScene('sixthSceneReg');
-		sixthScene.enter(async ctx => await ctx.replyWithHTML(t.sixth.question));
+		sixthScene.enter(async ctx => {
+			ctx.session.data.account.counter = 0;
+			await ctx.replyWithHTML(t.sixth.question);
+		});
 		sixthScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
 		sixthScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.account.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text;
@@ -198,16 +206,18 @@ export function sixthSceneReg() {
 export function seventhSceneReg() {
 	try {
 		const t = textJson.scenes.registration;
-		let counter = 0;
 		const seventhScene = new Scenes.BaseScene('seventhSceneReg');
-		seventhScene.enter(async ctx => await ctx.replyWithHTML(t.seventh.question));
+		seventhScene.enter(async ctx => {
+			ctx.session.data.account.counter = 0;
+			await ctx.replyWithHTML(t.seventh.question);
+		});
 		seventhScene.command('quit', async ctx => {
 			await ctx.reply(t.quit);
 			return await ctx.scene.leave();
 		});
 		seventhScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.account.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text;
@@ -227,9 +237,9 @@ export function seventhSceneReg() {
 export function eighthSceneReg() {
 	try {
 		const t = textJson.scenes.registration;
-		let counter = 0;
 		const eighthScene = new Scenes.BaseScene('eighthSceneReg');
 		eighthScene.enter(async ctx => {
+			ctx.session.data.account.counter = 0;
 			await ctx.replyWithHTML(t.eighth.question, {
 				disable_web_page_preview: true,
 			});
@@ -249,8 +259,8 @@ export function eighthSceneReg() {
 			return await ctx.scene.leave();
 		});
 		eighthScene.on('message', async ctx => {
-			counter++;
-			const isManyAttempts = await attempts(ctx, counter);
+			ctx.session.data.account.counter++;
+			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
 			if (isManyAttempts) return await ctx.scene.leave();
 
 			const text = ctx.message.text;
@@ -275,7 +285,7 @@ async function attempts(ctx, counter) {
 	try {
 		const t = textJson.scenes.registration;
 
-		if (counter > 4) {
+		if (counter > 3) {
 			return await await ctx.reply(t.attempts);
 		}
 	} catch (error) {
