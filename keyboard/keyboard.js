@@ -130,9 +130,10 @@ export function resultSeriesGeneralKeyboard(seriesId) {
 export const adminKeyboard = {
 	parse_mode: 'html',
 	...Markup.inlineKeyboard([
-		[Markup.button.callback('Управление командами', 'm_4_1_')],
-		[Markup.button.callback('Загрузить протокол', 'admin_getProtocol')],
-		[Markup.button.callback('Загрузить расписание', 'admin_getSchedule')],
+		[Markup.button.callback('Управление командами ⚙️', 'm_4_1_')],
+		[Markup.button.callback('Загрузить протокол 💾', 'admin_getProtocol')],
+		[Markup.button.callback('Загрузить расписание 📄', 'admin_getSchedule')],
+		[Markup.button.callback('Установка категорий райдерам 🦾', 'm_4_4_')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
@@ -144,6 +145,25 @@ export const adminTeamKeyboard = {
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
+export const adminCategoriesKeyboard = {
+	parse_mode: 'html',
+	...Markup.inlineKeyboard([
+		[Markup.button.callback('Выбор райдера', 'm_4_4_1_')],
+		[Markup.button.callback('Выбор заезда', 'm_4_4_2_')],
+		[Markup.button.callback('Главное меню ❗️', 'main')],
+	]),
+};
+
+export function adminCatRidersKeyboard(riderId) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([
+			[Markup.button.callback('A', `m_4_4_1_A__${riderId}`)],
+			[Markup.button.callback('B', `m_4_4_1_B__${riderId}`)],
+			[Markup.button.callback('C', `m_4_4_1_C__${riderId}`)],
+		]),
+	};
+}
 
 // меню выбора результатов этапов серии
 export function resultStagesKeyboard(series) {

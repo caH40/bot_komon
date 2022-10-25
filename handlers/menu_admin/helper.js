@@ -1,4 +1,8 @@
-import { teamForApprovalKeyboard, teamKeyboard } from '../../keyboard/keyboard.js';
+import {
+	adminCatRidersKeyboard,
+	teamForApprovalKeyboard,
+	teamKeyboard,
+} from '../../keyboard/keyboard.js';
 import { Rider } from '../../Model/Rider.js';
 import { Team } from '../../Model/Team.js';
 
@@ -46,6 +50,43 @@ export async function approvalTeam(ctx, cbqData) {
 		return await ctx
 			.reply(title)
 			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function riderCategory(ctx, text) {
+	try {
+		try {
+			const riders = [];
+			const ridersDB = await Rider.find({ lastName: { $regex: text } });
+
+			for (let index = 0; index < ridersDB.length; index++) {
+				riders.push(ridersDB[index]);
+			}
+			console.log(riders);
+			if (riders.length > 20)
+				return await ctx.reply(
+					'Нашлось слишком много райдеров, сузьте поиск, увеличьте количество букв.  Для выхода /quit'
+				);
+			if (riders.length === 0)
+				return await ctx.reply(
+					`Ничего не нашлось.\nВвод необходимо осуществлять на кириллице начиная с заглавной буквы. Для выхода /quit`
+				);
+
+			riders.forEach(async rider => {
+				await ctx.reply(
+					`
+Фамилия: ${rider.lastName}
+Имя: ${rider.firstName}
+Текущая категория: ${rider.category ? rider.category : 'не присвоена'}
+<b>Выберите новую категорию райдеру:</b>`,
+					adminCatRidersKeyboard(rider._id)
+				);
+			});
+			return await ctx.scene.leave();
+		} catch (error) {
+			console.log(error);
+		}
 	} catch (error) {
 		console.log(error);
 	}
