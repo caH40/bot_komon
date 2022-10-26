@@ -28,7 +28,7 @@ bot.command('help', async ctx => await help(ctx));
 bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
 bot.command('myid', async ctx => await ctx.reply(`Ваш ID Telegram: ${ctx.message.from.id}`));
-bot.command('getpoints', async ctx => await updatePointsGeneral('6358006a5cae17bfd12c7b4f'));
+bot.command('getpoints', async ctx => await updatePointsGeneral('6356d19c9650d5b16c13967f'));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 
 bot.launch();

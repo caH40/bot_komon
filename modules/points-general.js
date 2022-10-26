@@ -28,16 +28,42 @@ export async function updatePointsGeneral(seriesId) {
 				}
 				if (resultsDB[j].riderId?.category === 'B') {
 					placeB++;
-					resultsDB[j].pointsStage = points[placeB];
+					await Result.findByIdAndUpdate(
+						{ _id: resultsDB[j]._id },
+						{ $set: { pointsStage: points[placeB] } }
+					);
 				}
 				if (resultsDB[j].riderId?.category === 'C') {
 					placeC++;
-					resultsDB[j].pointsStage = points[placeC];
+					await Result.findByIdAndUpdate(
+						{ _id: resultsDB[j]._id },
+						{ $set: { pointsStage: points[placeC] } }
+					);
 				}
 				if (resultsDB[j].riderId?.category === 'W') {
 					placeW++;
-					resultsDB[j].pointsStage = points[placeW];
+					await Result.findByIdAndUpdate(
+						{ _id: resultsDB[j]._id },
+						{ $set: { pointsStage: points[placeW] } }
+					);
 				}
+			}
+		}
+		//костыль, пока не все девушки зарегистрировались
+		for (let i = 0; i < stagesDB.length; i++) {
+			let resultsDB = await Result.find({
+				stageId: stagesDB[i]._id,
+				categoryCurrent: 'W',
+			}).populate('riderId');
+
+			resultsDB = resultsDB.sort((a, b) => a.time - b.time);
+			let placeW = 0;
+			for (let j = 0; j < resultsDB.length; j++) {
+				placeW++;
+				await Result.findByIdAndUpdate(
+					{ _id: resultsDB[j]._id },
+					{ $set: { pointsStage: points[placeW] } }
+				);
 			}
 		}
 	} catch (error) {
