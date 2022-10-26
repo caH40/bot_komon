@@ -25,7 +25,7 @@ export async function resultsViewStage(ctx, cbqData) {
 		const seriesType = stagesDB[0].type;
 		const { name } = await Series.findOne({ _id: seriesId });
 
-		const resultsDB = await Result.find({ stageId });
+		const resultsDB = await Result.find({ stageId }).populate('riderId');
 		// resultsDB.forEach(result => {
 		// 	result.category = result.category
 		// 		? result.category
@@ -39,7 +39,9 @@ export async function resultsViewStage(ctx, cbqData) {
 		} else {
 			results = results
 				.filter(result =>
-					result.category ? result.category === category : result.categoryCurrent === category
+					result.riderId?.category
+						? result.riderId?.category === category
+						: result.categoryCurrent === category
 				)
 				.sort((a, b) => a.time - b.time);
 		}
