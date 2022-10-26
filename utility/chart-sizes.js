@@ -50,14 +50,12 @@ export const rowSize = {
 	},
 	protocol: {
 		desktop: {
-			name: 21,
+			placeCategory: 4,
+			name: 25,
 			teamCurrent: 13,
 			time: 10,
 			gap: 8,
 			gapPrev: 8,
-			placeAbsolute: 6,
-			category: 4,
-			placeCategory: 6,
 			pointsStage: 5,
 			watt: 7,
 			wattPerKg: 8,

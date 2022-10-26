@@ -12,14 +12,15 @@ export function viewDesktop(data) {
 			body =
 				body +
 				'|' +
+				format(String(row.placeCategory), rowSize.protocol.desktop.placeCategory) +
 				format(row.name, rowSize.protocol.desktop.name) +
 				format(row.teamCurrent, rowSize.protocol.desktop.teamCurrent) +
 				format(String(row.time), rowSize.protocol.desktop.time) +
-				format(row.gap, rowSize.protocol.desktop.gap) +
-				format(row.gapPrev, rowSize.protocol.desktop.gapPrev) +
-				format(String(row.placeAbsolute), rowSize.protocol.desktop.placeAbsolute) +
-				format(category, rowSize.protocol.desktop.category) +
-				format(String(row.placeCategory), rowSize.protocol.desktop.placeCategory) +
+				format(row.gap === '00:00' ? '' : '+' + row.gap, rowSize.protocolTotal.desktop.gap) +
+				format(
+					row.gapPrev ? '+' + row.gapPrev : row.gapPrev,
+					rowSize.protocolTotal.desktop.gapPrev
+				) +
 				format(String(row.pointsStage), rowSize.protocol.desktop.pointsStage) +
 				format(String(row.watt), rowSize.protocol.desktop.watt) +
 				format(String(row.wattPerKg), rowSize.protocol.desktop.wattPerKg) +
