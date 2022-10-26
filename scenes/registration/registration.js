@@ -247,8 +247,10 @@ export function eighthSceneReg() {
 		eighthScene.command('save', async ctx => {
 			const response = await registrationToDB(ctx.session.data.account);
 			if (response) {
+				ctx.session.data.account = {};
 				await ctx.reply(t.eighth.successfulDB);
 			} else {
+				ctx.session.data.account = {};
 				await ctx.reply(t.eighth.wrongDB);
 			}
 			return await ctx.scene.leave();
