@@ -183,7 +183,7 @@ export async function pointsSeries(ctx) {
 export async function updatePointsSeries(ctx, cbqData) {
 	try {
 		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
+			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
 			await mainMenuKeyboard(ctx)
 		);
 

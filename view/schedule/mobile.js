@@ -4,7 +4,7 @@ import { viewMobile } from '../generate/schedule.js';
 export async function scheduleViewMob(ctx, stagesDB, title) {
 	try {
 		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
+			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
 			await mainMenuKeyboard(ctx)
 		);
 		await ctx

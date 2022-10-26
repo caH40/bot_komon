@@ -64,7 +64,7 @@ ${time}. Поступила заявка от райдера ${riderDB.lastName}
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		}
 		return await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
+			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
 			await mainMenuKeyboard(ctx)
 		);
 	} catch (error) {
@@ -92,7 +92,7 @@ export async function teamJoin(ctx) {
 export async function teamCreate(ctx) {
 	try {
 		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
+			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
 			await mainMenuKeyboard(ctx)
 		);
 		return await ctx.scene.enter('firstSceneCreateTeam');
@@ -218,7 +218,7 @@ export async function teamRemove(ctx) {
 			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
 		return await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
+			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
 			await mainMenuKeyboard(ctx)
 		);
 	} catch (error) {

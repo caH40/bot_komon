@@ -13,7 +13,7 @@ export async function resultStages(ctx, cbqData) {
 		const stagesDB = await Stage.find({ seriesId, hasResults: true });
 
 		return await ctx.editMessageText(
-			`<b>📝 Результаты этапов ${name}.</b>\n<i>menu/series/standings/stages</i>`,
+			`<b>📝 Результаты этапов ${name}.</b>`,
 			resultStagesKeyboard(stagesDB)
 		);
 	} catch (error) {
@@ -28,7 +28,7 @@ export async function resultStage(ctx, cbqData) {
 		const { name } = await Series.findOne({ _id: seriesId });
 
 		return await ctx.editMessageText(
-			`<b>📝 Результаты этапа №${number} ${name}.</b>\n<i>menu/series/standings/stages/stage</i>`,
+			`<b>📝 Результаты этапа №${number} ${name}.</b>`,
 			resultStageCatKeyboard(stageId)
 		);
 	} catch (error) {
@@ -41,7 +41,7 @@ export async function resultGeneral(ctx, cbqData) {
 		const { name } = await Series.findOne({ _id });
 
 		return await ctx.editMessageText(
-			`<b>👑 Генеральный зачет серии ${name}.</b>\n<i>menu/series/standings/general</i>`,
+			`<b>👑 Генеральный зачет серии ${name}.</b>`,
 			resultSeriesGeneralKeyboard(_id)
 		);
 	} catch (error) {
