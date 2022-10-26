@@ -13,7 +13,8 @@ export function viewDesktopTotal(data) {
 		let body = '';
 
 		data.forEach(row => {
-			const category = row.category ? row.category : row.categoryCurrent;
+			console.log(row);
+			const category = row.riderId ? row.riderId.category : row.categoryCurrent;
 			body =
 				body +
 				'|' +
@@ -47,7 +48,7 @@ export function viewMobileTotal(data) {
 		let body = '';
 
 		data.forEach(row => {
-			const category = row.category ? row.category : row.categoryCurrent;
+			const category = row.riderId ? row.riderId.category : row.categoryCurrent;
 			body =
 				body +
 				'|' +

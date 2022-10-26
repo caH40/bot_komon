@@ -8,11 +8,11 @@ export function viewDesktop(data) {
 		let body = '';
 
 		data.forEach(row => {
-			const category = row.category ? row.category : row.categoryCurrent;
+			const category = row.riderId ? row.riderId.category : row.categoryCurrent;
 			body =
 				body +
 				'|' +
-				format(String(row.placeCategory), rowSize.protocol.desktop.placeCategory) +
+				format(String(category), rowSize.protocol.desktop.placeCategory) +
 				format(row.name, rowSize.protocol.desktop.name) +
 				format(row.teamCurrent, rowSize.protocol.desktop.teamCurrent) +
 				format(String(row.time), rowSize.protocol.desktop.time) +
@@ -38,11 +38,11 @@ export function viewMobile(data) {
 		let body = '';
 
 		data.forEach(row => {
-			const category = row.category ? row.category : row.categoryCurrent;
+			const category = row.riderId ? row.riderId.category : row.categoryCurrent;
 			body =
 				body +
 				'|' +
-				format(String(row.placeCategory), rowSize.protocol.mobile.placeCategory) +
+				format(String(category), rowSize.protocol.mobile.placeCategory) +
 				format(row.name, rowSize.protocol.mobile.name) +
 				format(String(row.time), rowSize.protocol.mobile.time) +
 				`\n`;
