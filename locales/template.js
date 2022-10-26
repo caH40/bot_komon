@@ -3,10 +3,7 @@ export function finalMessage(ctx) {
 Проверьте данные:
 <b>Имя:</b> ${ctx.session.data.account.firstName};
 <b>Фамилия:</b> ${ctx.session.data.account.lastName};
-<b>Год рождения:</b> ${ctx.session.data.account.yearBirth};
 <b>Пол:</b> ${ctx.session.data.account.gender};
-<b>Имя в Звифте:</b> ${ctx.session.data.account.firstNameZwift};
-<b>Фамилия в Звифте:</b> ${ctx.session.data.account.lastNameZwift};
 <b>Велотрейнер:</b> ${ctx.session.data.account.cycleTrainer};
 <b>ZwiftPower:</b> ${ctx.session.data.account.zwiftPower};
 ========================
@@ -27,3 +24,7 @@ export function finalMessageTeamCr(ctx) {
 Для выхода <b>без сохранения</b> информации <u>/quit</u>
 `;
 }
+
+//<b>Год рождения:</b> ${ctx.session.data.account.yearBirth};
+//<b>Имя в Звифте:</b> ${ctx.session.data.account.firstNameZwift};
+//<b>Фамилия в Звифте:</b> ${ctx.session.data.account.lastNameZwift};

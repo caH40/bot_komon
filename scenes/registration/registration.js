@@ -9,7 +9,7 @@ import {
 	validationLink,
 	validationNameEn,
 	validationNameRus,
-	validationYear,
+	// validationYear,
 } from './validation.js';
 
 export function firstSceneReg() {
@@ -69,7 +69,7 @@ export function secondSceneReg() {
 			const isValid = validationNameRus(text);
 			if (isValid) {
 				ctx.session.data.account.lastName = text;
-				return ctx.scene.enter('thirdSceneReg');
+				return ctx.scene.enter('fourthSceneReg');
 			}
 			await ctx.reply(t.second.wrong);
 		});
@@ -79,36 +79,36 @@ export function secondSceneReg() {
 	}
 }
 
-export function thirdSceneReg() {
-	try {
-		const t = textJson.scenes.registration;
-		const thirdScene = new Scenes.BaseScene('thirdSceneReg');
-		thirdScene.enter(async ctx => {
-			ctx.session.data.account.counter = 0;
-			await ctx.replyWithHTML(t.third.question);
-		});
-		thirdScene.command('quit', async ctx => {
-			await ctx.reply(t.quit);
-			return await ctx.scene.leave();
-		});
-		thirdScene.on('message', async ctx => {
-			ctx.session.data.account.counter++;
-			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
-			if (isManyAttempts) return await ctx.scene.leave();
+// export function thirdSceneReg() {
+// 	try {
+// 		const t = textJson.scenes.registration;
+// 		const thirdScene = new Scenes.BaseScene('thirdSceneReg');
+// 		thirdScene.enter(async ctx => {
+// 			ctx.session.data.account.counter = 0;
+// 			await ctx.replyWithHTML(t.third.question);
+// 		});
+// 		thirdScene.command('quit', async ctx => {
+// 			await ctx.reply(t.quit);
+// 			return await ctx.scene.leave();
+// 		});
+// 		thirdScene.on('message', async ctx => {
+// 			ctx.session.data.account.counter++;
+// 			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
+// 			if (isManyAttempts) return await ctx.scene.leave();
 
-			const text = ctx.message.text;
-			const isValid = validationYear(text);
-			if (isValid) {
-				ctx.session.data.account.yearBirth = text;
-				return ctx.scene.enter('fourthSceneReg');
-			}
-			await ctx.reply(t.third.wrong);
-		});
-		return thirdScene;
-	} catch (error) {
-		console.log(error);
-	}
-}
+// 			const text = ctx.message.text;
+// 			const isValid = validationYear(text);
+// 			if (isValid) {
+// 				ctx.session.data.account.yearBirth = text;
+// 				return ctx.scene.enter('fourthSceneReg');
+// 			}
+// 			await ctx.reply(t.third.wrong);
+// 		});
+// 		return thirdScene;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
 
 export function fourthSceneReg() {
 	try {
@@ -131,7 +131,7 @@ export function fourthSceneReg() {
 			const isValid = validationGender(text);
 			if (isValid) {
 				ctx.session.data.account.gender = text;
-				return ctx.scene.enter('fifthSceneReg');
+				return ctx.scene.enter('seventhSceneReg');
 			}
 			await ctx.reply(t.fourth.wrong);
 		});
@@ -141,67 +141,67 @@ export function fourthSceneReg() {
 	}
 }
 
-export function fifthSceneReg() {
-	try {
-		const t = textJson.scenes.registration;
-		const fifthScene = new Scenes.BaseScene('fifthSceneReg');
-		fifthScene.enter(async ctx => {
-			ctx.session.data.account.counter = 0;
-			await ctx.replyWithHTML(t.fifth.question, { disable_web_page_preview: true });
-		});
-		fifthScene.command('quit', async ctx => {
-			await ctx.reply(t.quit);
-			return await ctx.scene.leave();
-		});
-		fifthScene.on('message', async ctx => {
-			ctx.session.data.account.counter++;
-			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
-			if (isManyAttempts) return await ctx.scene.leave();
+// export function fifthSceneReg() {
+// 	try {
+// 		const t = textJson.scenes.registration;
+// 		const fifthScene = new Scenes.BaseScene('fifthSceneReg');
+// 		fifthScene.enter(async ctx => {
+// 			ctx.session.data.account.counter = 0;
+// 			await ctx.replyWithHTML(t.fifth.question, { disable_web_page_preview: true });
+// 		});
+// 		fifthScene.command('quit', async ctx => {
+// 			await ctx.reply(t.quit);
+// 			return await ctx.scene.leave();
+// 		});
+// 		fifthScene.on('message', async ctx => {
+// 			ctx.session.data.account.counter++;
+// 			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
+// 			if (isManyAttempts) return await ctx.scene.leave();
 
-			const text = ctx.message.text;
-			const isValid = validationNameEn(text);
-			if (isValid) {
-				ctx.session.data.account.firstNameZwift = text;
-				return ctx.scene.enter('sixthSceneReg');
-			}
-			await ctx.reply(t.fifth.wrong);
-		});
-		return fifthScene;
-	} catch (error) {
-		console.log(error);
-	}
-}
+// 			const text = ctx.message.text;
+// 			const isValid = validationNameEn(text);
+// 			if (isValid) {
+// 				ctx.session.data.account.firstNameZwift = text;
+// 				return ctx.scene.enter('sixthSceneReg');
+// 			}
+// 			await ctx.reply(t.fifth.wrong);
+// 		});
+// 		return fifthScene;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
 
-export function sixthSceneReg() {
-	try {
-		const t = textJson.scenes.registration;
-		const sixthScene = new Scenes.BaseScene('sixthSceneReg');
-		sixthScene.enter(async ctx => {
-			ctx.session.data.account.counter = 0;
-			await ctx.replyWithHTML(t.sixth.question);
-		});
-		sixthScene.command('quit', async ctx => {
-			await ctx.reply(t.quit);
-			return await ctx.scene.leave();
-		});
-		sixthScene.on('message', async ctx => {
-			ctx.session.data.account.counter++;
-			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
-			if (isManyAttempts) return await ctx.scene.leave();
+// export function sixthSceneReg() {
+// 	try {
+// 		const t = textJson.scenes.registration;
+// 		const sixthScene = new Scenes.BaseScene('sixthSceneReg');
+// 		sixthScene.enter(async ctx => {
+// 			ctx.session.data.account.counter = 0;
+// 			await ctx.replyWithHTML(t.sixth.question);
+// 		});
+// 		sixthScene.command('quit', async ctx => {
+// 			await ctx.reply(t.quit);
+// 			return await ctx.scene.leave();
+// 		});
+// 		sixthScene.on('message', async ctx => {
+// 			ctx.session.data.account.counter++;
+// 			const isManyAttempts = await attempts(ctx, ctx.session.data.account.counter);
+// 			if (isManyAttempts) return await ctx.scene.leave();
 
-			const text = ctx.message.text;
-			const isValid = validationNameEn(text);
-			if (isValid) {
-				ctx.session.data.account.lastNameZwift = text;
-				return ctx.scene.enter('seventhSceneReg');
-			}
-			await ctx.reply(t.sixth.wrong);
-		});
-		return sixthScene;
-	} catch (error) {
-		console.log(error);
-	}
-}
+// 			const text = ctx.message.text;
+// 			const isValid = validationNameEn(text);
+// 			if (isValid) {
+// 				ctx.session.data.account.lastNameZwift = text;
+// 				return ctx.scene.enter('seventhSceneReg');
+// 			}
+// 			await ctx.reply(t.sixth.wrong);
+// 		});
+// 		return sixthScene;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
 
 export function seventhSceneReg() {
 	try {
