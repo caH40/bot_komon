@@ -43,7 +43,7 @@ export const protocol = {
 };
 export const protocolChartMobile = {
 	rowDLine: `|===============================|\n`,
-	titles: `|Участник       |Время   |Мст|Гр|\n`,
+	titles: `|Мст|Участник          |Время   |\n`,
 };
 
 export const protocolTotal = {

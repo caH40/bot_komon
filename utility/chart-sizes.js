@@ -63,10 +63,9 @@ export const rowSize = {
 			wattPerKg: 8,
 		},
 		mobile: {
-			name: 15,
-			time: 8,
 			placeCategory: 3,
-			category: 2,
+			name: 18,
+			time: 8,
 		},
 	},
 	protocolTotal: {

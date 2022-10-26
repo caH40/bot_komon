@@ -41,10 +41,9 @@ export function viewMobile(data) {
 			body =
 				body +
 				'|' +
+				format(String(row.placeCategory), rowSize.protocol.mobile.placeCategory) +
 				format(row.name, rowSize.protocol.mobile.name) +
 				format(String(row.time), rowSize.protocol.mobile.time) +
-				format(String(row.placeCategory), rowSize.protocol.mobile.placeCategory) +
-				format(category, rowSize.protocol.mobile.category) +
 				`\n`;
 		});
 		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;
