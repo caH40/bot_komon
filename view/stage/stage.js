@@ -26,40 +26,47 @@ export async function resultsViewStage(ctx, cbqData) {
 		const { name } = await Series.findOne({ _id: seriesId });
 
 		const resultsDB = await Result.find({ stageId }).populate('riderId');
-		// resultsDB.forEach(result => {
-		// 	result.category = result.category
-		// 		? result.category
-		// 		: ruleCategory(result.watt, result.wattPerKg, result.gender);
-		// });
-		// 'T' общий протокол
+
 		let results = resultsDB.map(result => result.toObject());
+		let resultFiltered = [];
 
 		if (category === 'T') {
-			results = results.sort((a, b) => a.time - b.time);
+			const categories = ['A', 'B', 'C', 'W'];
+			for (let i = 0; i < categories.length; i++) {
+				let res = results
+					.filter(result =>
+						result.riderId?.category
+							? result.riderId?.category === categories[i]
+							: result.categoryCurrent === categories[i]
+					)
+					.sort((a, b) => a.time - b.time);
+				res.forEach((result, index) => (result.placeCategory = index + 1));
+				resultFiltered = [...resultFiltered, ...res];
+			}
 		} else {
-			results = results
+			resultFiltered = results
 				.filter(result =>
 					result.riderId?.category
 						? result.riderId?.category === category
 						: result.categoryCurrent === category
 				)
 				.sort((a, b) => a.time - b.time);
+			resultFiltered.forEach((result, index) => (result.placeCategory = index + 1));
 		}
+		resultFiltered.sort((a, b) => a.time - b.time);
 
-		results.forEach((result, index) => (result.placeCategory = index + 1));
+		resultFiltered = await gapValue(resultFiltered);
+		resultFiltered = await maxValue(resultFiltered);
 
-		results = await gapValue(results);
-		results = await maxValue(results);
-
-		results.forEach(elm => {
+		resultFiltered.forEach(elm => {
 			elm.gap = secondesToTime(elm.gap);
 			elm.time = secondesToTime(elm.time);
 			elm.gapPrev = secondesToTime(elm.gapPrev);
 		});
 
-		const title = `${name}, Этап ${seriesNumber}, ${seriesType}`;
+		const title = `${name}, Этап ${seriesNumber}, ${seriesType}, Категория "${category}"`;
 
-		const charts = divisionChart(results);
+		const charts = divisionChart(resultFiltered);
 
 		if (view === 'Des') return resultsViewStageDes(ctx, charts, title, category);
 		if (view === 'Mob') return resultsViewStageMob(ctx, charts, title, category);

@@ -1,5 +1,4 @@
 import {
-	protocol,
 	protocolChartMobile,
 	protocolChartMobileTotal,
 	protocolTotal,
@@ -13,7 +12,6 @@ export function viewDesktopTotal(data) {
 		let body = '';
 
 		data.forEach(row => {
-			console.log(row);
 			const category = row.riderId ? row.riderId.category : row.categoryCurrent;
 			body =
 				body +
