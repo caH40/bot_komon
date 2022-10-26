@@ -70,14 +70,14 @@ export const rowSize = {
 	},
 	protocolTotal: {
 		desktop: {
-			name: 21,
+			placeAbsolute: 4,
+			name: 25,
 			teamCurrent: 13,
 			time: 10,
 			gap: 8,
 			gapPrev: 8,
-			placeAbsolute: 6,
 			category: 4,
-			placeCategory: 6,
+			placeCategory: 4,
 			pointsStage: 5,
 			watt: 7,
 			wattPerKg: 8,
