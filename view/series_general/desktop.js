@@ -17,7 +17,7 @@ export async function resultsSeriesGeneralDes(ctx, category, seriesId) {
 		let resultsSeries = [];
 		const lengthSeries = seriesIds.length;
 		for (let index = 0; index < lengthSeries; index++) {
-			let results = await Result.find({ stageId: seriesIds[index] });
+			let results = await Result.find({ stageId: seriesIds[index] }).populate('riderId');
 			resultsSeries = [...resultsSeries, ...results];
 		}
 
@@ -37,12 +37,16 @@ export async function resultsSeriesGeneralDes(ctx, category, seriesId) {
 		//в будущем брать данные по группе и команде из коллекции Riders
 
 		resultsGeneral = resultsGeneral.map(rider => {
+			const categoryFilter = resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId);
+
+			const categoryNew = categoryFilter.riderId
+				? categoryFilter.riderId?.category
+				: categoryFilter.categoryCurrent;
 			return {
 				zwiftRiderId: rider.zwiftRiderId,
 				pointsGeneral: rider.pointsGeneral,
 				name: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId).name,
-				category: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId)
-					.categoryCurrent,
+				category: categoryNew,
 				team: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId).team ?? '',
 			};
 		});

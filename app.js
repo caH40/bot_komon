@@ -8,7 +8,6 @@ import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
 import { filterMessage } from './middleware/filter-message.js';
 import { activationScenes } from './scenes/activation-scenes.js';
-import { updatePointsGeneral } from './modules/points-general.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -28,7 +27,6 @@ bot.command('help', async ctx => await help(ctx));
 bot.command('main', async ctx => await mainMenu(ctx));
 bot.hears('wizard', async ctx => await ctx.scene.enter('sampleWizard'));
 bot.command('myid', async ctx => await ctx.reply(`Ваш ID Telegram: ${ctx.message.from.id}`));
-// bot.command('getpoints', async ctx => await updatePointsGeneral('6356d19c9650d5b16c13967f'));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 
 bot.launch();
