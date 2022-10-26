@@ -35,7 +35,7 @@ export function validationGender(text) {
 
 export function validationNameEn(text) {
 	try {
-		if (!validator.isAlpha(text, 'ru-RU') && validator.isLength(text, { min: 1, max: 15 })) {
+		if (!validator.isAlpha(text, 'ru-RU') && validator.isLength(text, { min: 1, max: 30 })) {
 			// if (validator.isAlphanumeric(text, 'en-US') && validator.isLength(text, { min: 1, max: 15 })) {
 			return true;
 		}
