@@ -66,6 +66,7 @@ export async function updatePointsGeneral(seriesId) {
 				);
 			}
 		}
+		return true;
 	} catch (error) {
 		console.log(error);
 	}

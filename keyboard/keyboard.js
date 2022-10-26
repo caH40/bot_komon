@@ -135,6 +135,7 @@ export const adminKeyboard = {
 		[Markup.button.callback('Загрузить протокол 💾', 'admin_getProtocol')],
 		[Markup.button.callback('Загрузить расписание 📄', 'admin_getSchedule')],
 		[Markup.button.callback('Установка категорий райдерам 🦾', 'm_4_4_')],
+		[Markup.button.callback('Обновление генеральных зачетов 🔄', 'm_4_5_')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
@@ -171,6 +172,16 @@ export function adminCatRidersFromStageKeyboard(stages) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard(buttonCatFromStageRiders(stages)),
+	};
+}
+
+export function adminPointsSeriesKeyboard(series) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([
+			...series.map(ser => [Markup.button.callback(`${ser.name} 🏁`, `m_4_5_E__${ser._id}`)]),
+			[Markup.button.callback('Главное меню ❗️', 'main')],
+		]),
 	};
 }
 

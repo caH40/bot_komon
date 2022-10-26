@@ -8,8 +8,10 @@ import {
 	assignCategoryRiderFromStage,
 	assignCatRider,
 	categoryRiderFromStage,
+	pointsSeries,
 	requestTeam,
 	riderCategory,
+	updatePointsSeries,
 } from './helper.js';
 
 export async function handlerAdmin(ctx, cbqData) {
@@ -30,6 +32,8 @@ export async function handlerAdmin(ctx, cbqData) {
 		if (cbqData === 'm_4_4_2_') return await categoryRiderFromStage(ctx);
 		if (cbqData.includes('m_4_4_2_E')) return await assignCategoryRiderFromStage(ctx, cbqData);
 		if (cbqData.includes('m_4_team_add_')) return await approvalTeam(ctx, cbqData);
+		if (cbqData === 'm_4_5_') return await pointsSeries(ctx);
+		if (cbqData.includes('m_4_5_E__')) return await updatePointsSeries(ctx, cbqData);
 	} catch (error) {
 		console.log(error);
 	}

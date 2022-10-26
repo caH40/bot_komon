@@ -1,13 +1,17 @@
 import {
 	adminCatRidersFromStageKeyboard,
 	adminCatRidersKeyboard,
+	adminPointsSeriesKeyboard,
+	mainMenuKeyboard,
 	teamForApprovalKeyboard,
 	teamKeyboard,
 } from '../../keyboard/keyboard.js';
 import { Result } from '../../Model/Result.js';
 import { Rider } from '../../Model/Rider.js';
+import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
 import { Team } from '../../Model/Team.js';
+import { updatePointsGeneral } from '../../modules/points-general.js';
 
 export async function requestTeam(ctx) {
 	try {
@@ -159,6 +163,52 @@ export async function assignCategoryRiderFromStage(ctx, cbqData) {
 		}
 
 		await ctx.reply(message);
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function pointsSeries(ctx) {
+	try {
+		const seriesDB = await Series.find();
+		return ctx.editMessageText(
+			'<b>🔄 Обновление генеральных зачетов.\nВыберите серию в которой необходимо обновить очки в генеральной, спринторскойи горной номинациях.</b>',
+			adminPointsSeriesKeyboard(seriesDB)
+		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function updatePointsSeries(ctx, cbqData) {
+	try {
+		await ctx.editMessageText(
+			`❗<b>Главное меню. Выбор основных функций.</b>❗\n<i>main</i>`,
+			await mainMenuKeyboard(ctx)
+		);
+
+		const seriesId = cbqData.slice(9);
+		const response = await updatePointsGeneral(seriesId);
+
+		const seriesDB = await Series.findOne({ _id: seriesId });
+
+		if (response) {
+			ctx
+				.reply(
+					`${new Date().toLocaleString()}. Обновление очковых квалификаций серии ${
+						seriesDB.name
+					} прошло успешно!`
+				)
+				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+		} else {
+			await ctx
+				.reply(
+					`${new Date().toLocaleString()}. При обновление очковых квалификаций серии ${
+						seriesDB.name
+					} произошла непредвиденная ошибка...`
+				)
+				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+		}
 	} catch (error) {
 		console.log(error);
 	}
