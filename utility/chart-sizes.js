@@ -69,6 +69,27 @@ export const rowSize = {
 			category: 2,
 		},
 	},
+	protocolTotal: {
+		desktop: {
+			name: 21,
+			teamCurrent: 13,
+			time: 10,
+			gap: 8,
+			gapPrev: 8,
+			placeAbsolute: 6,
+			category: 4,
+			placeCategory: 6,
+			pointsStage: 5,
+			watt: 7,
+			wattPerKg: 8,
+		},
+		mobile: {
+			placeAbsolute: 3,
+			name: 15,
+			time: 8,
+			category: 2,
+		},
+	},
 	general: {
 		desktop: {
 			place: 5,
