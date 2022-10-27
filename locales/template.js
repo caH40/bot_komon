@@ -8,9 +8,9 @@ export function finalMessage(ctx) {
 <b>Фамилия в Звифте:</b> ${ctx.session.data.account.lastNameZwift};
 <b>Велотрейнер:</b> ${ctx.session.data.account.cycleTrainer};
 <b>ZwiftPower:</b> ${ctx.session.data.account.zwiftPower};
-========================
+=============================
 Если всё верно, для <b>сохранения</b> наберите <u>/save</u>
-Для <b>повторного ввода</b> данный <u>/repeat</u>
+Для <b>повторного ввода</b> данных <u>/repeat</u>
 Для выхода <b>без сохранения</b> информации <u>/quit</u>
 `;
 }
