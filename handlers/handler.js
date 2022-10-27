@@ -1,5 +1,5 @@
 import { teamLeaveDB } from '../controllersDB/team-leave.js';
-import { mainMenuKeyboard, accountKeyboard, mobVsDesKeyboard } from '../keyboard/keyboard.js';
+import { mainMenuKeyboard, mobVsDesKeyboard } from '../keyboard/keyboard.js';
 import { beingDeveloped } from '../modules/beingDeveloped.js';
 import { myResults } from '../view/myresults/myresults-view.js';
 
@@ -10,7 +10,7 @@ import { handlerResults } from './menu-results/handler-results.js';
 import { handlerTeam } from './menu-team/handler-menu.js';
 import { teamChooseForJoin } from './menu-team/helper.js';
 import { handlerAdmin } from './menu_admin/handler-menu.js';
-import { getSchedule } from './helper-main.js';
+import { account, getSchedule } from './helper-main.js';
 import { getScheduleWeekly } from '../modules/schedule-weekle.js';
 
 export async function handler(ctx, cbqData) {
@@ -27,7 +27,7 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		// console.log(cbqData); //❗❗❗
+		console.log(cbqData); //❗❗❗
 		// первый уровень меню
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
@@ -62,8 +62,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData === 'main_schedule') return await getSchedule(ctx);
 		if (cbqData === 'm_1_V') return await getScheduleWeekly(ctx);
 
-		if (cbqData === 'main_account')
-			return await ctx.editMessageText('<b>🔑 Личный кабинет.</b>', accountKeyboard);
+		if (cbqData === 'main_account') return await account(ctx);
 
 		// обработка запросов из админ кабинета
 		if (cbqData === 'admin_getProtocol') return await ctx.scene.enter('getProtocol');
