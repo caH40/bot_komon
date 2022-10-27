@@ -3,7 +3,7 @@ import { Scenes } from 'telegraf';
 import { registrationToDB } from '../../controllersDB/registration-save.js';
 import { getTelegramId } from './telegramid.js';
 import textJson from '../../locales/ru.json' assert { type: 'json' };
-import { finalMessage } from '../../locales/template.js';
+import { finalMessage, riderData } from '../../locales/template.js';
 import {
 	validationGender,
 	validationLink,
@@ -11,6 +11,7 @@ import {
 	validationNameRus,
 	// validationYear,
 } from './validation.js';
+import { Rider } from '../../Model/Rider.js';
 
 export function firstSceneReg() {
 	try {
@@ -20,9 +21,17 @@ export function firstSceneReg() {
 			ctx.session.data.account = {};
 			ctx.session.data.account.counter = 0;
 			getTelegramId(ctx);
-			const nameTg = ctx.session.data.account.first_name;
-			await ctx.replyWithHTML(t.first.welcome1 + nameTg + t.first.welcome2);
-			await ctx.replyWithHTML(t.first.question);
+			// показать данные райдера, если уже зарегистрирован
+			const riderDB = await Rider.findOne({ telegramId: ctx.session.data.account.telegramId });
+			if (riderDB) {
+				const message = riderData(riderDB);
+				await ctx.replyWithHTML(message, { disable_web_page_preview: true });
+				await ctx.replyWithHTML(t.first.question);
+			} else {
+				const nameTg = ctx.session.data.account.first_name;
+				await ctx.replyWithHTML(t.first.welcome1 + nameTg + t.first.welcome2);
+				await ctx.replyWithHTML(t.first.question);
+			}
 		});
 		firstScene.command('quit', async ctx => {
 			await ctx.replyWithHTML(t.quit);
