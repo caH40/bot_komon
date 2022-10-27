@@ -144,12 +144,26 @@ export async function categoryRiderFromStage(ctx) {
 export async function assignCategoryRiderFromStage(ctx, cbqData) {
 	try {
 		const stageId = cbqData.slice(11);
-		const resultDB = await Result.find({ stageId });
 
 		let message = '';
+
 		const ridersDB = await Rider.find();
+		//обновление riderId в результатах, если не было
+		for (let i = 0; i < ridersDB.length; i++) {
+			await Result.updateMany(
+				{ $and: [{ zwiftRiderId: ridersDB[i].zwiftId }, { riderId: null }] },
+				{ $set: { riderId: ridersDB[i]._id } }
+			);
+		}
+
+		const resultDB = await Result.find({ stageId });
 
 		for (let i = 0; i < ridersDB.length; i++) {
+			const res = await Result.updateMany(
+				{ $and: [{ zwiftRiderId: ridersDB[i].zwiftId }, { riderId: null }] },
+				{ $set: { riderId: ridersDB[i]._id } }
+			);
+
 			let newCategory = resultDB.find(
 				result => result.riderId?.toString() === ridersDB[i]._id.toString()
 			)?.categoryCurrent;
