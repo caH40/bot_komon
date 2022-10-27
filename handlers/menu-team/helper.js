@@ -234,3 +234,10 @@ export async function teamWait(ctx) {
 		console.log(error);
 	}
 }
+export async function teamDescription(ctx) {
+	try {
+		await ctx.scene.enter('teamDescription');
+	} catch (error) {
+		console.log(error);
+	}
+}

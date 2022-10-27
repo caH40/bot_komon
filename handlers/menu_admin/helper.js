@@ -16,7 +16,7 @@ import { updatePointsGeneral } from '../../modules/points-general.js';
 export async function requestTeam(ctx) {
 	try {
 		const teamsDB = await Team.find({ isAllowed: false }).populate('capitan');
-		console.log(teamsDB);
+
 		if (teamsDB.length === 0) return await ctx.reply('Нет заявок на создание команды.');
 
 		teamsDB.forEach(async team => {
