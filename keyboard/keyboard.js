@@ -1,4 +1,5 @@
 import { Markup } from 'telegraf';
+import { accountButtons } from './button/accaunt.js';
 import { buttonCatFromStageRiders } from './button/admin.js';
 import { mainBtn } from './button/main.js';
 import { resultSeriesBtn } from './button/schedule-btn.js';
@@ -7,15 +8,12 @@ import { teamBtn, teamsBtn } from './button/team.js';
 export async function mainMenuKeyboard(ctx) {
 	return { parse_mode: 'html', ...Markup.inlineKeyboard(await mainBtn(ctx)) };
 }
-export const accountKeyboard = {
-	parse_mode: 'html',
-	...Markup.inlineKeyboard([
-		[Markup.button.callback('Мои результаты 🏅', 'm_3_1_V--myResults')],
-		[Markup.button.callback('Регистрация 🆔', 'account_registration')],
-		[Markup.button.callback('Команда 🤝', 'm_3_2_')],
-		[Markup.button.callback('Главное меню ❗️', 'main')],
-	]),
-};
+export async function accountKeyboard(ctx) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard(await accountButtons(ctx)),
+	};
+}
 
 export async function teamKeyboard(rider) {
 	return { parse_mode: 'html', ...Markup.inlineKeyboard(await teamBtn(rider)) };

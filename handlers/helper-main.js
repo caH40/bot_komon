@@ -25,7 +25,10 @@ export async function account(ctx) {
 			name = `${gender}  <i>${riderDB.lastName} ${riderDB.firstName}</i>`;
 		}
 
-		return await ctx.editMessageText(`<b>🔑 Личный кабинет.</b>\n${name}`, accountKeyboard);
+		return await ctx.editMessageText(
+			`<b>🔑 Личный кабинет.</b>\n${name}`,
+			await accountKeyboard(ctx)
+		);
 	} catch (error) {
 		console.log(error);
 	}
