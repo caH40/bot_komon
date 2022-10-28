@@ -28,7 +28,7 @@ export async function resultSeriesBtn(cbqData) {
 			hasGeneral
 				? [Markup.button.callback('Генеральный зачет 👑', `result_General_${seriesId}`)]
 				: [],
-			hasTeams ? [Markup.button.callback('Командный зачет 🤝', `result_Team_${seriesId}`)] : [],
+			hasTeams ? [Markup.button.callback('Командный зачет 🤝', `m_1_all_3_V--${seriesId}`)] : [],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		];
 		return buttons;

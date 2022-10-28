@@ -50,7 +50,6 @@ export async function handlerResults(ctx, cbqData) {
 		// отриcовка таблиц
 		if (cbqData.includes('result_GSeries_')) return await resultsSeriesGeneral(ctx, cbqData);
 
-		if (cbqData.includes('result_Team_')) return await beingDeveloped(ctx);
 		if (cbqData.includes('result_Stage_')) return await resultsViewStage(ctx, cbqData);
 	} catch (error) {
 		console.log(error);

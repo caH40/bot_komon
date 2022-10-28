@@ -12,6 +12,7 @@ import { teamChooseForJoin } from './menu-team/helper.js';
 import { handlerAdmin } from './menu_admin/handler-menu.js';
 import { account, getSchedule } from './helper-main.js';
 import { getScheduleWeekly } from '../modules/schedule-weekle.js';
+import { resultsSeriesTeams } from '../view/result-teams/teams.js';
 
 export async function handler(ctx, cbqData) {
 	try {
@@ -27,14 +28,15 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		// console.log(cbqData); //❗❗❗
+		console.log(cbqData); //❗❗❗
+
 		// первый уровень меню
 		if (cbqData === 'main')
 			return await ctx.editMessageText(
 				`❗<b>Главное меню. Выбор основных функций.</b>❗`,
 				await mainMenuKeyboard(ctx)
 			);
-
+		if (cbqData.includes('_m_1_all_3_V--')) return await resultsSeriesTeams(ctx, cbqData);
 		if (cbqData.includes('_m_3_1_V--myResults')) return await myResults(ctx, cbqData);
 		if (cbqData.includes('_m_3_2_V--listRiders')) return await listRiders(ctx, cbqData);
 		if (cbqData.includes('m_3_2_4_1_E--teamLeave_')) return await teamLeaveDB(ctx, cbqData);
@@ -46,6 +48,7 @@ export async function handler(ctx, cbqData) {
 				mobVsDesKeyboard(cbqData)
 			);
 		}
+
 		//меню "Команда"
 		if (cbqData.includes('m_3_2')) return await handlerTeam(ctx, cbqData);
 		// меню "Админ кабинет"
