@@ -37,12 +37,13 @@ export async function teamChooseForJoin(ctx, cbqData) {
 			{ _id: teamId },
 			{ $addToSet: { requestRiders: riderDB._id.toString() } },
 			{ returnDocument: 'after' }
-		).populate('capitan');
+		).populate('riders.rider');
 
+		const capitan = teamDB.riders[0].rider;
 		if (teamDB.requestRiders.includes(riderDB._id)) {
 			const time = new Date().toLocaleString();
 			await ctx.telegram.sendMessage(
-				teamDB.capitan.telegramId,
+				capitan.telegramId,
 				`
 ${time}. Поступила заявка от райдера ${riderDB.lastName} ${riderDB.firstName} на присоединение к Вашей команде. Для рассмотрение заявок:
 Личный кабинет >>
@@ -53,7 +54,7 @@ ${time}. Поступила заявка от райдера ${riderDB.lastName}
 			);
 			await ctx
 				.reply(
-					`Вы подали заявку на присоединение к команде "${teamDB.name}". Капитан команды @${teamDB.capitan.telegramUsername} рассмотрит заявку и примет решение.`
+					`Вы подали заявку на присоединение к команде "${teamDB.name}". Капитан команды @${capitan.telegramUsername} рассмотрит заявку и примет решение.`
 				)
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		} else {

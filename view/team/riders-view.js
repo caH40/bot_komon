@@ -14,9 +14,9 @@ export async function listRiders(ctx, cbqData) {
 		);
 
 		const teamName = cbqData.slice(24);
-		const { _id, capitan } = await Team.findOne({ name: teamName });
+		const teamDB = await Team.findOne({ name: teamName }).populate('riders.rider');
 
-		const ridersDB = await Rider.find({ teamId: _id });
+		const ridersDB = await Rider.find({ teamId: teamDB._id });
 		let riders = ridersDB.map(rider => rider.toObject());
 
 		for (let i = 0; i < riders.length; i++) {
@@ -24,7 +24,7 @@ export async function listRiders(ctx, cbqData) {
 			riders[i].quantity = resultsQuantity ??= 0;
 			riders[i].sequence = String(i + 1);
 
-			if (riders[i]._id.toString() === capitan.toString())
+			if (riders[i]._id.toString() === teamDB.riders[0].rider.toString())
 				riders[i].sequence = riders[i].sequence + 'C';
 		}
 		const view = cbqData.slice(0, 3);

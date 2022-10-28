@@ -7,7 +7,10 @@ export async function addRiderDB(ctx, candidateId) {
 
 		const teamDB = await Team.findOneAndUpdate(
 			{ requestRiders: candidateId },
-			{ $pull: { requestRiders: candidateId } }
+			{
+				$pull: { requestRiders: candidateId },
+				$push: { riders: { rider: candidateId, dateJoin: new Date().getTime() } },
+			}
 		);
 
 		const riderDB = await Rider.findOneAndUpdate(
