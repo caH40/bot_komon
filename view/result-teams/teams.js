@@ -12,37 +12,47 @@ export async function resultsSeriesTeams(ctx, cbqData) {
 		const seriesId = cbqData.slice(17);
 
 		const seriesDB = await Series.findOne({ _id: seriesId });
+		//пока для одного стейджа расчет
+		const stageDB = await Stage.find({ seriesId, hasResults: true });
 
-		const stageDB = await Stage.findOne({ seriesId });
-		const resultsDB = await Result.find({ stageId: stageDB._id }).populate({
-			path: 'riderId',
-			select: 'category',
-		});
+		let resultsSeries = [];
+		for (let i = 0; i < stageDB.length; i++) {
+			let resultsDB = await Result.find({
+				stageId: stageDB[i]._id,
+				riderId: { $ne: undefined },
+			}).populate({
+				path: 'riderId',
+				select: 'category',
+			});
+			resultsSeries = [...resultsSeries, ...resultsDB];
+		}
 
 		//уникальные имена команд
 		let uniqueName = new Set();
-		resultsDB.forEach(result => {
+		resultsSeries.forEach(result => {
 			if (result.teamCurrent) uniqueName.add(result.teamCurrent);
 		});
-		console.log(uniqueName);
-		let results = [];
-		const categories = ['A', 'B', 'C'];
 
+		let results = [];
+		//заготовка массива для подсчета очков командам по категориям
+		const categories = ['A', 'B', 'C'];
 		uniqueName.forEach(team => {
 			categories.forEach(category => {
 				results.push({ name: team, category, points: 0 });
 			});
 		});
 
-		results.forEach(team => {
-			resultsDB.forEach(result => {
-				categories.forEach(category => {
-					if (team.name === result.teamCurrent && result.riderId?.category === category) {
-						team.points = team.points + result.pointsStage;
-					}
-				});
+		results.forEach(teamWithCat => {
+			resultsSeries.forEach(result => {
+				if (
+					teamWithCat.name === result.teamCurrent &&
+					teamWithCat.category === result.riderId?.category
+				) {
+					teamWithCat.points = teamWithCat.points + result.pointsStage;
+				}
 			});
 		});
+		console.log(results);
 
 		// await ctx.editMessageText(
 		// 	`❗<b>Главное меню. Выбор основных функций.</b>❗`,
