@@ -2,8 +2,9 @@ import { Team } from '../Model/Team.js';
 
 export async function descriptionUpdate(userTelegramId, text) {
 	try {
-		const teamsDB = await Team.find().populate('capitan');
-		const _id = teamsDB.find(team => team.capitan.telegramId === userTelegramId)?._id;
+		const teamsDB = await Team.find().populate('riders.rider');
+
+		const _id = teamsDB.find(team => team.riders[0].rider.telegramId === userTelegramId)?._id;
 
 		if (!_id) console.log('не нашел команду для изменения описания');
 
