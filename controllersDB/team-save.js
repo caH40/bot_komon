@@ -15,7 +15,12 @@ export async function registrationToDB(data) {
 		const team = new Team({
 			name: data.name,
 			description: data.description,
-			capitan: capitan._id,
+			riders: [
+				{
+					rider: capitan._id,
+					dateJoin: new Date().getTime(),
+				},
+			],
 		});
 
 		const response = await team.save();

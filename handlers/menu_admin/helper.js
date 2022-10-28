@@ -16,14 +16,13 @@ import { updateTeamName } from '../../modules/teamname-update.js';
 
 export async function requestTeam(ctx) {
 	try {
-		const teamsDB = await Team.find({ isAllowed: false }).populate('capitan');
-
+		const teamsDB = await Team.find({ isAllowed: false }).populate('riders.rider');
 		if (teamsDB.length === 0) return await ctx.reply('Нет заявок на создание команды.');
 
 		teamsDB.forEach(async team => {
 			let title = `
 Команда: "${team.name}";
-Капитан: ${team.capitan.lastName} ${team.capitan.firstName};
+Капитан: ${team.riders[0].rider.lastName} ${team.riders[0].rider.firstName};
 Описание: ${team.description};
 
 `;
@@ -42,7 +41,7 @@ export async function approvalTeam(ctx, cbqData) {
 		const action = cbqData.slice(13, 14);
 		const teamId = cbqData.slice(15);
 
-		const teamDB = await Team.findOne({ _id: teamId }).populate('capitan');
+		const teamDB = await Team.findOne({ _id: teamId }).populate('riders.rider');
 		if (action === 'Y') await Team.findOneAndUpdate({ _id: teamId }, { $set: { isAllowed: true } });
 		if (action === 'N') {
 			await Rider.findOneAndUpdate({ teamId }, { $unset: { teamId: 1 } });
@@ -55,7 +54,7 @@ export async function approvalTeam(ctx, cbqData) {
 				? `${time}. Создание команды "${teamDB.name}" одобрено!`
 				: `${time}. Создание команды "${teamDB.name}" отклонено!`;
 
-		await ctx.telegram.sendMessage(teamDB.capitan.telegramId, title);
+		await ctx.telegram.sendMessage(teamDB.riders[0].rider.telegramId, title);
 		return await ctx
 			.reply(title)
 			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
