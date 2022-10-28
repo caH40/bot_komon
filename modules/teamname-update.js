@@ -4,7 +4,7 @@ import { Stage } from '../Model/Stage.js';
 export async function updateTeamName(seriesId) {
 	try {
 		const stagesDB = await Stage.find({ seriesId, hasResults: true });
-
+		// при обновлении названий команд в результате необходимо проверять, находится ли в команде на данный момент райдер и не вышел ни он из неё
 		for (let i = 0; i < stagesDB.length; i++) {
 			let resultsDB = await Result.find({
 				stageId: stagesDB[i]._id,

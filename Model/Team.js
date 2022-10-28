@@ -6,6 +6,13 @@ const { Schema, model } = pkg;
 const teamSchema = new Schema({
 	name: { type: String, unique: true },
 	capitan: { type: mongoose.Schema.Types.ObjectId, ref: 'Rider', required: true },
+	riders: [
+		{
+			riderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Rider', required: true },
+			dateJoin: { type: Number, required: true },
+			dateLeave: Number,
+		},
+	],
 	description: String,
 	groupName: String,
 	link: String,
