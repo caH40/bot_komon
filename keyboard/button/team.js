@@ -9,10 +9,14 @@ export async function teamBtn(rider) {
 		let isCandidate = false;
 		let capitanId;
 
-		const riderDB = await Rider.findOne({ _id: rider._id }).populate('teamId');
+		const riderDB = await Rider.findOne({ _id: rider._id }).populate({
+			path: 'teamId',
+			populate: 'riders.rider',
+		});
+
 		if (rider.teamId) {
 			isAllowed = riderDB.teamId.isAllowed;
-			capitanId = riderDB.teamId.capitan;
+			capitanId = riderDB.teamId.riders[0].rider._id;
 		}
 
 		let isCapitan = false;
