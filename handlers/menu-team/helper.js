@@ -10,6 +10,7 @@ import {
 } from '../../keyboard/keyboard.js';
 import { Rider } from '../../Model/Rider.js';
 import { Team } from '../../Model/Team.js';
+import { secondesToTime } from '../../utility/date-convert.js';
 
 export async function teamMain(ctx) {
 	try {
@@ -33,6 +34,29 @@ export async function teamChooseForJoin(ctx, cbqData) {
 		const userId = ctx.update.callback_query.from.id;
 
 		const riderDB = await Rider.findOne({ telegramId: userId });
+
+		const monthAndHalfInMilliseconds = 45 * 24 * 3600000;
+		const today = new Date().getTime();
+
+		const exTeam = await Team.findOne({ riders: { $elemMatch: { rider: riderDB._id } } });
+		if (exTeam) {
+			const riderForCheck = exTeam.riders.find(
+				rider => rider.rider.toString() === riderDB._id.toString()
+			);
+			if (today - riderForCheck.dateLeave < monthAndHalfInMilliseconds)
+				return await ctx.reply(
+					`Вы выходили из команды ${exTeam.name} ${new Date(
+						riderForCheck.dateLeave
+					).toLocaleString()}. Трансферное окно закрыто до ${new Date(
+						monthAndHalfInMilliseconds + riderForCheck.dateLeave
+					).toLocaleString()}.`
+				);
+			const response = await Team.findOneAndUpdate(
+				{ _id: exTeam._id },
+				{ $pull: { riders: { rider: riderDB._id } } }
+			);
+		}
+
 		const teamDB = await Team.findOneAndUpdate(
 			{ _id: teamId },
 			{ $addToSet: { requestRiders: riderDB._id.toString() } },
@@ -45,12 +69,12 @@ export async function teamChooseForJoin(ctx, cbqData) {
 			await ctx.telegram.sendMessage(
 				capitan.telegramId,
 				`
-${time}. Поступила заявка от райдера ${riderDB.lastName} ${riderDB.firstName} на присоединение к Вашей команде. Для рассмотрение заявок:
-Личный кабинет >>
-Команда >>
-Управление командой >>
-Заявки на вступление в команду >>
-`
+		${time}. Поступила заявка от райдера ${riderDB.lastName} ${riderDB.firstName} на присоединение к Вашей команде. Для рассмотрение заявок:
+		Личный кабинет >>
+		Команда >>
+		Управление командой >>
+		Заявки на вступление в команду >>
+		`
 			);
 			await ctx
 				.reply(
