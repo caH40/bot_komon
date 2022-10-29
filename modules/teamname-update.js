@@ -14,7 +14,7 @@ export async function updateTeamName(seriesId) {
 			for (let j = 0; j < resultsDB.length; j++) {
 				await Result.findOneAndUpdate(
 					{ _id: resultsDB[j]._id },
-					{ $set: { teamCurrent: resultsDB[j].riderId.teamId.name } }
+					{ $set: { teamCurrent: resultsDB[j].riderId.teamId?.name } }
 				);
 			}
 		}

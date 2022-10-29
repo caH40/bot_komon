@@ -8,8 +8,6 @@ export async function getTypes(stages) {
 
 		stages.forEach(stage => {
 			types.forEach(type => {
-				console.log('stage.type', stage.type, 'type.type', type.type);
-				console.log(stage.type === type.type);
 				if (stage.type === type.type) type.quantity++;
 			});
 		});

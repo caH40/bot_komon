@@ -1,8 +1,8 @@
 import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
 import { Result } from '../../Model/Result.js';
-import { Rider } from '../../Model/Rider.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
+import { Team } from '../../Model/Team.js';
 import { resultTeamDes } from './desktop.js';
 import { resultTeamMob } from './mobile.js';
 
@@ -14,8 +14,6 @@ export async function resultsSeriesTeams(ctx, cbqData) {
 		const seriesDB = await Series.findOne({ _id: seriesId });
 		//пока для одного стейджа расчет
 		const stagesDB = await Stage.find({ seriesId, hasResults: true });
-
-		const types = await getTypes(seriesDB);
 
 		let resultsSeries = [];
 		for (let i = 0; i < stagesDB.length; i++) {
@@ -29,32 +27,22 @@ export async function resultsSeriesTeams(ctx, cbqData) {
 			resultsSeries = [...resultsSeries, ...resultsDB];
 		}
 
-		//уникальные имена команд
-		let uniqueName = new Set();
-		resultsSeries.forEach(result => {
-			if (result.teamCurrent) uniqueName.add(result.teamCurrent);
-		});
+		let teamsDB = await Team.find();
 
-		let results = [];
-		//заготовка массива для подсчета очков командам по категориям
+		const teams = [];
 		const categories = ['A', 'B', 'C'];
-		uniqueName.forEach(team => {
-			categories.forEach(category => {
-				results.push({ name: team, category, points: 0 });
-			});
+		teamsDB.forEach(team => {
+			categories.forEach(category => teams.push({ name: team.name, category, points: 0 }));
 		});
 
-		results.forEach(teamWithCat => {
+		teams.forEach(team => {
 			resultsSeries.forEach(result => {
-				if (
-					teamWithCat.name === result.teamCurrent &&
-					teamWithCat.category === result.riderId?.category
-				) {
-					teamWithCat.points = teamWithCat.points + result.pointsStage;
+				if (team.name === result.teamCurrent && team.category === result.riderId?.category) {
+					team.points = team.points + result.pointsStage;
 				}
 			});
 		});
-		console.log(results);
+		// console.log(teams);
 
 		// await ctx.editMessageText(
 		// 	`❗<b>Главное меню. Выбор основных функций.</b>❗`,

@@ -15,6 +15,7 @@ const resultSchema = new Schema({
 	category: String,
 	categoryCurrent: String,
 	teamCurrent: String,
+	isNeedCount: { type: Boolean, default: true },
 	pointsStage: { type: Number, default: 0 },
 	pointsSprint: { type: Number, default: 0 },
 	pointsMountain: { type: Number, default: 0 },

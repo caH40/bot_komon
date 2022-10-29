@@ -13,6 +13,7 @@ import { Stage } from '../../Model/Stage.js';
 import { Team } from '../../Model/Team.js';
 import { updatePointsGeneral } from '../../modules/points-general.js';
 import { updateTeamName } from '../../modules/teamname-update.js';
+import { updateRequiredTypes } from '../../modules/types-required.js';
 
 export async function requestTeam(ctx) {
 	try {
@@ -204,6 +205,7 @@ export async function updatePointsSeries(ctx, cbqData) {
 
 		const seriesId = cbqData.slice(9);
 		const response = await updatePointsGeneral(seriesId);
+		const requiredTypes = await updateRequiredTypes(seriesId);
 		const teamName = await updateTeamName(seriesId);
 
 		const seriesDB = await Series.findOne({ _id: seriesId });
