@@ -30,25 +30,42 @@ export function viewDesktop(data, title = '') {
 
 export function viewMobile(data, title = '') {
 	try {
-		const tableHeader =
-			scheduleChartMobile.rowDLine + scheduleChartMobile.titles + scheduleChartMobile.rowDLine;
 		let body = '';
 
 		data.forEach(row => {
-			body =
-				body +
-				'|' +
-				format(String(row.number), rowSize.schedule.mobile.number) +
-				format(ternary(row.dateStart), rowSize.schedule.mobile.dateStart) +
-				format(row.distance, rowSize.schedule.mobile.distance) +
-				format(row.type, rowSize.schedule.mobile.type) +
-				`\n`;
+			let emoji = row.dateStart < new Date().getTime() ? '✅' : '❗';
+			body = `${body}${emoji} <u>${ternary(row.dateStart)}</u> Этап №${row.number}, мир: ${
+				row.world
+			}, маршрут: ${row.route}, кругов ${row.laps}, ${row.distance}км, ${
+				row.ascent
+			}м, тип заезда: ${row.type}, <a href="${row.link}">Zwift</a>\n\n`;
 		});
-		return `${title}\n${tableHeader}${body}${scheduleChartMobile.rowDLine}`;
+		return `🏆 <b>${title}</b> 🏆\n\n${body}`;
 	} catch (error) {
 		console.log(error);
 	}
 }
+// export function viewMobile(data, title = '') {
+// 	try {
+// 		const tableHeader =
+// 			scheduleChartMobile.rowDLine + scheduleChartMobile.titles + scheduleChartMobile.rowDLine;
+// 		let body = '';
+
+// 		data.forEach(row => {
+// 			body =
+// 				body +
+// 				'|' +
+// 				format(String(row.number), rowSize.schedule.mobile.number) +
+// 				format(ternary(row.dateStart), rowSize.schedule.mobile.dateStart) +
+// 				format(row.distance, rowSize.schedule.mobile.distance) +
+// 				format(row.type, rowSize.schedule.mobile.type) +
+// 				`\n`;
+// 		});
+// 		return `${title}\n${tableHeader}${body}${scheduleChartMobile.rowDLine}`;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
 
 function ternary(date) {
 	return typeof date == 'number' ? new Date(date).toLocaleDateString() : date;

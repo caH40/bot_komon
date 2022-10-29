@@ -8,7 +8,10 @@ export async function scheduleViewMob(ctx, stagesDB, title) {
 			await mainMenuKeyboard(ctx)
 		);
 		await ctx
-			.replyWithHTML('<pre>' + viewMobile(stagesDB, title) + '</pre>', clearCharts)
+			.replyWithHTML(viewMobile(stagesDB, title), {
+				disable_web_page_preview: true,
+				...clearCharts,
+			})
 			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
 		return;
