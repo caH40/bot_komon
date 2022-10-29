@@ -32,10 +32,13 @@ export function viewDesktop(data) {
 }
 export function viewMobile(data) {
 	try {
+		// console.log(data);
+
 		let body = '';
 
 		data.forEach(row => {
-			body = `${body}${row.placeCategory}.	${row.name} - <b>${row.time}</b>\n`;
+			let nameStr = row.riderId ? `${row.riderId.lastName} ${row.riderId.firstName}` : row.name;
+			body = `${body}${row.placeCategory}.	${nameStr} - <b>${row.time}</b>\n`;
 		});
 		return body;
 	} catch (error) {

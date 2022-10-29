@@ -6,13 +6,9 @@ export async function resultsSeriesGeneralMob(ctx, resultsGeneral, category, nam
 	try {
 		const title = `${name}, Ген.зачет,"${category}"`;
 
-		const charts = divisionChart(resultsGeneral);
-
-		for (let i = 0; i < charts.length; i++) {
-			await ctx
-				.replyWithHTML(`<b>${title}</b>\n${viewMobile(charts[i])}`, clearCharts)
-				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
-		}
+		await ctx
+			.replyWithHTML(`<b>${title}</b>\n${viewMobile(resultsGeneral)}`, clearCharts)
+			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
 		return true;
 	} catch (error) {

@@ -32,13 +32,14 @@ export async function resultsSeriesGeneral(ctx, cbqData) {
 		let resultsGeneral = [];
 		zwiftRiderIds.forEach(zwiftRiderId => {
 			points = 0;
+
 			resultsSeries.forEach(elm => {
 				if (zwiftRiderId === elm.zwiftRiderId) points += elm.pointsStage;
 			});
 			resultsGeneral.push({ zwiftRiderId, pointsGeneral: points });
 		});
 		//в будущем брать данные по группе и команде из коллекции Riders
-
+		// console.log(resultsSeries);
 		resultsGeneral = resultsGeneral.map(rider => {
 			const categoryFilter = resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId);
 
@@ -49,6 +50,10 @@ export async function resultsSeriesGeneral(ctx, cbqData) {
 				zwiftRiderId: rider.zwiftRiderId,
 				pointsGeneral: rider.pointsGeneral,
 				name: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId).name,
+				firstName: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId).riderId
+					?.firstName,
+				lastName: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId).riderId
+					?.lastName,
 				category: categoryNew,
 				team: resultsSeries.find(elm => elm.zwiftRiderId === rider.zwiftRiderId).team ?? '',
 			};

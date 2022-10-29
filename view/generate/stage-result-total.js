@@ -42,8 +42,9 @@ export function viewMobileTotal(data) {
 		let body = '';
 
 		data.forEach(row => {
+			let nameStr = row.riderId ? `${row.riderId.lastName} ${row.riderId.firstName}` : row.name;
 			const category = row.riderId ? row.riderId.category : row.categoryCurrent;
-			body = `${body}${row.placeAbsolute}. ${row.name} (${category}) - <b>${row.time}</b>\n`;
+			body = `${body}${row.placeAbsolute}. ${nameStr} (${category}) - <b>${row.time}</b>\n`;
 		});
 		return body;
 	} catch (error) {

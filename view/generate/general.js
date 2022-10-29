@@ -26,7 +26,8 @@ export function viewMobile(data) {
 	try {
 		let body = '';
 		data.forEach(row => {
-			body = `${body}${row.place}. ${row.name}	${row.team} -	<b>${row.pointsGeneral}</b>\n`;
+			let nameStr = row.firstName ? `${row.lastName} ${row.firstName}` : row.name;
+			body = `${body}${row.place}. ${nameStr}	${row.team} -	<b>${row.pointsGeneral}</b>\n`;
 		});
 		return `${body}`;
 	} catch (error) {

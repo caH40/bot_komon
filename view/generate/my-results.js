@@ -30,7 +30,7 @@ export function viewDesktop(data, title = '') {
 export function viewMobile(data) {
 	try {
 		let body = '';
-		console.log(data);
+
 		data.forEach(row => {
 			body = `${body}${row.dateStart}, ${row.nameSeries}, этап: ${row.number}, место аб: ${row.placeAbsolute};\n`;
 		});
