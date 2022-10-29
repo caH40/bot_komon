@@ -38,7 +38,7 @@ export function viewMobile(data) {
 
 		data.forEach(row => {
 			let nameStr = row.riderId ? `${row.riderId.lastName} ${row.riderId.firstName}` : row.name;
-			body = `${body}${row.placeCategory}.	${nameStr} - <b>${row.time}</b>\n`;
+			body = `${body}${row.placeCategory}.	${nameStr} - <u>${row.time}</u>\n`;
 		});
 		return body;
 	} catch (error) {
