@@ -13,12 +13,14 @@ export async function resultsSeriesTeams(ctx, cbqData) {
 
 		const seriesDB = await Series.findOne({ _id: seriesId });
 		//пока для одного стейджа расчет
-		const stageDB = await Stage.find({ seriesId, hasResults: true });
+		const stagesDB = await Stage.find({ seriesId, hasResults: true });
+
+		const types = await getTypes(seriesDB);
 
 		let resultsSeries = [];
-		for (let i = 0; i < stageDB.length; i++) {
+		for (let i = 0; i < stagesDB.length; i++) {
 			let resultsDB = await Result.find({
-				stageId: stageDB[i]._id,
+				stageId: stagesDB[i]._id,
 				riderId: { $ne: undefined },
 			}).populate({
 				path: 'riderId',

@@ -30,7 +30,7 @@ export async function getExcel(ctx, fileName) {
 				route: elm['Маршрут'],
 				laps: elm['Количество кругов'],
 				distance: elm['Общая протяженность, км'],
-				ascent: elm['Общий набор высотты, м'],
+				ascent: elm['Общий набор высоты, м'],
 				type: elm['Тип заезда'],
 				link: elm['Ссылка на заезд в Звифте'],
 			};

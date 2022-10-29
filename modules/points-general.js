@@ -1,3 +1,4 @@
+//обновление очков для каждого результата
 import { Result } from '../Model/Result.js';
 import { Stage } from '../Model/Stage.js';
 import { points } from './points.js';
@@ -12,11 +13,14 @@ export async function updatePointsGeneral(seriesId) {
 				riderId: { $ne: undefined },
 			}).populate('riderId');
 
+			//что делать если время одинаковое
 			resultsDB = resultsDB.sort((a, b) => a.time - b.time);
+
 			let placeA = 0;
 			let placeB = 0;
 			let placeC = 0;
 			let placeW = 0;
+
 			for (let j = 0; j < resultsDB.length; j++) {
 				if (resultsDB[j].riderId?.category === 'A') {
 					placeA++;
