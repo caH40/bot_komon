@@ -101,6 +101,18 @@ export const rowSize = {
 			pointsGeneral: 3,
 		},
 	},
+	teamResult: {
+		desktop: {
+			place: 5,
+			name: 25,
+			points: 5,
+		},
+		mobile: {
+			place: 5,
+			name: 25,
+			points: 5,
+		},
+	},
 	series: {
 		desktop: {
 			name: 23,

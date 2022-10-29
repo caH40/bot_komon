@@ -1,44 +1,35 @@
-import { general, generalChartMobile } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
 import { rowSize } from '../../utility/chart-sizes.js';
+import textJson from '../../locales/ru.json' assert { type: 'json' };
 
 export function viewDesktop(data) {
 	try {
-		const tableHeader = general.rowDLine + general.titles + general.rowDLine;
+		const carts = textJson.charts.teamResults;
+		const tableHeader = carts.line + carts.header + carts.line;
 		let body = '';
-
+		console.log(data);
 		data.forEach(row => {
 			body =
 				body +
 				'|' +
-				format(String(row.place), rowSize.general.desktop.place) +
-				format(String(row.name), rowSize.general.desktop.name) +
-				format(String(row.category), rowSize.general.desktop.team) +
-				format(String(row.points), rowSize.general.desktop.pointsGeneral) +
+				format(String(row.place), rowSize.teamResult.desktop.place) +
+				format(String(row.name), rowSize.teamResult.desktop.name) +
+				format(String(row.points), rowSize.teamResult.desktop.points) +
 				`\n`;
 		});
-		return `${tableHeader}${body}${general.rowDLine}`;
+		return `${tableHeader}${body}${carts.line}`;
 	} catch (error) {
 		console.log(error);
 	}
 }
 export function viewMobile(data) {
 	try {
-		const tableHeader =
-			generalChartMobile.rowDLine + generalChartMobile.titles + generalChartMobile.rowDLine;
 		let body = '';
 
 		data.forEach(row => {
-			body =
-				body +
-				'|' +
-				format(String(row.place), rowSize.general.mobile.place) +
-				format(String(row.name), rowSize.general.mobile.name) +
-				format(String(row.team), rowSize.general.mobile.team) +
-				format(String(row.pointsGeneral), rowSize.general.mobile.pointsGeneral) +
-				`\n`;
+			body = `${body}${row.place}. ${row.name} - ${row.points}\n`;
 		});
-		return `${tableHeader}${body}${generalChartMobile.rowDLine}`;
+		return `${body}`;
 	} catch (error) {
 		console.log(error);
 	}

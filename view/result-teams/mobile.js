@@ -1,16 +1,12 @@
 import { clearCharts } from '../../keyboard/keyboard.js';
-import { divisionChart } from '../../utility/chart-division.js';
 import { viewMobile } from '../generate/result-teams.js';
 
 export async function resultTeamMob(ctx, results, series) {
 	try {
-		const title = `Командный зачет ${series}`;
-
-		const charts = divisionChart(results);
-
-		for (let i = 0; i < charts.length; i++) {
+		for (let i = 0; i < results.length; i++) {
+			let title = `Командный зачет ${series}, "${results[i][0]?.category}"`;
 			await ctx
-				.replyWithHTML(`<pre>${title}\n${viewMobile(charts[i])}</pre>`, clearCharts)
+				.replyWithHTML(`${title}\n${viewMobile(results[i])}`, clearCharts)
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		}
 

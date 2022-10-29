@@ -42,15 +42,24 @@ export async function resultsSeriesTeams(ctx, cbqData) {
 				}
 			});
 		});
-		// console.log(teams);
 
-		// await ctx.editMessageText(
-		// 	`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-		// 	await mainMenuKeyboard(ctx)
-		// );
+		let teamSorted = [];
 
-		if (view === 'Des') return resultTeamDes(ctx, results, seriesDB.name);
-		if (view === 'Mob') return resultTeamMob(ctx, results, seriesDB.name);
+		categories.forEach(category => {
+			let teamCat = teams
+				.filter(team => team.category === category)
+				.sort((a, b) => b.points - a.points);
+			teamCat.forEach((team, index) => (team.place = index + 1));
+			teamSorted.push(teamCat);
+		});
+
+		await ctx.editMessageText(
+			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
+			await mainMenuKeyboard(ctx)
+		);
+
+		if (view === 'Des') return resultTeamDes(ctx, teamSorted, seriesDB.name);
+		if (view === 'Mob') return resultTeamMob(ctx, teamSorted, seriesDB.name);
 	} catch (error) {
 		console.log(error);
 	}
