@@ -34,9 +34,10 @@ export async function protocolToDB(dataResult, seriesId, stageId) {
 			if (response) {
 				await Stage.findOneAndUpdate({ _id: stageId }, { $set: { hasResults: true } });
 			} else {
-				console.log('Ошибка при сохранении данных результатов этапа!');
+				return console.log('Ошибка при сохранении данных результатов этапа!');
 			}
 		}
+		return { results: dataResult, stageId };
 	} catch (error) {
 		console.log(error);
 	}

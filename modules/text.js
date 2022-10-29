@@ -9,6 +9,7 @@ export const text = {
 		successfully: 'Загрузка протокола в БД прошла успешно!',
 		quit: 'Файл удален с сервера.',
 		wrong: 'Наберите /confirm или /quit ',
+		wrongToDB: 'Произошла ошибка при сохранении данных в БД.',
 	},
 
 	upload: {
