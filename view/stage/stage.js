@@ -68,9 +68,9 @@ export async function resultsViewStage(ctx, cbqData) {
 		const title = `${name}, Этап ${seriesNumber}, ${seriesType}, ${categoryStr}`;
 
 		const charts = divisionChart(resultFiltered);
-
+		console.log(resultFiltered);
 		if (view === 'Des') return resultsViewStageDes(ctx, charts, title, category);
-		if (view === 'Mob') return resultsViewStageMob(ctx, charts, title, category);
+		if (view === 'Mob') return resultsViewStageMob(ctx, [resultFiltered], title, category);
 	} catch (error) {
 		console.log(error);
 	}

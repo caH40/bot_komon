@@ -27,24 +27,36 @@ export function viewDesktop(data, title = '') {
 	}
 }
 
-export function viewMobile(data, title = '') {
+export function viewMobile(data) {
 	try {
-		const tableHeader =
-			myResultsChartMobile.rowDLine + myResultsChartMobile.titles + myResultsChartMobile.rowDLine;
 		let body = '';
-
+		console.log(data);
 		data.forEach(row => {
-			body =
-				body +
-				'|' +
-				format(row.nameSeries, rowSize.myResults.mobile.nameSeries) +
-				format(String(row.number), rowSize.myResults.mobile.number) +
-				format(String(row.placeAbsolute), rowSize.myResults.mobile.placeAbsolute) +
-				format(String(row.placeCategory), rowSize.myResults.mobile.placeCategory) +
-				`\n`;
+			body = `${body}${row.dateStart}, ${row.nameSeries}, этап: ${row.number}, место аб: ${row.placeAbsolute};\n`;
 		});
-		return `${title}\n${tableHeader}${body}${myResultsChartMobile.rowDLine}`;
+		return body;
 	} catch (error) {
 		console.log(error);
 	}
 }
+// export function viewMobile(data, title = '') {
+// 	try {
+// 		const tableHeader =
+// 			myResultsChartMobile.rowDLine + myResultsChartMobile.titles + myResultsChartMobile.rowDLine;
+// 		let body = '';
+
+// 		data.forEach(row => {
+// 			body =
+// 				body +
+// 				'|' +
+// 				format(row.nameSeries, rowSize.myResults.mobile.nameSeries) +
+// 				format(String(row.number), rowSize.myResults.mobile.number) +
+// 				format(String(row.placeAbsolute), rowSize.myResults.mobile.placeAbsolute) +
+// 				format(String(row.placeCategory), rowSize.myResults.mobile.placeCategory) +
+// 				`\n`;
+// 		});
+// 		return `${title}\n${tableHeader}${body}${myResultsChartMobile.rowDLine}`;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
