@@ -64,7 +64,8 @@ export async function resultsViewStage(ctx, cbqData) {
 			elm.gapPrev = secondesToTime(elm.gapPrev);
 		});
 
-		const title = `${name}, Этап ${seriesNumber}, ${seriesType}, Категория "${category}"`;
+		const categoryStr = category === 'T' ? `Общий протокол` : `Категория "${category}"`;
+		const title = `${name}, Этап ${seriesNumber}, ${seriesType}, ${categoryStr}`;
 
 		const charts = divisionChart(resultFiltered);
 

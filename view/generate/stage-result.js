@@ -32,21 +32,33 @@ export function viewDesktop(data) {
 }
 export function viewMobile(data) {
 	try {
-		const tableHeader =
-			protocolChartMobile.rowDLine + protocolChartMobile.titles + protocolChartMobile.rowDLine;
 		let body = '';
 
 		data.forEach(row => {
-			body =
-				body +
-				'|' +
-				format(String(row.placeCategory), rowSize.protocol.mobile.placeCategory) +
-				format(row.name, rowSize.protocol.mobile.name) +
-				format(String(row.time), rowSize.protocol.mobile.time) +
-				`\n`;
+			body = `${body}${row.placeCategory}.	${row.name} - <b>${row.time}</b>\n`;
 		});
-		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;
+		return body;
 	} catch (error) {
 		console.log(error);
 	}
 }
+// export function viewMobile(data) {
+// 	try {
+// 		const tableHeader =
+// 			protocolChartMobile.rowDLine + protocolChartMobile.titles + protocolChartMobile.rowDLine;
+// 		let body = '';
+
+// 		data.forEach(row => {
+// 			body =
+// 				body +
+// 				'|' +
+// 				format(String(row.placeCategory), rowSize.protocol.mobile.placeCategory) +
+// 				format(row.name, rowSize.protocol.mobile.name) +
+// 				format(String(row.time), rowSize.protocol.mobile.time) +
+// 				`\n`;
+// 		});
+// 		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }

@@ -39,25 +39,38 @@ export function viewDesktopTotal(data) {
 }
 export function viewMobileTotal(data) {
 	try {
-		const tableHeader =
-			protocolChartMobileTotal.rowDLine +
-			protocolChartMobileTotal.titles +
-			protocolChartMobileTotal.rowDLine;
 		let body = '';
 
 		data.forEach(row => {
 			const category = row.riderId ? row.riderId.category : row.categoryCurrent;
-			body =
-				body +
-				'|' +
-				format(String(row.placeAbsolute), rowSize.protocolTotal.mobile.placeAbsolute) +
-				format(row.name, rowSize.protocolTotal.mobile.name) +
-				format(String(row.time), rowSize.protocolTotal.mobile.time) +
-				format(category, rowSize.protocolTotal.mobile.category) +
-				`\n`;
+			body = `${body}${row.placeAbsolute}. ${row.name} (${category}) - <b>${row.time}</b>\n`;
 		});
-		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;
+		return body;
 	} catch (error) {
 		console.log(error);
 	}
 }
+// export function viewMobileTotal(data) {
+// 	try {
+// 		const tableHeader =
+// 			protocolChartMobileTotal.rowDLine +
+// 			protocolChartMobileTotal.titles +
+// 			protocolChartMobileTotal.rowDLine;
+// 		let body = '';
+
+// 		data.forEach(row => {
+// 			const category = row.riderId ? row.riderId.category : row.categoryCurrent;
+// 			body =
+// 				body +
+// 				'|' +
+// 				format(String(row.placeAbsolute), rowSize.protocolTotal.mobile.placeAbsolute) +
+// 				format(row.name, rowSize.protocolTotal.mobile.name) +
+// 				format(String(row.time), rowSize.protocolTotal.mobile.time) +
+// 				format(category, rowSize.protocolTotal.mobile.category) +
+// 				`\n`;
+// 		});
+// 		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }

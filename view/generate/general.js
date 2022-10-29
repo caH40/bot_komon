@@ -24,22 +24,32 @@ export function viewDesktop(data) {
 }
 export function viewMobile(data) {
 	try {
-		const tableHeader =
-			generalChartMobile.rowDLine + generalChartMobile.titles + generalChartMobile.rowDLine;
 		let body = '';
-
 		data.forEach(row => {
-			body =
-				body +
-				'|' +
-				format(String(row.place), rowSize.general.mobile.place) +
-				format(String(row.name), rowSize.general.mobile.name) +
-				format(String(row.team), rowSize.general.mobile.team) +
-				format(String(row.pointsGeneral), rowSize.general.mobile.pointsGeneral) +
-				`\n`;
+			body = `${body}${row.place}. ${row.name}	${row.team} -	<b>${row.pointsGeneral}</b>\n`;
 		});
-		return `${tableHeader}${body}${generalChartMobile.rowDLine}`;
+		return `${body}`;
 	} catch (error) {
 		console.log(error);
 	}
+	// export function viewMobile(data) {
+	// 	try {
+	// 		const tableHeader =
+	// 			generalChartMobile.rowDLine + generalChartMobile.titles + generalChartMobile.rowDLine;
+	// 		let body = '';
+
+	// 		data.forEach(row => {
+	// 			body =
+	// 				body +
+	// 				'|' +
+	// 				format(String(row.place), rowSize.general.mobile.place) +
+	// 				format(String(row.name), rowSize.general.mobile.name) +
+	// 				format(String(row.team), rowSize.general.mobile.team) +
+	// 				format(String(row.pointsGeneral), rowSize.general.mobile.pointsGeneral) +
+	// 				`\n`;
+	// 		});
+	// 		return `${tableHeader}${body}${generalChartMobile.rowDLine}`;
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
 }

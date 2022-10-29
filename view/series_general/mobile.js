@@ -10,7 +10,7 @@ export async function resultsSeriesGeneralMob(ctx, resultsGeneral, category, nam
 
 		for (let i = 0; i < charts.length; i++) {
 			await ctx
-				.replyWithHTML(`<pre>${title}\n${viewMobile(charts[i])}</pre>`, clearCharts)
+				.replyWithHTML(`<b>${title}</b>\n${viewMobile(charts[i])}`, clearCharts)
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		}
 

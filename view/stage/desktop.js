@@ -1,7 +1,7 @@
 import { clearCharts } from '../../keyboard/keyboard.js';
-import { viewDesktopTotal } from '../generate/stage-result-total .js';
-import { viewDesktop } from '../generate/stage-result.js';
+import { viewDesktopTotal } from '../generate/stage-result-total.js';
 
+import { viewDesktop } from '../generate/stage-result.js';
 export async function resultsViewStageDes(ctx, charts, title, category) {
 	try {
 		if (category === 'T') {
