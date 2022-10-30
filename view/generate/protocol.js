@@ -1,4 +1,3 @@
-import { protocol } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
 import { rowSize } from '../../utility/chart-sizes.js';
 import textJson from '../../locales/ru.json' assert { type: 'json' };
@@ -16,7 +15,7 @@ export function viewDesktop(data) {
 				format(String(row.placeAbsolute), rowSize.protocolDl.desktop.placeAbsolute) +
 				format(row.name, rowSize.protocolDl.desktop.name) +
 				format(String(row.time), rowSize.protocolDl.desktop.time) +
-				format(row.gap ? '+' + row.gap : row.gap, rowSize.protocolTotal.desktop.gap) +
+				format(row.gap ? '+' + row.gap : row.gap, rowSize.protocolDl.desktop.gap) +
 				format(String(row.watt), rowSize.protocolDl.desktop.watt) +
 				format(String(row.wattPerKg), rowSize.protocolDl.desktop.wattPerKg) +
 				format(String(row.weightInGrams), rowSize.protocolDl.desktop.weightInGrams) +

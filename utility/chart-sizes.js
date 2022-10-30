@@ -71,7 +71,7 @@ export const rowSize = {
 			placeAbsolute: 4,
 			name: 30,
 			time: 13,
-			gap: 8,
+			gap: 14,
 			watt: 7,
 			wattPerKg: 8,
 			weightInGrams: 6,

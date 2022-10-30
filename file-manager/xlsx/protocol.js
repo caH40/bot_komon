@@ -3,6 +3,7 @@ import XLSX from 'xlsx';
 import { changeTitles } from '../../utility/excel.js';
 import { checkFileName } from '../name-check.js';
 import fs from 'fs';
+import { protocolPrep } from '../../modules/preparation-data.js';
 
 export async function getProtocolFile(ctx, fileName) {
 	try {
@@ -46,33 +47,14 @@ async function uploadXLSX(ctx, fileName) {
 		console.log(error);
 	}
 }
+
 async function uploadJSON(ctx, fileName) {
 	try {
 		const __dirname = path.resolve();
 		let fileJson = fs.readFileSync(path.resolve(__dirname, 'src/', `./${fileName}`), 'utf8');
-		// fileJson = fileJson[0];
-		fileJson = JSON.parse(fileJson);
 
-		const results = [];
-		fileJson.forEach(result => {
-			let resultRider = {
-				zwiftRiderId: result.profileId,
-				placeAbsolute: result.rank,
-				name: `${result.profileData.firstName} ${result.profileData.lastName}`,
-				wattPerKg:
-					Math.round((result.sensorData.avgWatts / result.profileData.weightInGrams) * 100000) /
-					100,
-				watt: result.sensorData.avgWatts,
-				weightInGrams: result.profileData.weightInGrams,
-				heightInCentimeters: result.profileData.heightInCentimeters,
-				avgHeartRate: result.sensorData.heartRateData.avgHeartRate,
-				time: result.activityData.durationInMilliseconds,
+		const results = protocolPrep(fileJson);
 
-				gender: result.profileData.gender,
-				imageSrc: result.profileData.imageSrc,
-			};
-			results.push(resultRider);
-		});
 		return results;
 	} catch (error) {
 		console.log(error);
