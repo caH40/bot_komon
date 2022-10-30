@@ -7,15 +7,7 @@ import { resultGeneral, resultStage, resultStages } from './helper.js';
 
 export async function handlerResults(ctx, cbqData) {
 	try {
-		if (
-			!(
-				cbqData === 'main_series' ||
-				cbqData.includes('series_') ||
-				cbqData.includes('result_') ||
-				cbqData.includes('view_') ||
-				cbqData.includes('stage_')
-			)
-		)
+		if (!(cbqData.includes('result_') || cbqData.includes('view_') || cbqData.includes('stage_')))
 			return;
 
 		if (cbqData.includes('view_')) {
@@ -26,18 +18,6 @@ export async function handlerResults(ctx, cbqData) {
 			);
 		}
 
-		if (cbqData === 'main_series')
-			return ctx.editMessageText(
-				'<b>🏆 Результаты заездов серий.\nВыбор серии.</b>',
-				await seriesBtn()
-			);
-
-		if (cbqData.includes('series_')) {
-			return await ctx.editMessageText(
-				'<b>🏆 Результаты заездов.\nВыбор зачетов. Выбор результатов отдельных этапов.</b>',
-				await resultSeriesKeyboard(cbqData)
-			);
-		}
 		// четвертый уровень меню
 		if (cbqData.includes('result_Stages_')) return await resultStages(ctx, cbqData);
 

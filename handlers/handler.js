@@ -1,5 +1,5 @@
 import { teamLeaveDB } from '../controllersDB/team-leave.js';
-import { mainMenuKeyboard, mobVsDesKeyboard } from '../keyboard/keyboard.js';
+import { mainMenuKeyboard, mobVsDesKeyboard, resultSeriesKeyboard } from '../keyboard/keyboard.js';
 import { beingDeveloped } from '../modules/beingDeveloped.js';
 import { myResults } from '../view/myresults/myresults-view.js';
 
@@ -13,6 +13,7 @@ import { handlerAdmin } from './menu_admin/handler-menu.js';
 import { account, getSchedule } from './helper-main.js';
 import { getScheduleWeekly } from '../modules/schedule-weekle.js';
 import { resultsSeriesTeams } from '../view/result-teams/teams.js';
+import { seriesBtn } from '../keyboard/button/schedule-btn.js';
 
 export async function handler(ctx, cbqData) {
 	try {
@@ -46,6 +47,18 @@ export async function handler(ctx, cbqData) {
 			return await ctx.editMessageText(
 				'<b>👨‍💻 Выбор используемого устройства.</b>',
 				mobVsDesKeyboard(cbqData)
+			);
+		}
+		if (cbqData === 'm_1_')
+			return ctx.editMessageText(
+				'<b>🏆 Результаты заездов серий.\nВыбор серии.</b>',
+				await seriesBtn()
+			);
+
+		if (cbqData.includes('m_1_all__')) {
+			return await ctx.editMessageText(
+				'<b>🏆 Результаты заездов.\nВыбор зачетов. Выбор результатов отдельных этапов.</b>',
+				await resultSeriesKeyboard(cbqData)
 			);
 		}
 

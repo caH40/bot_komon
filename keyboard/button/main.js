@@ -6,7 +6,7 @@ export async function mainBtn(ctx) {
 		const isAdmin = await verifyAdmin(ctx);
 		const isRoot = await verifyRoot(ctx);
 		return [
-			[Markup.button.callback('Результаты заездов 🏆', 'main_series')],
+			[Markup.button.callback('Результаты заездов 🏆', 'm_1_')],
 			[Markup.button.callback('Расписание заездов 📅', 'm_2_')],
 			[Markup.button.callback('Личный кабинет 🔑', 'main_account')],
 			isAdmin || isRoot ? [Markup.button.callback('Админ кабинет 🛠️', 'm_4_')] : [],

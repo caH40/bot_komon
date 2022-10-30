@@ -52,7 +52,7 @@ export function seriesKeyboard(series) {
 	const keyboard = {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			...series.map(elm => [Markup.button.callback(`${elm.name} 🚵‍♀️`, 'series_' + elm._id)]),
+			...series.map(elm => [Markup.button.callback(`${elm.name} 🚵‍♀️`, 'm_1_all__' + elm._id)]),
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};

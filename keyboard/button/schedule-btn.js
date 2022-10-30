@@ -20,7 +20,7 @@ export async function seriesBtn() {
 }
 export async function resultSeriesBtn(cbqData) {
 	try {
-		const seriesId = cbqData.slice(7);
+		const seriesId = cbqData.slice(9);
 		const { hasGeneral, hasTeams } = await Series.findOne({ _id: seriesId });
 
 		const buttons = [
