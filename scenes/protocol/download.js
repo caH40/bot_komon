@@ -1,12 +1,12 @@
 import { Scenes } from 'telegraf';
 import { getFileTelegram } from '../../file-manager/file-get.js';
-import { text } from '../../modules/text.js';
+import textJson from '../../locales/ru.json' assert { type: 'json' };
 
 export const downloadProtocolBase = () => {
 	try {
 		const protocol = new Scenes.BaseScene('getProtocol');
 		protocol.enter(async ctx => {
-			await ctx.reply(text.enter);
+			await ctx.reply(textJson.scenes.download.enter);
 		});
 
 		protocol.on('document', async ctx => {
@@ -18,7 +18,7 @@ export const downloadProtocolBase = () => {
 		});
 
 		protocol.command('quit', async ctx => await ctx.scene.leave('getProtocol'));
-		protocol.on('text', async ctx => await ctx.reply(text.wrong));
+		protocol.on('text', async ctx => await ctx.reply(textJson.scenes.download.wrong));
 		return protocol;
 	} catch (error) {
 		console.log(error);

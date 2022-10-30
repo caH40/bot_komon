@@ -1,4 +1,4 @@
-import { downloadXlsx } from './axios/download.js';
+import { downloadFile } from './axios/download.js';
 
 export async function getFileTelegram(ctx, dlPath) {
 	try {
@@ -7,16 +7,20 @@ export async function getFileTelegram(ctx, dlPath) {
 		ctx.session.data.fileName = fileName;
 
 		const mimeType = ctx.message.document.mime_type;
-		const mimeTypeSample = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-		if (mimeType === mimeTypeSample) {
+		const mimeTypeXlsx = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+		const mimeTypeJSON = 'application/json';
+		if (mimeType === mimeTypeXlsx || mimeType === mimeTypeJSON) {
 		} else {
-			ctx.reply('Файл должен быть файлом Excel и иметь расширение - xlsx\nПопробуйте еще раз.');
+			ctx.reply(
+				'Файл должен быть файлом Excel или JSON. Расширение - xlsx или json\nПопробуйте еще раз.'
+			);
 			return false;
 		}
+
 		const resGetFile = await ctx.telegram.getFile(fileId);
 		const filePath = resGetFile.file_path;
 
-		const isExistsFile = await downloadXlsx(fileName, filePath, dlPath);
+		const isExistsFile = await downloadFile(fileName, filePath, dlPath);
 
 		if (isExistsFile) {
 			ctx.reply('Файл с таким именем уже существует\nПопробуйте еще раз.');

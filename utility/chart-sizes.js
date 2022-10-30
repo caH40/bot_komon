@@ -66,6 +66,20 @@ export const rowSize = {
 			time: 8,
 		},
 	},
+	protocolDl: {
+		desktop: {
+			placeAbsolute: 4,
+			name: 30,
+			time: 13,
+			gap: 8,
+			watt: 7,
+			wattPerKg: 8,
+			weightInGrams: 6,
+			heightInCentimeters: 5,
+			avgHeartRate: 5,
+			gender: 7,
+		},
+	},
 	protocolTotal: {
 		desktop: {
 			placeAbsolute: 4,

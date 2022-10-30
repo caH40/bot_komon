@@ -32,10 +32,7 @@ export function viewDesktop(data) {
 }
 export function viewMobile(data) {
 	try {
-		// console.log(data);
-
 		let body = '';
-
 		data.forEach(row => {
 			let nameStr = row.riderId ? `${row.riderId.lastName} ${row.riderId.firstName}` : row.name;
 			body = `${body}${row.placeCategory}.	${nameStr} - <u>${row.time}</u>\n`;
@@ -45,23 +42,3 @@ export function viewMobile(data) {
 		console.log(error);
 	}
 }
-// export function viewMobile(data) {
-// 	try {
-// 		const tableHeader =
-// 			protocolChartMobile.rowDLine + protocolChartMobile.titles + protocolChartMobile.rowDLine;
-// 		let body = '';
-
-// 		data.forEach(row => {
-// 			body =
-// 				body +
-// 				'|' +
-// 				format(String(row.placeCategory), rowSize.protocol.mobile.placeCategory) +
-// 				format(row.name, rowSize.protocol.mobile.name) +
-// 				format(String(row.time), rowSize.protocol.mobile.time) +
-// 				`\n`;
-// 		});
-// 		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// }

@@ -5,7 +5,7 @@ import path from 'path';
 
 const __dirname = path.resolve();
 // сохранение файла на сервере
-export async function downloadXlsx(name, pathTelegram, dlPath) {
+export async function downloadFile(name, pathTelegram, dlPath) {
 	try {
 		const url = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/${pathTelegram}`;
 
