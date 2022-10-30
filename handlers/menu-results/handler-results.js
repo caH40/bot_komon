@@ -26,9 +26,7 @@ export async function handlerResults(ctx, cbqData) {
 		// результаты
 
 		//необходимо искать сначала более длинный составной ключ
-		if (cbqData.includes('result_General_')) return await resultGeneral(ctx, cbqData);
 		// отриcовка таблиц
-		if (cbqData.includes('result_GSeries_')) return await resultsSeriesGeneral(ctx, cbqData);
 
 		if (cbqData.includes('result_Stage_')) return await resultsViewStage(ctx, cbqData);
 	} catch (error) {

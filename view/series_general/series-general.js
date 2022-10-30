@@ -1,19 +1,13 @@
-import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
 import { Result } from '../../Model/Result.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
-import { resultsSeriesGeneralDes } from './desktop.js';
-import { resultsSeriesGeneralMob } from './mobile.js';
+import { posting } from './posting.js';
 
 export async function resultsSeriesGeneral(ctx, cbqData) {
 	try {
-		const view = cbqData.slice(0, 3);
-		const seriesId = cbqData.slice(21);
-		const category = cbqData.slice(19, 20);
-		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		const seriesId = cbqData.slice(16);
+		const category = cbqData.slice(14, 15);
+
 		const stagesDB = await Stage.find({ seriesId, hasResults: true });
 		const seriesIds = stagesDB.map(stage => stage._id);
 
@@ -59,7 +53,7 @@ export async function resultsSeriesGeneral(ctx, cbqData) {
 			};
 		});
 
-		const { name, type } = await Series.findOne({ _id: seriesId });
+		const { name } = await Series.findOne({ _id: seriesId });
 
 		resultsGeneral = resultsGeneral
 			.filter(rider => rider.category === category)
@@ -68,8 +62,7 @@ export async function resultsSeriesGeneral(ctx, cbqData) {
 			rider.place = index + 1;
 		});
 
-		if (view === 'Des') return resultsSeriesGeneralDes(ctx, resultsGeneral, category, name, type);
-		if (view === 'Mob') return resultsSeriesGeneralMob(ctx, resultsGeneral, category, name, type);
+		return posting(ctx, resultsGeneral, category, name);
 	} catch (error) {
 		console.log(error);
 	}

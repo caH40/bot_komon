@@ -14,6 +14,8 @@ import { account, getSchedule } from './helper-main.js';
 import { getScheduleWeekly } from '../modules/schedule-weekle.js';
 import { resultsSeriesTeams } from '../view/result-teams/teams.js';
 import { seriesBtn } from '../keyboard/button/schedule-btn.js';
+import { resultGeneral } from './menu-results/helper.js';
+import { resultsSeriesGeneral } from '../view/series_general/series-general.js';
 
 export async function handler(ctx, cbqData) {
 	try {
@@ -29,7 +31,7 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		console.log(cbqData); //❗❗❗
+		// console.log(cbqData); //❗❗❗
 
 		// первый уровень меню
 		if (cbqData === 'main')
@@ -37,6 +39,7 @@ export async function handler(ctx, cbqData) {
 				`❗<b>Главное меню. Выбор основных функций.</b>❗`,
 				await mainMenuKeyboard(ctx)
 			);
+
 		if (cbqData.includes('_m_1_all_3_V--')) return await resultsSeriesTeams(ctx, cbqData);
 		if (cbqData.includes('_m_3_1_V--myResults')) return await myResults(ctx, cbqData);
 		if (cbqData.includes('_m_3_2_V--listRiders')) return await listRiders(ctx, cbqData);
@@ -61,6 +64,8 @@ export async function handler(ctx, cbqData) {
 				await resultSeriesKeyboard(cbqData)
 			);
 		}
+		if (cbqData.includes('m_1_all_2__')) return await resultGeneral(ctx, cbqData);
+		if (cbqData.includes('m_1_all_2_all_')) return await resultsSeriesGeneral(ctx, cbqData);
 
 		//меню "Команда"
 		if (cbqData.includes('m_3_2')) return await handlerTeam(ctx, cbqData);

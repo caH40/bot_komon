@@ -118,10 +118,10 @@ export function resultSeriesGeneralKeyboard(seriesId) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			[Markup.button.callback('Категория "A" 💪', `view_result_GSeries_A_${seriesId}`)],
-			[Markup.button.callback('Категория "B" 👊', `view_result_GSeries_B_${seriesId}`)],
-			[Markup.button.callback('Категория "C" ✌️', `view_result_GSeries_C_${seriesId}`)],
-			[Markup.button.callback('Категория "W" 👍', `view_result_GSeries_W_${seriesId}`)],
+			[Markup.button.callback('Категория "A" 💪', `m_1_all_2_all_A_${seriesId}`)],
+			[Markup.button.callback('Категория "B" 👊', `m_1_all_2_all_B_${seriesId}`)],
+			[Markup.button.callback('Категория "C" ✌️', `m_1_all_2_all_C_${seriesId}`)],
+			[Markup.button.callback('Категория "W" 👍', `m_1_all_2_all_W_${seriesId}`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};

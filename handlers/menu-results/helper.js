@@ -37,7 +37,7 @@ export async function resultStage(ctx, cbqData) {
 }
 export async function resultGeneral(ctx, cbqData) {
 	try {
-		const _id = cbqData.slice(15);
+		const _id = cbqData.slice(11);
 		const { name } = await Series.findOne({ _id });
 
 		return await ctx.editMessageText(
