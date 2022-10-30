@@ -6,6 +6,7 @@ export function changeTitles(dataXlsx) {
 				zwiftId: elm['zwiftid'],
 				teamCurrent: elm['Команда'],
 				time: elm['Время'],
+				timeString: elm['Время'],
 				gap: elm['Отставание'],
 				placeAbsolute: elm['Место общее'],
 				placeCategory: elm['Место в группе'],

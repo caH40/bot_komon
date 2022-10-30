@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import { session, Telegraf } from 'telegraf';
 import mongoose from 'mongoose';
-import moment from 'moment';
 
 import { start } from './controllers/start.js';
 import { help } from './controllers/help.js';
@@ -9,7 +8,6 @@ import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
 import { filterMessage } from './middleware/filter-message.js';
 import { activationScenes } from './scenes/activation-scenes.js';
-import { secondesToTimeThousandths } from './utility/date-convert.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -27,11 +25,6 @@ bot.use(filterMessage);
 bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
 bot.command('main', async ctx => await mainMenu(ctx));
-bot.command('test', async ctx => {
-	const time = 13538155;
-	const newTime = secondesToTimeThousandths(time);
-	console.log(newTime);
-});
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 
 bot.launch();
