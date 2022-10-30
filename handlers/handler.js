@@ -28,7 +28,7 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		// console.log(cbqData); //❗❗❗
+		console.log(cbqData); //❗❗❗
 
 		// первый уровень меню
 		if (cbqData === 'main')
@@ -62,8 +62,10 @@ export async function handler(ctx, cbqData) {
 		const isCompleted = await handlerResults(ctx, cbqData);
 		if (isCompleted) return;
 
-		if (cbqData === 'main_schedule') return await getSchedule(ctx);
-		if (cbqData === 'm_1_V') return await getScheduleWeekly(ctx);
+		//расписание заездов
+		if (cbqData === 'm_2_') return await getSchedule(ctx);
+		if (cbqData.includes('m_2_all__')) return await scheduleView(ctx, cbqData);
+		if (cbqData === 'm_2_V') return await getScheduleWeekly(ctx);
 
 		if (cbqData === 'main_account') return await account(ctx);
 
@@ -72,7 +74,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData === 'admin_getSchedule') return await ctx.scene.enter('downloadSchedule');
 		// отриcовка таблиц
 		// расписание
-		if (cbqData.includes('schedule_')) return await scheduleView(ctx, cbqData);
+
 		if (cbqData === 'clear') return;
 		await beingDeveloped(ctx);
 	} catch (error) {

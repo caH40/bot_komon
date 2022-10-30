@@ -63,8 +63,8 @@ export function scheduleKeyboard(series) {
 	const keyboard = {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			[Markup.button.callback('Еженедельные заезды 📌', 'm_1_V')],
-			...series.map(elm => [Markup.button.callback(`${elm.name} 🚵‍♀️`, 'view_schedule_' + elm._id)]),
+			[Markup.button.callback('Еженедельные заезды 📌', 'm_2_V')],
+			...series.map(elm => [Markup.button.callback(`${elm.name} 🚵‍♀️`, 'm_2_all__' + elm._id)]),
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};

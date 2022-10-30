@@ -2,6 +2,7 @@ import { scheduleChart, scheduleChartMobile } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
 import { rowSize } from '../../utility/chart-sizes.js';
 
+// для отображения таблицы при загрузке новых протоколов с результатами
 export function viewDesktop(data, title = '') {
 	try {
 		const tableHeader = scheduleChart.rowDLine + scheduleChart.titles + scheduleChart.rowDLine;
@@ -28,7 +29,7 @@ export function viewDesktop(data, title = '') {
 	}
 }
 
-export function viewMobile(data, title = '') {
+export function generateView(data, title = '') {
 	try {
 		let body = '';
 
