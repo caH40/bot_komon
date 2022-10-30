@@ -13,7 +13,7 @@ export function protocolPrep(fileJson) {
 		const results = [];
 
 		fileJson.forEach(result => {
-			const time = secondesToTime(result.activityData.durationInMilliseconds);
+			const timeString = secondesToTime(result.activityData.durationInMilliseconds);
 			const wattPerKg =
 				Math.round((result.sensorData.avgWatts / result.profileData.weightInGrams) * 100000) / 100;
 			const name = `${result.profileData.firstName} ${result.profileData.lastName}`;
@@ -25,7 +25,7 @@ export function protocolPrep(fileJson) {
 			if (result.profileData.gender === 'FEMALE') gender = 'женский';
 
 			let resultRider = {
-				zwiftRiderId: result.profileId,
+				zwiftId: result.profileId,
 				placeAbsolute: result.rank,
 				name,
 				wattPerKg,
@@ -33,7 +33,8 @@ export function protocolPrep(fileJson) {
 				weightInGrams: result.profileData.weightInGrams,
 				heightInCentimeters: result.profileData.heightInCentimeters,
 				avgHeartRate: result.sensorData.heartRateData.avgHeartRate,
-				time,
+				time: result.activityData.durationInMilliseconds,
+				timeString,
 				gap,
 				gender,
 				imageSrc: result.profileData.imageSrc,

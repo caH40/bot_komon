@@ -21,6 +21,11 @@ const resultSchema = new Schema({
 	pointsMountain: { type: Number, default: 0 },
 	isUnderChecking: { type: String, default: false },
 	comment: String,
+	weightInGrams: Number,
+	heightInCentimeters: Number,
+	avgHeartRate: Number,
+	gender: String,
+	imageSrc: String,
 });
 
 export const Result = model('Result', resultSchema);
