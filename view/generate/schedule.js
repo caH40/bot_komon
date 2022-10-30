@@ -34,11 +34,13 @@ export function viewMobile(data, title = '') {
 
 		data.forEach(row => {
 			let emoji = row.dateStart < new Date().getTime() ? '✅' : '❗';
-			body = `${body}${emoji} <u>${ternary(row.dateStart)}</u> Этап №${row.number}, мир: ${
+			body = `${body}${emoji} <u>${ternary(row.dateStart)} Этап №${row.number}</u>\nМир: <i>${
 				row.world
-			}, маршрут: ${row.route}, кругов ${row.laps}, ${row.distance}км, ${
-				row.ascent
-			}м, тип заезда: ${row.type}, <a href="${row.link}">Zwift</a>\n\n`;
+			}</i>, маршрут: <i>${row.route}</i>, кругов <i>${row.laps}</i>, <i>${
+				row.distance
+			}км</i>, <i>${row.ascent}м</i>, тип заезда: <i>${row.type}</i>, <a href="${
+				row.link
+			}">Zwift</a>\n\n`;
 		});
 		return `🏆 <b>${title}</b> 🏆\n\n${body}`;
 	} catch (error) {
