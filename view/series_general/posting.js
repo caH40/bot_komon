@@ -1,12 +1,10 @@
-import { clearCharts, mainMenuKeyboard } from '../../keyboard/keyboard.js';
+import { clearCharts } from '../../keyboard/keyboard.js';
+import { mainMenu } from '../../keyboard/main-menu.js';
 import { generateView } from '../generate/general.js';
 
 export async function posting(ctx, resultsGeneral, category, name) {
 	try {
-		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		await mainMenu(ctx);
 
 		const title = `${name}, Ген.зачет,"${category}"`;
 

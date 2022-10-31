@@ -1,6 +1,5 @@
 import { addRiderDB, notAddRiderDB } from '../../controllersDB/team-add-rider.js';
 import {
-	mainMenuKeyboard,
 	teamAddRiderKeyboard,
 	teamKeyboard,
 	teamLeaveKeyboard,
@@ -8,9 +7,9 @@ import {
 	teamRemoveRiderKeyboard,
 	teamsKeyboard,
 } from '../../keyboard/keyboard.js';
+import { mainMenu } from '../../keyboard/main-menu.js';
 import { Rider } from '../../Model/Rider.js';
 import { Team } from '../../Model/Team.js';
-import { secondesToTime } from '../../utility/date-convert.js';
 
 export async function teamMain(ctx) {
 	try {
@@ -88,10 +87,7 @@ export async function teamChooseForJoin(ctx, cbqData) {
 				)
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		}
-		return await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		return await mainMenu(ctx);
 	} catch (error) {
 		console.log(error);
 	}
@@ -116,10 +112,7 @@ export async function teamJoin(ctx) {
 
 export async function teamCreate(ctx) {
 	try {
-		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		await mainMenu(ctx);
 		return await ctx.scene.enter('firstSceneCreateTeam');
 	} catch (error) {
 		console.log(error);
@@ -242,10 +235,7 @@ export async function teamRemove(ctx) {
 			.reply(`Вы удалили команду "${riderDB.teamId.name}"`)
 			.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
-		return await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		return mainMenu(ctx);
 	} catch (error) {
 		console.log(error);
 	}

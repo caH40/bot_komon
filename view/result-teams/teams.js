@@ -1,4 +1,4 @@
-import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
+import { mainMenu } from '../../keyboard/main-menu.js';
 import { Result } from '../../Model/Result.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
@@ -51,10 +51,7 @@ export async function resultsSeriesTeams(ctx, cbqData) {
 			teamSorted.push(teamCat);
 		});
 
-		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		await mainMenu(ctx);
 
 		return posting(ctx, teamSorted, seriesDB.name);
 	} catch (error) {

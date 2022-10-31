@@ -5,8 +5,8 @@ import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
 import { divisionChart } from '../../utility/chart-division.js';
 import { secondesToTime, secondesToTimeThousandths } from '../../utility/date-convert.js';
-import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
 import { gapValue, maxValue } from './utilites.js';
+import { mainMenu } from '../../keyboard/main-menu.js';
 
 export async function resultsViewStage(ctx, cbqData) {
 	try {
@@ -14,10 +14,7 @@ export async function resultsViewStage(ctx, cbqData) {
 		const category = cbqData.slice(17, 18);
 		const stageId = cbqData.slice(19);
 
-		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		await mainMenu(ctx);
 
 		const stagesDB = await Stage.find({ _id: stageId });
 		const seriesId = stagesDB[0].seriesId;

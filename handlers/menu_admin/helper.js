@@ -2,10 +2,9 @@ import {
 	adminCatRidersFromStageKeyboard,
 	adminCatRidersKeyboard,
 	adminPointsSeriesKeyboard,
-	mainMenuKeyboard,
 	teamForApprovalKeyboard,
-	teamKeyboard,
 } from '../../keyboard/keyboard.js';
+import { mainMenu } from '../../keyboard/main-menu.js';
 import { Result } from '../../Model/Result.js';
 import { Rider } from '../../Model/Rider.js';
 import { Series } from '../../Model/Series.js';
@@ -198,10 +197,7 @@ export async function pointsSeries(ctx) {
 
 export async function updatePointsSeries(ctx, cbqData) {
 	try {
-		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		await mainMenu(ctx);
 
 		const seriesId = cbqData.slice(9);
 		const response = await updatePointsGeneral(seriesId);

@@ -1,4 +1,4 @@
-import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
+import { mainMenu } from '../../keyboard/main-menu.js';
 import { Result } from '../../Model/Result.js';
 import { Rider } from '../../Model/Rider.js';
 import { secondesToTime } from '../../utility/date-convert.js';
@@ -6,10 +6,7 @@ import { posting } from './posting.js';
 
 export async function myResults(ctx) {
 	try {
-		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		await mainMenu(ctx);
 
 		const userId = ctx.update.callback_query.message.chat.id;
 

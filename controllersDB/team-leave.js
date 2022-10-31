@@ -1,4 +1,4 @@
-import { mainMenuKeyboard } from '../keyboard/keyboard.js';
+import { mainMenu } from '../keyboard/main-menu.js';
 import { Rider } from '../Model/Rider.js';
 import { Team } from '../Model/Team.js';
 
@@ -35,10 +35,7 @@ export async function teamLeaveDB(ctx, cbqData) {
 				.reply('Вы вышли из состава команды!')
 				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 
-		return await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		return await mainMenu(ctx);
 	} catch (error) {
 		console.log(error);
 	}
