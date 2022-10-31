@@ -1,48 +1,15 @@
-import { teamRidersChart, teamRidersChartMobile } from '../../modules/text.js';
-import { format } from '../../utility/chart-format.js';
-import { rowSize } from '../../utility/chart-sizes.js';
-
-export function viewDesktop(data, title = '') {
+export function generateView(riders) {
 	try {
-		const tableHeader =
-			teamRidersChart.rowDLine + teamRidersChart.titles + teamRidersChart.rowDLine;
+		const title = `<b>Команда "${riders[0].teamName}"</b>`;
 		let body = '';
 
-		data.forEach(row => {
-			let name = `${row.lastName} ${row.firstName}`;
-			body =
-				body +
-				'|' +
-				format(String(row.sequence), rowSize.teamRiders.desktop.sequence) +
-				format(name, rowSize.teamRiders.desktop.name) +
-				format(String(row.quantity), rowSize.teamRiders.desktop.quantity) +
-				`\n`;
+		riders.forEach(rider => {
+			let name = `${rider.lastName} ${rider.firstName}`;
+			body = `${body}${rider.sequence}. ${name}${rider.capitan ? '(A)' : ''}, старты: <u>${
+				rider.quantityResults
+			}</u>;\n`;
 		});
-		return `${title}\n${tableHeader}${body}${teamRidersChart.rowDLine}`;
-	} catch (error) {
-		console.log(error);
-	}
-}
-
-export function viewMobile(data, title = '') {
-	try {
-		const tableHeader =
-			teamRidersChartMobile.rowDLine +
-			teamRidersChartMobile.titles +
-			teamRidersChartMobile.rowDLine;
-		let body = '';
-
-		data.forEach(row => {
-			let name = `${row.lastName} ${row.firstName}`;
-			body =
-				body +
-				'|' +
-				format(String(row.sequence), rowSize.teamRiders.mobile.sequence) +
-				format(name, rowSize.teamRiders.mobile.name) +
-				format(String(row.quantity), rowSize.teamRiders.mobile.quantity) +
-				`\n`;
-		});
-		return `${title}\n${tableHeader}${body}${teamRidersChartMobile.rowDLine}`;
+		return `${title}\n${body}`;
 	} catch (error) {
 		console.log(error);
 	}

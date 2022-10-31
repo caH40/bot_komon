@@ -1,39 +1,36 @@
-import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
 import { Result } from '../../Model/Result.js';
 import { Rider } from '../../Model/Rider.js';
 import { Team } from '../../Model/Team.js';
-
-import { listRidersViewDes } from './desktop.js';
-import { listRidersViewMob } from './mobile.js';
+import { posting } from './posting.js';
 
 export async function listRiders(ctx, cbqData) {
 	try {
-		await ctx.editMessageText(
-			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
-			await mainMenuKeyboard(ctx)
-		);
+		const teamName = cbqData.slice(9);
 
-		const teamName = cbqData.slice(24);
+		//populate, что бы узнать id капитана
 		const teamDB = await Team.findOne({ name: teamName }).populate('riders.rider');
 
 		const ridersDB = await Rider.find({ teamId: teamDB._id });
-		let riders = ridersDB.map(rider => rider.toObject());
+		const riders = [];
 
-		for (let i = 0; i < riders.length; i++) {
-			let resultsQuantity = await Result.find({ riderId: riders[i]._id }).length;
-			riders[i].quantity = resultsQuantity ??= 0;
-			riders[i].sequence = String(i + 1);
+		for (let i = 0; i < ridersDB.length; i++) {
+			//поиск всех результатов и их подсчет
+			let quantityResults = await Result.find({ riderId: ridersDB[i]._id });
 
-			if (riders[i]._id.toString() === teamDB.riders[0].rider.toString())
-				riders[i].sequence = riders[i].sequence + 'C';
+			let rider = {
+				quantityResults: (quantityResults.length ??= 0),
+				sequence: String(i + 1),
+				teamName: teamDB.name,
+				lastName: ridersDB[i].lastName,
+				firstName: ridersDB[i].firstName,
+			};
+
+			if (ridersDB[i]._id.toString() === teamDB.riders[0].rider._id.toString())
+				rider.capitan = true;
+			riders.push(rider);
 		}
-		const view = cbqData.slice(0, 3);
 
-		const title = `Райдеры команды "${teamName}"`;
-
-		if (view === 'Des') return listRidersViewDes(ctx, riders, title);
-		if (view === 'Mob') return listRidersViewMob(ctx, riders, title);
-		return true;
+		return await posting(ctx, riders);
 	} catch (error) {
 		console.log(error);
 	}
