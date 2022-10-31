@@ -1,35 +1,13 @@
-import { format } from '../../utility/chart-format.js';
-import { rowSize } from '../../utility/chart-sizes.js';
-import textJson from '../../locales/ru.json' assert { type: 'json' };
-
-export function viewDesktop(data) {
-	try {
-		const carts = textJson.charts.teamResults;
-		const tableHeader = carts.line + carts.header + carts.line;
-		let body = '';
-		console.log(data);
-		data.forEach(row => {
-			body =
-				body +
-				'|' +
-				format(String(row.place), rowSize.teamResult.desktop.place) +
-				format(String(row.name), rowSize.teamResult.desktop.name) +
-				format(String(row.points), rowSize.teamResult.desktop.points) +
-				`\n`;
-		});
-		return `${tableHeader}${body}${carts.line}`;
-	} catch (error) {
-		console.log(error);
-	}
-}
-export function viewMobile(data) {
+export function generateView(data, series) {
 	try {
 		let body = '';
+		let title = `Командный зачет ${series}\nГруппа <u>"${data[0]?.category}"</u>:`;
 
 		data.forEach(row => {
-			body = `${body}${row.place}. ${row.name} - ${row.points}\n`;
+			body = `${body}${row.place}. ${row.name} - <u>${row.points}</u>\n`;
 		});
-		return `${body}`;
+
+		return `<b>${title}</b>\n${body}`;
 	} catch (error) {
 		console.log(error);
 	}

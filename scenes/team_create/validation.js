@@ -2,7 +2,7 @@ import validator from 'validator';
 
 export function validationName(text) {
 	try {
-		if (validator.isLength(text, { min: 2, max: 15 })) {
+		if (validator.isLength(text, { min: 2, max: 30 })) {
 			return true;
 		}
 		return false;

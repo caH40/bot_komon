@@ -88,7 +88,7 @@ export async function riderCategory(ctx, text) {
 						`
 Фамилия: <b>${rider.lastName}</b>
 Имя: <b>${rider.firstName}</b>
-Текущая категория: <b>${rider.category ? rider.category : 'не присвоена'}</b>
+Текущая группа: <b>${rider.category ? rider.category : 'не присвоена'}</b>
 <b>Выберите новую категорию райдеру:</b>`,
 						adminCatRidersKeyboard(rider._id)
 					)
@@ -175,7 +175,7 @@ export async function assignCategoryRiderFromStage(ctx, cbqData) {
 				{ $set: { category: newCategory } },
 				{ returnDocument: 'after' }
 			);
-			message += `${riderUpdated.lastName} ${riderUpdated.firstName} новая категория ${riderUpdated.category}\n`;
+			message += `${riderUpdated.lastName} ${riderUpdated.firstName} новая группа ${riderUpdated.category}\n`;
 		}
 
 		await ctx.reply(message);

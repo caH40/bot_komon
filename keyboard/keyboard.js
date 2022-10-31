@@ -82,10 +82,10 @@ export function resultStageCatKeyboard(stageId) {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
 			[Markup.button.callback('Общий протокол 📌', `view_result_Stage_T_${stageId}`)],
-			[Markup.button.callback('Категория "A" 💪', `view_result_Stage_A_${stageId}`)],
-			[Markup.button.callback('Категория "B" 👊', `view_result_Stage_B_${stageId}`)],
-			[Markup.button.callback('Категория "C" ✌️', `view_result_Stage_C_${stageId}`)],
-			[Markup.button.callback('Категория "W" 👍', `view_result_Stage_W_${stageId}`)],
+			[Markup.button.callback('Группа "A" 💪', `view_result_Stage_A_${stageId}`)],
+			[Markup.button.callback('Группа "B" 👊', `view_result_Stage_B_${stageId}`)],
+			[Markup.button.callback('Группа "C" ✌️', `view_result_Stage_C_${stageId}`)],
+			[Markup.button.callback('Группа "W" 👍', `view_result_Stage_W_${stageId}`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};
@@ -118,10 +118,10 @@ export function resultSeriesGeneralKeyboard(seriesId) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			[Markup.button.callback('Категория "A" 💪', `m_1_all_2_all_A_${seriesId}`)],
-			[Markup.button.callback('Категория "B" 👊', `m_1_all_2_all_B_${seriesId}`)],
-			[Markup.button.callback('Категория "C" ✌️', `m_1_all_2_all_C_${seriesId}`)],
-			[Markup.button.callback('Категория "W" 👍', `m_1_all_2_all_W_${seriesId}`)],
+			[Markup.button.callback('Группа "A" 💪', `m_1_all_2_all_A_${seriesId}`)],
+			[Markup.button.callback('Группа "B" 👊', `m_1_all_2_all_B_${seriesId}`)],
+			[Markup.button.callback('Группа "C" ✌️', `m_1_all_2_all_C_${seriesId}`)],
+			[Markup.button.callback('Группа "W" 👍', `m_1_all_2_all_W_${seriesId}`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};

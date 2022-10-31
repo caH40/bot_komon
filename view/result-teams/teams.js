@@ -3,13 +3,11 @@ import { Result } from '../../Model/Result.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
 import { Team } from '../../Model/Team.js';
-import { resultTeamDes } from './desktop.js';
-import { resultTeamMob } from './mobile.js';
+import { posting } from './posting.js';
 
 export async function resultsSeriesTeams(ctx, cbqData) {
 	try {
-		const view = cbqData.slice(0, 3);
-		const seriesId = cbqData.slice(17);
+		const seriesId = cbqData.slice(13);
 
 		const seriesDB = await Series.findOne({ _id: seriesId });
 		//пока для одного стейджа расчет
@@ -58,8 +56,7 @@ export async function resultsSeriesTeams(ctx, cbqData) {
 			await mainMenuKeyboard(ctx)
 		);
 
-		if (view === 'Des') return resultTeamDes(ctx, teamSorted, seriesDB.name);
-		if (view === 'Mob') return resultTeamMob(ctx, teamSorted, seriesDB.name);
+		return posting(ctx, teamSorted, seriesDB.name);
 	} catch (error) {
 		console.log(error);
 	}

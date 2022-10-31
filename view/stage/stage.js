@@ -67,7 +67,7 @@ export async function resultsViewStage(ctx, cbqData) {
 			elm.weightInGrams = Math.round(elm.weightInGrams / 10) / 100;
 		});
 
-		const categoryStr = category === 'T' ? `Общий протокол` : `Категория "${category}"`;
+		const categoryStr = category === 'T' ? `Общий протокол` : `Группа "${category}"`;
 		const title = `${name}, Этап ${seriesNumber}, ${seriesType}, ${categoryStr}`;
 
 		const charts = divisionChart(resultFiltered);

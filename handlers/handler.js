@@ -40,7 +40,7 @@ export async function handler(ctx, cbqData) {
 				await mainMenuKeyboard(ctx)
 			);
 
-		if (cbqData.includes('_m_1_all_3_V--')) return await resultsSeriesTeams(ctx, cbqData);
+		if (cbqData.includes('m_1_all_3_E__')) return await resultsSeriesTeams(ctx, cbqData);
 		if (cbqData.includes('_m_3_2_V--listRiders')) return await listRiders(ctx, cbqData);
 		if (cbqData.includes('m_3_2_4_1_E--teamLeave_')) return await teamLeaveDB(ctx, cbqData);
 		if (cbqData.includes('m_3_2_2_all_E__teamJoin_')) return await teamChooseForJoin(ctx, cbqData);
