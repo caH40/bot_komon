@@ -1,8 +1,3 @@
-import {
-	protocolChartMobile,
-	protocolChartMobileTotal,
-	protocolTotal,
-} from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
 import { rowSize } from '../../utility/chart-sizes.js';
 import textJson from '../../locales/ru.json' assert { type: 'json' };
@@ -10,7 +5,7 @@ import textJson from '../../locales/ru.json' assert { type: 'json' };
 export function viewDesktopTotal(data) {
 	try {
 		const chart = textJson.charts.protocolTotal;
-		// console.log(data);
+
 		const tableHeader = chart.line + chart.header + chart.line;
 		let body = '';
 

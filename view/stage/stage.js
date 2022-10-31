@@ -4,7 +4,7 @@ import { Result } from '../../Model/Result.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
 import { divisionChart } from '../../utility/chart-division.js';
-import { secondesToTime } from '../../utility/date-convert.js';
+import { secondesToTime, secondesToTimeThousandths } from '../../utility/date-convert.js';
 import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
 import { gapValue, maxValue } from './utilites.js';
 
@@ -62,7 +62,7 @@ export async function resultsViewStage(ctx, cbqData) {
 
 		resultFiltered.forEach(elm => {
 			elm.gap = secondesToTime(elm.gap);
-			elm.time = secondesToTime(elm.time);
+			elm.time = secondesToTimeThousandths(elm.time);
 			elm.gapPrev = secondesToTime(elm.gapPrev);
 		});
 

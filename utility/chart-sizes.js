@@ -85,7 +85,7 @@ export const rowSize = {
 			placeAbsolute: 4,
 			name: 25,
 			teamCurrent: 13,
-			time: 13,
+			time: 12,
 			gap: 8,
 			gapPrev: 8,
 			category: 4,

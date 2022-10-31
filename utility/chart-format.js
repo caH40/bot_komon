@@ -6,8 +6,10 @@ export function format(value, lengthColumn) {
 		//удаление всех emoji
 		if (value) value = value.replace(regexp, '');
 		if (value) value = value.replace('https://', '');
-		//ширина столбцов
+		if (value) value = value.replace('⁣', '');
+		if (value) value = value.replace('⁣', '');
 
+		//ширина столбцов
 		if (!value) {
 			let spaces = '';
 			for (let i = 0; i < lengthColumn; i++) {
