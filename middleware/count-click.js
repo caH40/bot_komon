@@ -14,6 +14,7 @@ export async function countClick(ctx, next) {
 				const click = Click({
 					user,
 					quantityClick: 1,
+					dateStart: new Date().getTime(),
 				});
 				await click.save();
 			}
