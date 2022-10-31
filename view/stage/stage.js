@@ -39,10 +39,12 @@ export async function resultsViewStage(ctx, cbqData) {
 							? result.riderId?.category === categories[i]
 							: result.categoryCurrent === categories[i]
 					)
-					.sort((a, b) => a.time - b.time);
+					.sort((a, b) => a.placeAbsolute - b.placeAbsolute);
+
 				res.forEach((result, index) => (result.placeCategory = index + 1));
 				resultFiltered = [...resultFiltered, ...res];
 			}
+			resultFiltered = resultFiltered.sort((a, b) => a.placeAbsolute - b.placeAbsolute);
 		} else {
 			resultFiltered = results
 				.filter(result =>
@@ -50,10 +52,10 @@ export async function resultsViewStage(ctx, cbqData) {
 						? result.riderId?.category === category
 						: result.categoryCurrent === category
 				)
-				.sort((a, b) => a.time - b.time);
+				.sort((a, b) => a.placeAbsolute - b.placeAbsolute);
 			resultFiltered.forEach((result, index) => (result.placeCategory = index + 1));
+			resultFiltered.sort((a, b) => a.placeCategory - b.placeCategory);
 		}
-		resultFiltered.sort((a, b) => a.time - b.time);
 
 		resultFiltered = await gapValue(resultFiltered);
 		resultFiltered = await maxValue(resultFiltered);
