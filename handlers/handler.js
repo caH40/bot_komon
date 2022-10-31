@@ -53,7 +53,7 @@ export async function handler(ctx, cbqData) {
 		}
 		if (cbqData === 'm_1_')
 			return ctx.editMessageText(
-				'<b>🏆 Результаты заездов серий.\nВыбор серии.</b>',
+				'<b>🏆 Результаты заездов серий. Выбор серии.</b>',
 				await seriesBtn()
 			);
 

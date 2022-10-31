@@ -26,9 +26,11 @@ export async function myResults(ctx) {
 			.populate('riderId');
 
 		if (resultsDB.length === 0) {
-			return await ctx.reply(
-				'Ваши результаты не найдены!\nЕсли Вы участвовали в заездах проводимых командой KOM-on, попробуйте изменить данные в аккаунте (регистрация) на валидные.'
-			);
+			return await ctx
+				.reply(
+					'Ваши результаты не найдены!\nЕсли Вы участвовали в заездах проводимых командой KOM-on, попробуйте изменить данные в аккаунте (регистрация) на валидные.'
+				)
+				.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 		}
 
 		let myResultsObj = [];
