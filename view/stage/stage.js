@@ -64,6 +64,7 @@ export async function resultsViewStage(ctx, cbqData) {
 			elm.gap = secondesToTime(elm.gap);
 			elm.time = secondesToTimeThousandths(elm.time);
 			elm.gapPrev = secondesToTime(elm.gapPrev);
+			elm.weightInGrams = Math.round(elm.weightInGrams / 10) / 100;
 		});
 
 		const categoryStr = category === 'T' ? `Общий протокол` : `Категория "${category}"`;

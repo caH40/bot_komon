@@ -25,7 +25,6 @@ export function viewDesktopTotal(data) {
 				) +
 				format(category, rowSize.protocolTotal.desktop.category) +
 				format(String(row.placeCategory), rowSize.protocolTotal.desktop.placeCategory) +
-				format(String(row.pointsStage), rowSize.protocolTotal.desktop.pointsStage) +
 				format(String(row.watt), rowSize.protocolTotal.desktop.watt) +
 				format(String(row.wattPerKg), rowSize.protocolTotal.desktop.wattPerKg) +
 				format(String(row.weightInGrams), rowSize.protocolTotal.desktop.weightInGrams) +
