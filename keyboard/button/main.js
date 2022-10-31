@@ -8,7 +8,7 @@ export async function mainBtn(ctx) {
 		return [
 			[Markup.button.callback('Результаты заездов 🏆', 'm_1_')],
 			[Markup.button.callback('Расписание заездов 📅', 'm_2_')],
-			[Markup.button.callback('Личный кабинет 🔑', 'main_account')],
+			[Markup.button.callback('Личный кабинет 🔑', 'm_3_')],
 			isAdmin || isRoot ? [Markup.button.callback('Админ кабинет 🛠️', 'm_4_')] : [],
 		];
 	} catch (error) {

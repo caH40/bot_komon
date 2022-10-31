@@ -1,18 +1,15 @@
 import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
 import { Result } from '../../Model/Result.js';
 import { Rider } from '../../Model/Rider.js';
-import { Stage } from '../../Model/Stage.js';
 import { secondesToTime } from '../../utility/date-convert.js';
-import { myResultsViewDes } from './desktop.js';
-import { myResultsViewMob } from './mobile.js';
+import { posting } from './posting.js';
 
-export async function myResults(ctx, cbqData) {
+export async function myResults(ctx) {
 	try {
 		await ctx.editMessageText(
 			`❗<b>Главное меню. Выбор основных функций.</b>❗`,
 			await mainMenuKeyboard(ctx)
 		);
-		const view = cbqData.slice(0, 3);
 
 		const userId = ctx.update.callback_query.message.chat.id;
 
@@ -54,9 +51,7 @@ export async function myResults(ctx, cbqData) {
 
 		const title = `${gender} <i>${riderDB.lastName} ${riderDB.firstName}</i>. Результаты: \n`;
 
-		if (view === 'Des') return myResultsViewDes(ctx, myResultsObj, title);
-		if (view === 'Mob') return myResultsViewMob(ctx, myResultsObj, title);
-		return true;
+		return posting(ctx, myResultsObj, title);
 	} catch (error) {
 		console.log(error);
 	}

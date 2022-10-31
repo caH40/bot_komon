@@ -7,7 +7,7 @@ export async function accountButtons(ctx) {
 		const riderDB = await Rider.findOne({ telegramId: userId });
 
 		return [
-			[Markup.button.callback('Мои результаты 🏅', 'm_3_1_V--myResults')],
+			[Markup.button.callback('Мои результаты 🏅', 'm_3_1_E')],
 			riderDB
 				? [Markup.button.callback('Обновить данные регистрации 🔄', 'account_registration')]
 				: [Markup.button.callback('Регистрация 🆔', 'account_registration')],

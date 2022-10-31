@@ -41,7 +41,6 @@ export async function handler(ctx, cbqData) {
 			);
 
 		if (cbqData.includes('_m_1_all_3_V--')) return await resultsSeriesTeams(ctx, cbqData);
-		if (cbqData.includes('_m_3_1_V--myResults')) return await myResults(ctx, cbqData);
 		if (cbqData.includes('_m_3_2_V--listRiders')) return await listRiders(ctx, cbqData);
 		if (cbqData.includes('m_3_2_4_1_E--teamLeave_')) return await teamLeaveDB(ctx, cbqData);
 		if (cbqData.includes('m_3_2_2_all_E__teamJoin_')) return await teamChooseForJoin(ctx, cbqData);
@@ -85,7 +84,8 @@ export async function handler(ctx, cbqData) {
 		if (cbqData.includes('m_2_all__')) return await scheduleView(ctx, cbqData);
 		if (cbqData === 'm_2_V') return await getScheduleWeekly(ctx);
 
-		if (cbqData === 'main_account') return await account(ctx);
+		if (cbqData === 'm_3_') return await account(ctx);
+		if (cbqData === 'm_3_1_E') return await myResults(ctx, cbqData);
 
 		// обработка запросов из админ кабинета
 		if (cbqData === 'admin_getProtocol') return await ctx.scene.enter('getProtocol');
