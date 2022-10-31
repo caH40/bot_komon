@@ -8,6 +8,7 @@ import { mainMenu } from './controllers/main.js';
 import { callbackQuery } from './controllers/callback-query.js';
 import { filterMessage } from './middleware/filter-message.js';
 import { activationScenes } from './scenes/activation-scenes.js';
+import { countClick } from './middleware/count-click.js';
 
 await mongoose
 	.connect(process.env.MONGODB)
@@ -21,6 +22,7 @@ const stage = activationScenes();
 bot.use(session());
 bot.use(stage.middleware());
 bot.use(filterMessage);
+bot.use(countClick);
 
 bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
