@@ -85,7 +85,7 @@ export const rowSize = {
 			placeAbsolute: 4,
 			name: 25,
 			teamCurrent: 13,
-			time: 10,
+			time: 13,
 			gap: 8,
 			gapPrev: 8,
 			category: 4,
@@ -93,6 +93,9 @@ export const rowSize = {
 			pointsStage: 5,
 			watt: 7,
 			wattPerKg: 8,
+			weightInGrams: 4,
+			heightInCentimeters: 4,
+			avgHeartRate: 5,
 		},
 		mobile: {
 			placeAbsolute: 3,

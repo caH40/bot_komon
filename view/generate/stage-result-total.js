@@ -5,10 +5,13 @@ import {
 } from '../../modules/text.js';
 import { format } from '../../utility/chart-format.js';
 import { rowSize } from '../../utility/chart-sizes.js';
+import textJson from '../../locales/ru.json' assert { type: 'json' };
 
 export function viewDesktopTotal(data) {
 	try {
-		const tableHeader = protocolTotal.rowDLine + protocolTotal.titles + protocolTotal.rowDLine;
+		const chart = textJson.charts.protocolTotal;
+		// console.log(data);
+		const tableHeader = chart.line + chart.header + chart.line;
 		let body = '';
 
 		data.forEach(row => {
@@ -30,9 +33,12 @@ export function viewDesktopTotal(data) {
 				format(String(row.pointsStage), rowSize.protocolTotal.desktop.pointsStage) +
 				format(String(row.watt), rowSize.protocolTotal.desktop.watt) +
 				format(String(row.wattPerKg), rowSize.protocolTotal.desktop.wattPerKg) +
+				format(String(row.weightInGrams), rowSize.protocolTotal.desktop.weightInGrams) +
+				format(String(row.heightInCentimeters), rowSize.protocolTotal.desktop.heightInCentimeters) +
+				format(String(row.avgHeartRate), rowSize.protocolTotal.desktop.avgHeartRate) +
 				`\n`;
 		});
-		return `${tableHeader}${body}${protocolTotal.rowDLine}`;
+		return `${tableHeader}${body}${chart.line}`;
 	} catch (error) {
 		console.log(error);
 	}
@@ -51,27 +57,3 @@ export function viewMobileTotal(data) {
 		console.log(error);
 	}
 }
-// export function viewMobileTotal(data) {
-// 	try {
-// 		const tableHeader =
-// 			protocolChartMobileTotal.rowDLine +
-// 			protocolChartMobileTotal.titles +
-// 			protocolChartMobileTotal.rowDLine;
-// 		let body = '';
-
-// 		data.forEach(row => {
-// 			const category = row.riderId ? row.riderId.category : row.categoryCurrent;
-// 			body =
-// 				body +
-// 				'|' +
-// 				format(String(row.placeAbsolute), rowSize.protocolTotal.mobile.placeAbsolute) +
-// 				format(row.name, rowSize.protocolTotal.mobile.name) +
-// 				format(String(row.time), rowSize.protocolTotal.mobile.time) +
-// 				format(category, rowSize.protocolTotal.mobile.category) +
-// 				`\n`;
-// 		});
-// 		return `${tableHeader}${body}${protocolChartMobile.rowDLine}`;
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// }
