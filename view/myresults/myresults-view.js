@@ -2,6 +2,7 @@ import { mainMenuKeyboard } from '../../keyboard/keyboard.js';
 import { Result } from '../../Model/Result.js';
 import { Rider } from '../../Model/Rider.js';
 import { Stage } from '../../Model/Stage.js';
+import { secondesToTime } from '../../utility/date-convert.js';
 import { myResultsViewDes } from './desktop.js';
 import { myResultsViewMob } from './mobile.js';
 
@@ -22,7 +23,10 @@ export async function myResults(ctx, cbqData) {
 			);
 		}
 
-		let resultsDB = await Result.find({ riderId: riderDB._id });
+		let resultsDB = await Result.find({ riderId: riderDB._id })
+			.populate('stageId')
+			.populate({ path: 'stageId', populate: { path: 'seriesId' } })
+			.populate('riderId');
 
 		if (resultsDB.length === 0) {
 			return await ctx.reply(
@@ -30,35 +34,25 @@ export async function myResults(ctx, cbqData) {
 			);
 		}
 
-		let myResultsObj = resultsDB.map(result => result.toObject());
-		//получение уникальных stageId в которых участвовал райдер
-		let stageIds = new Set();
-		myResultsObj.forEach(result => stageIds.add(result.stageId.toString()));
-		stageIds = Array.from(stageIds);
+		let myResultsObj = [];
 
-		//подсчет количество участников
-		for (let i = 0; i < stageIds.length; i++) {
-			let stageDb = await Stage.findOne({ _id: stageIds[i] }).populate('seriesId');
-			for (let j = 0; j < myResultsObj.length; j++) {
-				myResultsObj[j].sequenceNumber = i + 1;
-				myResultsObj[j].nameSeries = stageDb.seriesId.name;
-				myResultsObj[j].dateStart = new Date(stageDb.seriesId.dateStart).toLocaleDateString();
-				myResultsObj[j].number = stageDb.number;
-				myResultsObj[j].type = stageDb.type;
-			}
-		}
+		resultsDB.forEach((result, index) => {
+			const resultStage = {
+				sequenceNumber: index + 1,
+				name: index + 1,
+				nameSeries: result.stageId.seriesId.name,
+				dateStart: new Date(result.stageId.dateStart).toLocaleDateString(),
+				stageNumber: result.stageId.number,
+				stageRoute: result.stageId.route,
+				time: secondesToTime(result.time),
+				placeAbsolute: result.placeAbsolute,
+			};
+			myResultsObj.push(resultStage);
+		});
 
-		for (let i = 0; i < stageIds.length; i++) {
-			let resultsDb = await Result.find({ stageId: stageIds[i] });
-			for (let j = 0; j < myResultsObj.length; j++) {
-				if (myResultsObj[j].stageId.toString() === stageIds[i]) {
-					myResultsObj[j].quantityRiders = resultsDb.length;
-				}
-			}
-		}
+		const gender = riderDB.gender === 'мужской' ? `🧔‍♂️` : `👩`;
 
-		const name = myResultsObj[0].name;
-		const title = `Результаты ${name}`;
+		const title = `${gender} <i>${riderDB.lastName} ${riderDB.firstName}</i>. Результаты: \n`;
 
 		if (view === 'Des') return myResultsViewDes(ctx, myResultsObj, title);
 		if (view === 'Mob') return myResultsViewMob(ctx, myResultsObj, title);

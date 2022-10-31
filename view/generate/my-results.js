@@ -14,7 +14,7 @@ export function viewDesktop(data, title = '') {
 				format(String(row.sequenceNumber), rowSize.myResults.desktop.sequenceNumber) +
 				format(row.nameSeries, rowSize.myResults.desktop.nameSeries) +
 				format(String(row.dateStart), rowSize.myResults.desktop.dateStart) +
-				format(String(row.number), rowSize.myResults.desktop.number) +
+				format(String(row.stageNumber), rowSize.myResults.desktop.number) +
 				format(row.type, rowSize.myResults.desktop.type) +
 				format(String(row.placeAbsolute), rowSize.myResults.desktop.placeAbsolute) +
 				format(String(row.placeCategory), rowSize.myResults.desktop.placeCategory) +
@@ -32,31 +32,10 @@ export function viewMobile(data) {
 		let body = '';
 
 		data.forEach(row => {
-			body = `${body}${row.dateStart}, ${row.nameSeries}, этап: ${row.number}, место аб: ${row.placeAbsolute};\n`;
+			body = `${body}${row.sequenceNumber}. <u>${row.dateStart}</u>\n🏆 ${row.nameSeries}\n📢 Этап: №${row.stageNumber}\n🔁 Маршрут: ${row.stageRoute}\n🏁 Время: ${row.time}\n🏅 Место в абсолюте: ${row.placeAbsolute};\n\n`;
 		});
 		return body;
 	} catch (error) {
 		console.log(error);
 	}
 }
-// export function viewMobile(data, title = '') {
-// 	try {
-// 		const tableHeader =
-// 			myResultsChartMobile.rowDLine + myResultsChartMobile.titles + myResultsChartMobile.rowDLine;
-// 		let body = '';
-
-// 		data.forEach(row => {
-// 			body =
-// 				body +
-// 				'|' +
-// 				format(row.nameSeries, rowSize.myResults.mobile.nameSeries) +
-// 				format(String(row.number), rowSize.myResults.mobile.number) +
-// 				format(String(row.placeAbsolute), rowSize.myResults.mobile.placeAbsolute) +
-// 				format(String(row.placeCategory), rowSize.myResults.mobile.placeCategory) +
-// 				`\n`;
-// 		});
-// 		return `${title}\n${tableHeader}${body}${myResultsChartMobile.rowDLine}`;
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// }
