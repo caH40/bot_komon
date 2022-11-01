@@ -18,7 +18,7 @@ export async function resultsSprinter(ctx, cbqData) {
 				sprinter => sprinter?.riderId.toString() === result.riderId.toString()
 			);
 
-			if (sprinter) return (sprinter.pointsSprint = result.pointsSprint);
+			if (sprinter) return (sprinter.pointsSprint += result.pointsSprint);
 
 			sprintersResult.push({ riderId: result.riderId, pointsSprint: result.pointsSprint });
 		});
