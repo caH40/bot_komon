@@ -17,8 +17,6 @@ import { seriesBtn } from '../keyboard/button/schedule-btn.js';
 import { resultGeneral } from './menu-results/helper.js';
 import { resultsSeriesGeneral } from '../view/series_general/series-general.js';
 import { mainMenu } from '../keyboard/main-menu.js';
-import { resultsSprinter } from '../view/sprinter/sprinter-standings.js';
-import { resultsMountain } from '../view/mountain/mountain-standings.js';
 import { resultsPoints } from '../view/points/points.js';
 
 export async function handler(ctx, cbqData) {
