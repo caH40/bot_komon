@@ -234,7 +234,6 @@ export async function pointsSprinter(ctx, cbqData) {
 		const stageId = cbqData.slice(17);
 		ctx.session.data.stageId = stageId;
 		await ctx.scene.enter('pointsSprinter');
-		// await mainMenu(ctx);
 	} catch (error) {
 		console.log(error);
 	}

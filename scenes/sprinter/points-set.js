@@ -12,6 +12,13 @@ export function pointsSprinterScene() {
 			try {
 				ctx.session.data.pointsFixed = [];
 				let resultsDB = await Result.find({ stageId: ctx.session.data.stageId });
+				if (resultsDB.length === 0) {
+					await ctx
+						.reply('Не найдены результаты серии')
+						.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
+					return await ctx.scene.leave();
+				}
+
 				resultsDB = resultsDB.sort((a, b) => {
 					if (a.name < b.name) return -1;
 					if (a.name > b.name) return 1;
