@@ -19,6 +19,7 @@ import { resultsSeriesGeneral } from '../view/series_general/series-general.js';
 import { mainMenu } from '../keyboard/main-menu.js';
 import { resultsSprinter } from '../view/sprinter/sprinter-standings.js';
 import { resultsMountain } from '../view/mountain/mountain-standings.js';
+import { resultsPoints } from '../view/points/points.js';
 
 export async function handler(ctx, cbqData) {
 	try {
@@ -61,8 +62,8 @@ export async function handler(ctx, cbqData) {
 		}
 		if (cbqData.includes('m_1_all_2__')) return await resultGeneral(ctx, cbqData);
 		if (cbqData.includes('m_1_all_2_all_')) return await resultsSeriesGeneral(ctx, cbqData);
-		if (cbqData.includes('m_1_all_4_E')) return await resultsSprinter(ctx, cbqData);
-		if (cbqData.includes('m_1_all_5_E')) return await resultsMountain(ctx, cbqData);
+		if (cbqData.includes('m_1_all_4_E')) return await resultsPoints(ctx, cbqData);
+		if (cbqData.includes('m_1_all_5_E')) return await resultsPoints(ctx, cbqData);
 		if (cbqData.includes('m_3_2')) return await handlerTeam(ctx, cbqData);
 		if (cbqData.includes('m_4_')) return await handlerAdmin(ctx, cbqData);
 		if (cbqData === 'account_registration') return await ctx.scene.enter('firstSceneReg');
