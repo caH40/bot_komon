@@ -135,6 +135,7 @@ export const adminKeyboard = {
 		[Markup.button.callback('Загрузить расписание 📄', 'admin_getSchedule')],
 		[Markup.button.callback('Установка категорий райдерам 🦾', 'm_4_4_')],
 		[Markup.button.callback('Обновление генеральных зачетов 🔄', 'm_4_5_')],
+		[Markup.button.callback('Спринт и горный зачеты 💨', 'm_4_6_')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
@@ -179,6 +180,40 @@ export function adminPointsSeriesKeyboard(series) {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
 			...series.map(ser => [Markup.button.callback(`${ser.name} 🏁`, `m_4_5_E__${ser._id}`)]),
+			[Markup.button.callback('Главное меню ❗️', 'main')],
+		]),
+	};
+}
+export function pointsSMSeriesKeyboard(series) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([
+			...series.map(ser => [Markup.button.callback(`${ser.name} 🏁`, `m_4_6_all__${ser._id}`)]),
+			[Markup.button.callback('Главное меню ❗️', 'main')],
+		]),
+	};
+}
+export function pointsSMStageKeyboard(stages) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([
+			...stages.map(stage => [
+				Markup.button.callback(
+					`Этап №${stage.number}, ${stage.type} 🏁`,
+					`m_4_6_all_all__${stage._id}`
+				),
+			]),
+			[Markup.button.callback('Главное меню ❗️', 'main')],
+		]),
+	};
+}
+export function pointsSMboard(stageId) {
+	return {
+		parse_mode: 'html',
+		...Markup.inlineKeyboard([
+			[Markup.button.callback('Распределить спринтерские очки', `m_4_6_all_all_1__${stageId}`)],
+			[Markup.button.callback('Распределить горные очки', `m_4_6_all_all_2__${stageId}`)],
+			[Markup.button.callback('<< назад >>', `m_4_6_`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};

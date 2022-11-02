@@ -2,6 +2,9 @@ import {
 	adminCatRidersFromStageKeyboard,
 	adminCatRidersKeyboard,
 	adminPointsSeriesKeyboard,
+	pointsSMboard,
+	pointsSMSeriesKeyboard,
+	pointsSMStageKeyboard,
 	teamForApprovalKeyboard,
 } from '../../keyboard/keyboard.js';
 import { mainMenu } from '../../keyboard/main-menu.js';
@@ -187,9 +190,59 @@ export async function pointsSeries(ctx) {
 	try {
 		const seriesDB = await Series.find();
 		return ctx.editMessageText(
-			'<b>🔄 Обновление генеральных зачетов.\nВыберите серию в которой необходимо обновить очки в генеральной, спринторскойи горной номинациях.</b>',
+			'<b>🔄 Обновление генеральных зачетов.\nВыберите серию в которой необходимо обновить очки в генеральной, спринтерской горной номинациях.</b>',
 			adminPointsSeriesKeyboard(seriesDB)
 		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function pointsSMSeries(ctx) {
+	try {
+		const seriesDB = await Series.find();
+		return ctx.editMessageText(
+			'<b>💨 Спринт и горный зачеты. Выбор серии.</b>',
+			pointsSMSeriesKeyboard(seriesDB)
+		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function pointsSMStage(ctx, cbqData) {
+	try {
+		const seriesId = cbqData.slice(11);
+		const stagesDB = await Stage.find({ seriesId, hasResults: true });
+		return ctx.editMessageText(
+			'<b>💨 Спринт и горный зачеты. Выбор этапа.</b>',
+			pointsSMStageKeyboard(stagesDB)
+		);
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function pointsSM(ctx, cbqData) {
+	try {
+		const stageId = cbqData.slice(15);
+		return ctx.editMessageText('<b>💨 Спринт и горный зачеты.</b>', pointsSMboard(stageId));
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function pointsSprinter(ctx, cbqData) {
+	try {
+		await mainMenu(ctx);
+		const stageId = cbqData.slice(17);
+		console.log('sprinter', stageId);
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function pointsMountain(ctx, cbqData) {
+	try {
+		await mainMenu(ctx);
+		const stageId = cbqData.slice(17);
+		console.log('Mountain', stageId);
 	} catch (error) {
 		console.log(error);
 	}

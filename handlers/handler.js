@@ -32,7 +32,7 @@ export async function handler(ctx, cbqData) {
 			await ctx.deleteMessage(messagesIdForDelete[index]);
 		}
 		ctx.session.data.messagesIdForDelete = [];
-		// console.log(cbqData); //❗❗❗
+		console.log(cbqData); //❗❗❗
 
 		if (cbqData === 'main') return await mainMenu(ctx);
 		if (cbqData.includes('m_1_all_3_E__')) return await resultsSeriesTeams(ctx, cbqData);

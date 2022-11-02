@@ -8,7 +8,12 @@ import {
 	assignCategoryRiderFromStage,
 	assignCatRider,
 	categoryRiderFromStage,
+	pointsMountain,
 	pointsSeries,
+	pointsSM,
+	pointsSMSeries,
+	pointsSMStage,
+	pointsSprinter,
 	requestTeam,
 	riderCategory,
 	updatePointsSeries,
@@ -34,6 +39,11 @@ export async function handlerAdmin(ctx, cbqData) {
 		if (cbqData.includes('m_4_team_add_')) return await approvalTeam(ctx, cbqData);
 		if (cbqData === 'm_4_5_') return await pointsSeries(ctx);
 		if (cbqData.includes('m_4_5_E__')) return await updatePointsSeries(ctx, cbqData);
+		if (cbqData === 'm_4_6_') return await pointsSMSeries(ctx);
+		if (cbqData.includes('m_4_6_all__')) return await pointsSMStage(ctx, cbqData);
+		if (cbqData.includes('m_4_6_all_all__')) return await pointsSM(ctx, cbqData);
+		if (cbqData.includes('m_4_6_all_all_1__')) return await pointsSprinter(ctx, cbqData);
+		if (cbqData.includes('m_4_6_all_all_2__')) return await pointsMountain(ctx, cbqData);
 	} catch (error) {
 		console.log(error);
 	}
