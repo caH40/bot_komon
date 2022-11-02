@@ -20,6 +20,7 @@ import { firstSceneCreateTeam, secondSceneCreateTeam } from './team_create/team-
 import { categoryRiderScene } from './category_rider/category-rider.js';
 import { teamDescriptionScene } from './team-desc/description.js';
 import { pointsSprinterScene } from './sprinter/points-set.js';
+import { pointsMountainScene } from './mountain/points-set.js';
 
 export function activationScenes() {
 	try {
@@ -43,6 +44,7 @@ export function activationScenes() {
 			categoryRiderScene(),
 			teamDescriptionScene(),
 			pointsSprinterScene(),
+			pointsMountainScene(),
 		]);
 	} catch (error) {
 		console.log(error);

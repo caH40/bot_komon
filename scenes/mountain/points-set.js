@@ -1,12 +1,12 @@
 import { Scenes } from 'telegraf';
-import { pointsSprinterToDB } from '../../controllersDB/pointsSM.js';
-import { sprinterKeyboard } from '../../keyboard/keyboard-points.js';
+import { pointsMountainToDB } from '../../controllersDB/pointsSM.js';
+import { mountainKeyboard } from '../../keyboard/keyboard-points.js';
 
 import { Result } from '../../Model/Result.js';
 
-export function pointsSprinterScene() {
+export function pointsMountainScene() {
 	try {
-		const firstScene = new Scenes.BaseScene('pointsSprinter');
+		const firstScene = new Scenes.BaseScene('pointsMountain');
 
 		firstScene.enter(async ctx => {
 			try {
@@ -29,7 +29,7 @@ export function pointsSprinterScene() {
 				for (let i = 0; i < resultsDB.length; i++) {
 					if (resultsDB[i])
 						await ctx
-							.reply(resultsDB[i].name, sprinterKeyboard(resultsDB[i]))
+							.reply(resultsDB[i].name, mountainKeyboard(resultsDB[i]))
 							.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 				}
 			} catch (error) {
@@ -61,8 +61,8 @@ export function pointsSprinterScene() {
 						isClicked[pointFixed.points] = true;
 					});
 
-					if (ctx.session.data.pointsFixed.length === 10) {
-						await pointsSprinterToDB(ctx, ctx.session.data.pointsFixed, ctx.session.data.stageId);
+					if (ctx.session.data.pointsFixed.length === 2) {
+						await pointsMountainToDB(ctx, ctx.session.data.pointsFixed, ctx.session.data.stageId);
 						return await ctx.scene.leave();
 					}
 					ctx.session.data.pointsFixed.forEach(pointFixed => {
@@ -74,7 +74,7 @@ export function pointsSprinterScene() {
 					for (let i = 0; i < resultsDB.length; i++) {
 						if (resultsDB[i])
 							await ctx
-								.reply(resultsDB[i].name, sprinterKeyboard(resultsDB[i], isClicked))
+								.reply(resultsDB[i].name, mountainKeyboard(resultsDB[i], isClicked))
 								.then(message => ctx.session.data.messagesIdForDelete.push(message.message_id));
 					}
 				}
