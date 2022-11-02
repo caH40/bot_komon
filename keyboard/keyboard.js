@@ -193,6 +193,7 @@ export function pointsSMSeriesKeyboard(series) {
 		]),
 	};
 }
+
 export function pointsSMStageKeyboard(stages) {
 	return {
 		parse_mode: 'html',

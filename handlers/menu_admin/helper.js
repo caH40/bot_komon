@@ -231,9 +231,10 @@ export async function pointsSM(ctx, cbqData) {
 }
 export async function pointsSprinter(ctx, cbqData) {
 	try {
-		await mainMenu(ctx);
 		const stageId = cbqData.slice(17);
-		console.log('sprinter', stageId);
+		ctx.session.data.stageId = stageId;
+		await ctx.scene.enter('pointsSprinter');
+		// await mainMenu(ctx);
 	} catch (error) {
 		console.log(error);
 	}
