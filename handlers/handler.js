@@ -63,7 +63,7 @@ export async function handler(ctx, cbqData) {
 		if (cbqData.includes('m_1_all_4_E')) return await resultsPoints(ctx, cbqData);
 		if (cbqData.includes('m_1_all_5_E')) return await resultsPoints(ctx, cbqData);
 		if (cbqData.includes('m_3_2')) return await handlerTeam(ctx, cbqData);
-		if (cbqData.includes('m_4_')) return await handlerAdmin(ctx, cbqData);
+		if (cbqData.includes('m_5_')) return await handlerAdmin(ctx, cbqData);
 		if (cbqData === 'account_registration') return await ctx.scene.enter('firstSceneReg');
 
 		const isCompleted = await handlerResults(ctx, cbqData);

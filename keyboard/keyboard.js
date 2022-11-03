@@ -22,8 +22,8 @@ export function teamForApprovalKeyboard(teamId) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			Markup.button.callback('Одобрить', `m_4_team_add_Y_${teamId}`),
-			Markup.button.callback('Отклонить', `m_4_team_add_N_${teamId}`),
+			Markup.button.callback('Одобрить', `m_5_team_add_Y_${teamId}`),
+			Markup.button.callback('Отклонить', `m_5_team_add_N_${teamId}`),
 		]),
 	};
 }
@@ -130,28 +130,28 @@ export function resultSeriesGeneralKeyboard(seriesId) {
 export const adminKeyboard = {
 	parse_mode: 'html',
 	...Markup.inlineKeyboard([
-		[Markup.button.callback('Управление командами ⚙️', 'm_4_1_')],
+		[Markup.button.callback('Управление командами ⚙️', 'm_5_1_')],
 		[Markup.button.callback('Загрузить протокол 💾', 'admin_getProtocol')],
 		[Markup.button.callback('Загрузить расписание 📄', 'admin_getSchedule')],
-		[Markup.button.callback('Установка категорий райдерам 🦾', 'm_4_4_')],
-		[Markup.button.callback('Обновление генеральных зачетов 🔄', 'm_4_5_')],
-		[Markup.button.callback('Спринт и горный зачеты 💨', 'm_4_6_')],
+		[Markup.button.callback('Установка категорий райдерам 🦾', 'm_5_4_')],
+		[Markup.button.callback('Обновление генеральных зачетов 🔄', 'm_5_5_')],
+		[Markup.button.callback('Спринт и горный зачеты 💨', 'm_5_6_')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
 export const adminTeamKeyboard = {
 	parse_mode: 'html',
 	...Markup.inlineKeyboard([
-		[Markup.button.callback('Заявки на создание команды', 'm_4_1_1_E')],
-		[Markup.button.callback('Удалить команду', 'm_4_1_2_')],
+		[Markup.button.callback('Заявки на создание команды', 'm_5_1_1_E')],
+		[Markup.button.callback('Удалить команду', 'm_5_1_2_')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
 export const adminCategoriesKeyboard = {
 	parse_mode: 'html',
 	...Markup.inlineKeyboard([
-		[Markup.button.callback('Выбор райдера', 'm_4_4_1_')],
-		[Markup.button.callback('Выбор заезда', 'm_4_4_2_')],
+		[Markup.button.callback('Выбор райдера', 'm_5_4_1_')],
+		[Markup.button.callback('Выбор заезда', 'm_5_4_2_')],
 		[Markup.button.callback('Главное меню ❗️', 'main')],
 	]),
 };
@@ -161,9 +161,9 @@ export function adminCatRidersKeyboard(riderId) {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
 			[
-				Markup.button.callback('A', `m_4_4_1_E__A_${riderId}`),
-				Markup.button.callback('B', `m_4_4_1_E__B_${riderId}`),
-				Markup.button.callback('C', `m_4_4_1_E__C_${riderId}`),
+				Markup.button.callback('A', `m_5_4_1_E__A_${riderId}`),
+				Markup.button.callback('B', `m_5_4_1_E__B_${riderId}`),
+				Markup.button.callback('C', `m_5_4_1_E__C_${riderId}`),
 			],
 		]),
 	};
@@ -179,7 +179,7 @@ export function adminPointsSeriesKeyboard(series) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			...series.map(ser => [Markup.button.callback(`${ser.name} 🏁`, `m_4_5_E__${ser._id}`)]),
+			...series.map(ser => [Markup.button.callback(`${ser.name} 🏁`, `m_5_5_E__${ser._id}`)]),
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};
@@ -188,7 +188,7 @@ export function pointsSMSeriesKeyboard(series) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			...series.map(ser => [Markup.button.callback(`${ser.name} 🏁`, `m_4_6_all__${ser._id}`)]),
+			...series.map(ser => [Markup.button.callback(`${ser.name} 🏁`, `m_5_6_all__${ser._id}`)]),
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};
@@ -201,7 +201,7 @@ export function pointsSMStageKeyboard(stages) {
 			...stages.map(stage => [
 				Markup.button.callback(
 					`Этап №${stage.number}, ${stage.type} 🏁`,
-					`m_4_6_all_all__${stage._id}`
+					`m_5_6_all_all__${stage._id}`
 				),
 			]),
 			[Markup.button.callback('Главное меню ❗️', 'main')],
@@ -212,9 +212,9 @@ export function pointsSMboard(stageId) {
 	return {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
-			[Markup.button.callback('Распределить спринтерские очки', `m_4_6_all_all_1__${stageId}`)],
-			[Markup.button.callback('Распределить горные очки', `m_4_6_all_all_2__${stageId}`)],
-			[Markup.button.callback('<< назад >>', `m_4_6_`)],
+			[Markup.button.callback('Распределить спринтерские очки', `m_5_6_all_all_1__${stageId}`)],
+			[Markup.button.callback('Распределить горные очки', `m_5_6_all_all_2__${stageId}`)],
+			[Markup.button.callback('<< назад >>', `m_5_6_`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};
