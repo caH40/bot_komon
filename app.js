@@ -30,7 +30,7 @@ bot.use(countClick);
 bot.command('start', async ctx => await start(ctx));
 bot.command('help', async ctx => await help(ctx));
 bot.command('main', async ctx => await mainMenu(ctx));
-bot.command('test', async ctx => await countClicksPerDay(ctx));
+bot.command('click', async ctx => await getCharts(ctx));
 bot.on('callback_query', async ctx => await callbackQuery(ctx));
 
 bot.launch().then(nodeSchedule());

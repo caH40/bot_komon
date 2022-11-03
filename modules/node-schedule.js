@@ -4,10 +4,9 @@ import { countClicksPerDay } from './clicksperday.js';
 export function nodeSchedule() {
 	try {
 		const rule = new schedule.RecurrenceRule();
-
 		// rule.dayOfWeek = [0, new schedule.Range(4, 6)];
-		rule.hour = 13;
-		rule.minute = 15;
+		rule.hour = 22;
+		rule.minute = 57;
 
 		schedule.scheduleJob(rule, countClicksPerDay);
 	} catch (error) {

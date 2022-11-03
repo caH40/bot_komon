@@ -3,7 +3,6 @@ const { Schema, model } = pkg;
 
 const clickSchema = new Schema({
 	user: { type: Object, unique: true, required: true },
-	dateStart: Number,
 	clicks: { type: Number, default: 0 },
 	clicksPerDay: {
 		type: Array,

@@ -11,9 +11,7 @@ export async function countClicksPerDay() {
 			currentDay.date = new Date().getTime();
 
 			let prePeriod = 0;
-			user.clicksPerDay.forEach(day => {
-				prePeriod += day.clicks;
-			});
+			user.clicksPerDay.forEach(day => (prePeriod += day.clicks));
 
 			currentDay.clicks = total - prePeriod;
 
