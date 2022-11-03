@@ -7,9 +7,9 @@ export function descriptionKeyboard() {
 		parse_mode: 'html',
 		...Markup.inlineKeyboard([
 			[Markup.button.url('Результаты в GoogleDocs 📈', urlGDocs)],
-			[Markup.button.callback('Правила заездов Series 📕', `m_4_2`)],
-			[Markup.button.callback('Правила заездов Crit Race 📓', `m_4_3`)],
-			[Markup.button.callback('Правила заездов Catch Up Race 📒', `m_4_4`)],
+			[Markup.button.callback('Описание и правила Series 📕', `m_4_2`)],
+			[Markup.button.callback('Описание и правила Crit Race 📓', `m_4_3`)],
+			[Markup.button.callback('Описание и правила Catch Up Race 📒', `m_4_4`)],
 			[Markup.button.callback('Главное меню ❗️', 'main')],
 		]),
 	};
