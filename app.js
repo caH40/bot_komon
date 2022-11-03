@@ -11,7 +11,6 @@ import { activationScenes } from './scenes/activation-scenes.js';
 import { countClick } from './middleware/count-click.js';
 import { getCharts } from './modules/chartist.js';
 import { nodeSchedule } from './modules/node-schedule.js';
-import { countClicksPerDay } from './modules/clicksperday.js';
 
 await mongoose
 	.connect(process.env.MONGODB)

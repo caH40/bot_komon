@@ -38,7 +38,11 @@ export async function getCharts(ctx) {
 		let totalStr = 'Количество кликов в меню:\n';
 		const keys = Object.keys(total);
 
-		keys.forEach(day => (totalStr += `${day} - <u>${total[day] ? total[day] : 0}</u>;\n`));
+		keys.forEach(day => {
+			let emoji = total[day] > 20 ? '😎' : '🧊';
+			emoji = total[day] > 50 ? '🔥' : emoji;
+			totalStr += `${emoji} ${day} - <u>${total[day] ? total[day] : 0}</u>;\n`;
+		});
 		await ctx.replyWithHTML(totalStr);
 	} catch (error) {
 		console.log(error);
