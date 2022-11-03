@@ -5,15 +5,12 @@ export async function countClick(ctx, next) {
 		if (ctx.update.callback_query) {
 			const user = ctx.update.callback_query.from;
 
-			const click = await Click.findOneAndUpdate(
-				{ 'user.id': user.id },
-				{ $inc: { quantityClick: 1 } }
-			);
+			const click = await Click.findOneAndUpdate({ 'user.id': user.id }, { $inc: { clicks: 1 } });
 
 			if (!click) {
 				const click = Click({
 					user,
-					quantityClick: 1,
+					clicks: 1,
 					dateStart: new Date().getTime(),
 				});
 				await click.save();
