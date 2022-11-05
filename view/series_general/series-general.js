@@ -1,7 +1,7 @@
 import { Result } from '../../Model/Result.js';
 import { Series } from '../../Model/Series.js';
 import { Stage } from '../../Model/Stage.js';
-import { getResultsSeriesForGeneral } from '../../modules/getResults.js';
+import { getResultsSeries, getResultsSeriesForGeneral } from '../../modules/getResults.js';
 import { posting } from './posting.js';
 
 export async function resultsSeriesGeneral(ctx, cbqData) {

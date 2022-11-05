@@ -29,7 +29,7 @@ export async function getResultsSeriesForGeneral(seriesId) {
 			});
 
 			for (let i = 0; i < stagesDB.length; i++) {
-				let resultsDB = await Result.find({ stageId: stagesDB[i]._id });
+				let resultsDB = await Result.find({ stageId: stagesDB[i]._id }).populate('riderId');
 				results.push(...resultsDB);
 			}
 
