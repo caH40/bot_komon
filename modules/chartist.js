@@ -39,8 +39,11 @@ export async function getCharts(ctx) {
 		const keys = Object.keys(total);
 
 		keys.forEach(day => {
-			let emoji = total[day] > 20 ? '😎' : '🧊';
-			emoji = total[day] > 50 ? '🔥' : emoji;
+			let emoji = '🧊';
+			if (total[day] > 20 && total[day] < 90) emoji = '🌡️';
+			if (total[day] > 89 && total[day] < 150) emoji = '🔥';
+			else if (total[day] > 149) emoji = '🧨';
+
 			totalStr += `${emoji} ${day} - <u>${total[day] ? total[day] : 0}</u>;\n`;
 		});
 		await ctx.replyWithHTML(totalStr);
