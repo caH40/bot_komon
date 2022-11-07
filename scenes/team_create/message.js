@@ -4,7 +4,7 @@ export async function sendMessageAdmin(ctx) {
 	try {
 		const adminDB = await Rights.findOne();
 		adminDB.admin.forEach(async admin => {
-			ctx.telegram.sendMessage(
+			await ctx.telegram.sendMessage(
 				admin,
 				`${new Date().toLocaleString()}.\nПоявилась заявка на создание команды "${
 					ctx.session.data.teamCreate.name
