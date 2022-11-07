@@ -9,12 +9,11 @@ import { confirmUploadScheduleScene } from '../scenes/schedule/confirm.js';
 import {
 	firstSceneReg,
 	secondSceneReg,
-	// thirdSceneReg,
 	fourthSceneReg,
 	fifthSceneReg,
 	sixthSceneReg,
 	seventhSceneReg,
-	eighthSceneReg,
+	eighthSceneReg
 } from '../scenes/registration/registration.js';
 import { firstSceneCreateTeam, secondSceneCreateTeam } from './team_create/team-create.js';
 import { categoryRiderScene } from './category_rider/category-rider.js';
@@ -31,20 +30,19 @@ export function activationScenes() {
 			downloadScheduleBase(),
 			uploadScheduleBase(),
 			confirmUploadScheduleScene(),
-			firstSceneReg(),
-			secondSceneReg(),
-			// thirdSceneReg(),
-			fourthSceneReg(),
-			fifthSceneReg(),
-			sixthSceneReg(),
-			seventhSceneReg(),
-			eighthSceneReg(),
+			firstSceneReg,
+			secondSceneReg,
+			fourthSceneReg,
+			fifthSceneReg,
+			sixthSceneReg,
+			seventhSceneReg,
+			eighthSceneReg,
 			firstSceneCreateTeam(),
 			secondSceneCreateTeam(),
 			categoryRiderScene(),
 			teamDescriptionScene(),
 			pointsSprinterScene(),
-			pointsMountainScene(),
+			pointsMountainScene()
 		]);
 	} catch (error) {
 		console.log(error);
