@@ -1,4 +1,4 @@
-# Телеграм бот для серии гонок в Звифте KOM-on
+# Телеграм бот для серии гонок в Звифте KOM-on v.1
 
 ![node](https://img.shields.io/npm/v/node?color=017728&label=node)
 ![telegraf](https://img.shields.io/npm/v/telegraf?color=red&label=telegraf)
@@ -8,5 +8,3 @@
 ![validator](https://img.shields.io/npm/v/validator?color=gren&label=validator)
 ![xlsx](https://img.shields.io/npm/v/xlsx?color=00af35&label=xlsx)
 
-загрузка финишного протокола:
-файл должен называть "Наименование серии-год_stage-номер этапа.xlsx" - "autumn-2022_stage-2.xlsx
